@@ -80,7 +80,9 @@ namespace Borsa
             if (MessageBox.Show("Delete account?", "Delete?", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
             {
                 int accountId = int.Parse(lvList.SelectedItems[0].Text);
+                DB.User.Accounts.RemoveAll(c => c.AccountId == accountId);
                 DB.Entities.Accounts.RemoveAll(c => c.AccountId == accountId);
+                DB.Save();
                 refreshList();
             }
         }
