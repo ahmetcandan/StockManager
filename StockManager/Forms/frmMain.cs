@@ -282,7 +282,7 @@ namespace Borsa
             List<string> stockCodes = new List<string>();
             for (int i = 0; i < lvList.SelectedItems.Count; i++)
                 stockCodes.Add(lvList.SelectedItems[i].SubItems["StockCode"].Text);
-            frmStockAnalysis frm = new frmStockAnalysis(string.Join(",", stockCodes));
+            frmStockAnalysis frm = new frmStockAnalysis(string.Join(",", stockCodes.Distinct()));
             frm.ShowDialog();
         }
 

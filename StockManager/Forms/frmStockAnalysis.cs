@@ -22,7 +22,10 @@ namespace Borsa
                 stocks = DB.Entities.Stocks;
             else
                 foreach (var stockCode in stockCodes.Split(','))
-                    stocks.Add(DB.Entities.GetStock(stockCode));
+                {
+                    var stock = DB.Entities.GetStock(stockCode);
+                    if (stock != null) stocks.Add(stock);
+                }
         }
 
         private void timer1_Tick(object sender, EventArgs e)
@@ -49,8 +52,8 @@ namespace Borsa
                          join al in DB.Entities.AccountTransactions on a.AccountId equals al.AccountId
                          join st in DB.Entities.StockTransactions on al.StockTransactionId equals st.StockTransactionId
                          join s in DB.Entities.Stocks on st.StockCode equals s.StockCode
-                         join s1 in stocks on s.StockCode equals s1.StockCode
-                         where a.AccountId == DB.DefaultAccount.AccountId
+                         join s1 in stocks.Distinct() on s.StockCode equals s1.StockCode
+                         where a.AccountId == DB.DefaultAccount.AccountId && s1 != null
                          orderby st.Date
                          group st by s into StockTransactions
                          select new { Stock = StockTransactions.Key, StockTransactions };
@@ -114,7 +117,7 @@ namespace Borsa
                     }
 
                     stockAnalyses.Add(stockAnalysis);
-                    if(isPartial) stockAnalyses.Add(partialStockAnalysis);
+                    if (isPartial) stockAnalyses.Add(partialStockAnalysis);
                     avarageConst = stockAnalysis.BuyPrice;
                 }
             }
