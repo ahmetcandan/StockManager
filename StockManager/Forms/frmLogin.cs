@@ -48,7 +48,7 @@ namespace Borsa
         {
             if (validation())
             {
-                var user = DB.Entities.GetUser(txtUserName.Text, passwordIsHash ? DB.Entities.Setting.PasswordHash : txtPassword.Text.ComputeSha256Hash());
+                var user = DB.Entities.GetUser(txtUserName.Text, passwordIsHash ? DB.Entities.Setting.PasswordHash : txtPassword.Text.ComputeSha256Hash(txtUserName.Text));
                 if (user != null)
                 {
                     SettingSave();
@@ -107,7 +107,7 @@ namespace Borsa
             else
                 DB.Entities.Setting.UserName = string.Empty;
             if (cbRememberPassword.Checked)
-                DB.Entities.Setting.PasswordHash = passwordIsHash ? DB.Entities.Setting.PasswordHash : txtPassword.Text.ComputeSha256Hash();
+                DB.Entities.Setting.PasswordHash = passwordIsHash ? DB.Entities.Setting.PasswordHash : txtPassword.Text.ComputeSha256Hash(txtUserName.Text);
             else
                 DB.Entities.Setting.PasswordHash = string.Empty;
             DB.Save();

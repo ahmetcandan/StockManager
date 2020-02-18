@@ -56,6 +56,11 @@
             this.label1 = new System.Windows.Forms.Label();
             this.lblInformations = new System.Windows.Forms.Label();
             this.lblInformation2 = new System.Windows.Forms.Label();
+            this.cbStock = new System.Windows.Forms.ComboBox();
+            this.label4 = new System.Windows.Forms.Label();
+            this.dtDateStart = new System.Windows.Forms.DateTimePicker();
+            this.label5 = new System.Windows.Forms.Label();
+            this.dtDateEnd = new System.Windows.Forms.DateTimePicker();
             this.listMenu.SuspendLayout();
             this.menuNotify.SuspendLayout();
             this.SuspendLayout();
@@ -84,10 +89,10 @@
             this.lvList.GridLines = true;
             this.lvList.HideSelection = false;
             this.lvList.LabelEdit = true;
-            this.lvList.Location = new System.Drawing.Point(0, 0);
+            this.lvList.Location = new System.Drawing.Point(0, 40);
             this.lvList.Margin = new System.Windows.Forms.Padding(4);
             this.lvList.Name = "lvList";
-            this.lvList.Size = new System.Drawing.Size(1365, 584);
+            this.lvList.Size = new System.Drawing.Size(1206, 484);
             this.lvList.TabIndex = 0;
             this.lvList.UseCompatibleStateImageBehavior = false;
             this.lvList.View = System.Windows.Forms.View.Details;
@@ -157,7 +162,7 @@
             this.toolStripSeparator2,
             this.changeAccountToolStripMenuItem});
             this.listMenu.Name = "listMenu";
-            this.listMenu.Size = new System.Drawing.Size(250, 236);
+            this.listMenu.Size = new System.Drawing.Size(250, 208);
             this.listMenu.Opening += new System.ComponentModel.CancelEventHandler(this.listMenu_Opening);
             // 
             // editToolStripMenuItem
@@ -256,10 +261,10 @@
             this.label1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.label1.Font = new System.Drawing.Font("Hermit", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label1.ForeColor = System.Drawing.Color.PaleGreen;
-            this.label1.Location = new System.Drawing.Point(0, 584);
+            this.label1.Location = new System.Drawing.Point(0, 524);
             this.label1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(1365, 30);
+            this.label1.Size = new System.Drawing.Size(1206, 30);
             this.label1.TabIndex = 6;
             this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
@@ -272,7 +277,7 @@
             this.lblInformations.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.lblInformations.Font = new System.Drawing.Font("Hermit", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblInformations.ForeColor = System.Drawing.Color.PaleGreen;
-            this.lblInformations.Location = new System.Drawing.Point(0, 584);
+            this.lblInformations.Location = new System.Drawing.Point(0, 524);
             this.lblInformations.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblInformations.Name = "lblInformations";
             this.lblInformations.Size = new System.Drawing.Size(170, 30);
@@ -290,7 +295,7 @@
             this.lblInformation2.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.lblInformation2.Font = new System.Drawing.Font("Hermit", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblInformation2.ForeColor = System.Drawing.Color.PaleGreen;
-            this.lblInformation2.Location = new System.Drawing.Point(0, 584);
+            this.lblInformation2.Location = new System.Drawing.Point(0, 524);
             this.lblInformation2.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblInformation2.Name = "lblInformation2";
             this.lblInformation2.Size = new System.Drawing.Size(170, 30);
@@ -298,17 +303,91 @@
             this.lblInformation2.Text = "Informations ";
             this.lblInformation2.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
+            // cbStock
+            // 
+            this.cbStock.BackColor = System.Drawing.Color.Black;
+            this.cbStock.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cbStock.Font = new System.Drawing.Font("Hermit", 12F);
+            this.cbStock.ForeColor = System.Drawing.Color.Lime;
+            this.cbStock.FormattingEnabled = true;
+            this.cbStock.Items.AddRange(new object[] {
+            "Buy",
+            "Sell"});
+            this.cbStock.Location = new System.Drawing.Point(221, 3);
+            this.cbStock.Margin = new System.Windows.Forms.Padding(4);
+            this.cbStock.Name = "cbStock";
+            this.cbStock.Size = new System.Drawing.Size(248, 36);
+            this.cbStock.TabIndex = 9;
+            this.cbStock.SelectedIndexChanged += new System.EventHandler(this.cbStock_SelectedIndexChanged);
+            // 
+            // label4
+            // 
+            this.label4.BackColor = System.Drawing.Color.DarkSlateGray;
+            this.label4.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.label4.Font = new System.Drawing.Font("Hermit", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label4.ForeColor = System.Drawing.Color.PaleGreen;
+            this.label4.Location = new System.Drawing.Point(0, 3);
+            this.label4.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(213, 36);
+            this.label4.TabIndex = 10;
+            this.label4.Text = "Stock : ";
+            this.label4.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            // 
+            // dtDateStart
+            // 
+            this.dtDateStart.CalendarMonthBackground = System.Drawing.Color.Black;
+            this.dtDateStart.Font = new System.Drawing.Font("Hermit", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.dtDateStart.Location = new System.Drawing.Point(698, 3);
+            this.dtDateStart.Margin = new System.Windows.Forms.Padding(4);
+            this.dtDateStart.Name = "dtDateStart";
+            this.dtDateStart.Size = new System.Drawing.Size(248, 36);
+            this.dtDateStart.TabIndex = 11;
+            this.dtDateStart.ValueChanged += new System.EventHandler(this.dtDateStart_ValueChanged);
+            // 
+            // label5
+            // 
+            this.label5.BackColor = System.Drawing.Color.DarkSlateGray;
+            this.label5.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.label5.Font = new System.Drawing.Font("Hermit", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label5.ForeColor = System.Drawing.Color.PaleGreen;
+            this.label5.Location = new System.Drawing.Point(477, 3);
+            this.label5.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(213, 36);
+            this.label5.TabIndex = 12;
+            this.label5.Text = "Date : ";
+            this.label5.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            // 
+            // dtDateEnd
+            // 
+            this.dtDateEnd.CalendarMonthBackground = System.Drawing.Color.Black;
+            this.dtDateEnd.Font = new System.Drawing.Font("Hermit", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.dtDateEnd.Location = new System.Drawing.Point(954, 3);
+            this.dtDateEnd.Margin = new System.Windows.Forms.Padding(4);
+            this.dtDateEnd.Name = "dtDateEnd";
+            this.dtDateEnd.Size = new System.Drawing.Size(248, 36);
+            this.dtDateEnd.TabIndex = 13;
+            this.dtDateEnd.ValueChanged += new System.EventHandler(this.dtDateEnd_ValueChanged);
+            // 
             // frmMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1366, 614);
+            this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            this.ClientSize = new System.Drawing.Size(1207, 554);
+            this.Controls.Add(this.dtDateEnd);
+            this.Controls.Add(this.dtDateStart);
+            this.Controls.Add(this.label5);
+            this.Controls.Add(this.cbStock);
+            this.Controls.Add(this.label4);
             this.Controls.Add(this.lblInformation2);
             this.Controls.Add(this.lblInformations);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.lvList);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Margin = new System.Windows.Forms.Padding(4);
+            this.MinimumSize = new System.Drawing.Size(1225, 601);
             this.Name = "frmMain";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Stock Tracking";
@@ -350,6 +429,11 @@
         private System.Windows.Forms.Label lblInformation2;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator2;
         private System.Windows.Forms.ToolStripMenuItem changeAccountToolStripMenuItem;
+        private System.Windows.Forms.ComboBox cbStock;
+        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.DateTimePicker dtDateStart;
+        private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.DateTimePicker dtDateEnd;
     }
 }
 

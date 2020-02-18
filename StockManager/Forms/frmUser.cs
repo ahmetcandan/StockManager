@@ -105,7 +105,7 @@ namespace Borsa
                 {
                     user.UserName = txtUserName.Text;
                     if (!passwordIsHash)
-                        user.Password = txtPassword.Text.ComputeSha256Hash();
+                        user.Password = txtPassword.Text.ComputeSha256Hash(txtUserName.Text);
                     user.IsActive = cbIsActive.Checked;
                     DB.Entities.PostUser(user, isNew);
                     DB.Save();

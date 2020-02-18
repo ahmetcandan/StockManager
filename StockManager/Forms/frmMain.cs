@@ -24,16 +24,46 @@ namespace Borsa
         {
             timer1.Start();
             refreshList();
+            cbStock_Fill();
+            dtDateStart.Value = new DateTime(DateTime.Now.Year, DateTime.Now.Month, 1);
+            var endDate = new DateTime(DateTime.Now.Year, DateTime.Now.Month, 1);
+            endDate = endDate.AddMonths(1);
+            endDate = endDate.AddDays(-1);
+            dtDateEnd.Value = endDate;
+        }
+
+        private void cbStock_Fill()
+        {
+            cbStock.Items.Clear();
+            cbStock.Items.Add(new ComboboxItem
+            {
+                Code = "",
+                Value = "All"
+            });
+            foreach (var stock in DB.Entities.Stocks)
+            {
+                cbStock.Items.Add(new ComboboxItem
+                {
+                    Code = stock.StockCode,
+                    Value = stock.StockCode
+                });
+            }
         }
 
         private void refreshList()
         {
+            string selectedStockCode = cbStock.SelectedItem != null ? ((ComboboxItem)cbStock.SelectedItem).Code : "";
+            DateTime startDate = dtDateStart.Value;
+            DateTime endDate = dtDateEnd.Value;
             lvList.Items.Clear();
             var list = from a in DB.Entities.Accounts
                        join al in DB.Entities.AccountTransactions on a.AccountId equals al.AccountId
                        join st in DB.Entities.StockTransactions on al.StockTransactionId equals st.StockTransactionId
                        join s in DB.Entities.Stocks on st.StockCode equals s.StockCode
                        where a.AccountId == DB.DefaultAccount.AccountId
+                       && (string.IsNullOrEmpty(selectedStockCode) || s.StockCode == selectedStockCode)
+                       && st.Date >= startDate
+                       && st.Date <= endDate
                        orderby st.Date
                        select new
                        {
@@ -302,6 +332,32 @@ namespace Borsa
         {
             frmAccount frm = new frmAccount();
             frm.ShowDialog();
+        }
+
+        private void cbStock_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            refreshList();
+        }
+
+        private void dtDateStart_ValueChanged(object sender, EventArgs e)
+        {
+            refreshList();
+        }
+
+        private void dtDateEnd_ValueChanged(object sender, EventArgs e)
+        {
+            refreshList();
+        }
+    }
+
+    class ComboboxItem
+    {
+        public string Value { get; set; }
+        public string Code { get; set; }
+
+        public override string ToString()
+        {
+            return Value;
         }
     }
 
