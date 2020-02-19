@@ -1,4 +1,5 @@
 ﻿using Borsa.Model;
+using StockManager;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -14,14 +15,16 @@ namespace Borsa
     public partial class frmStockAnalysis : Form
     {
         List<Stock> stocks = new List<Stock>();
+        StockAnalysisRequest request = new StockAnalysisRequest();
 
-        public frmStockAnalysis(string stockCodes = "")
+        public frmStockAnalysis(StockAnalysisRequest request)
         {
+            this.request = request;
             InitializeComponent();
-            if (string.IsNullOrEmpty(stockCodes))
+            if (request.StockCodes.Count == 0)
                 stocks = DB.Entities.Stocks;
             else
-                foreach (var stockCode in stockCodes.Split(','))
+                foreach (var stockCode in request.StockCodes)
                 {
                     var stock = DB.Entities.GetStock(stockCode);
                     if (stock != null) stocks.Add(stock);
@@ -46,7 +49,6 @@ namespace Borsa
             StockAnalysis stockAnalysis = new StockAnalysis();
             decimal avarageConst = 0;
             decimal totalValue = 0;
-            decimal totalConst = 0;
 
             var result = from a in DB.Entities.Accounts
                          join al in DB.Entities.AccountTransactions on a.AccountId equals al.AccountId
@@ -54,6 +56,8 @@ namespace Borsa
                          join s in DB.Entities.Stocks on st.StockCode equals s.StockCode
                          join s1 in stocks.Distinct() on s.StockCode equals s1.StockCode
                          where a.AccountId == DB.DefaultAccount.AccountId && s1 != null
+                         && st.Date >= request.StartDate
+                         && st.Date <= request.EndDate
                          orderby st.Date
                          group st by s into StockTransactions
                          select new { Stock = StockTransactions.Key, StockTransactions };
@@ -162,19 +166,24 @@ namespace Borsa
                     Name = "SellPrice",
                     Text = item.SellPrice == 0 ? "" : item.SellPrice.ToMoneyStirng(6)
                 });
-                if (item.TotalAmount == 0)
-                    totalValue += item.TotalValue - item.TotalConst;
+                li.SubItems.Add(new ListViewItem.ListViewSubItem()
+                {
+                    Name = "Gain",
+                    Text = item.TotalAmount == 0 ? Math.Abs(item.TotalValue - item.TotalConst).ToMoneyStirng(2) : ""
+                });
+                decimal value = item.TotalAmount == 0 ? (item.TotalSellAmount * item.SellPrice - item.TotalConst) : (item.TotalBuyAmount * item.BuyPrice);
+                if (item.TotalAmount > 0)
+                    totalValue += value;
                 li.SubItems.Add(new ListViewItem.ListViewSubItem()
                 {
                     Name = "TotalValue",
-                    Text = Math.Abs(item.TotalValue - item.TotalConst).ToMoneyStirng(2)
+                    Text = value.ToMoneyStirng(2)
                 });
 
                 lvList.Items.Add(li);
             }
 
-            lblInformations.Text = $"[Const: {totalConst.ToMoneyStirng(2)}, Total Value: {totalValue.ToMoneyStirng(2)}]";
-            //lblInformations.Text = $"[ Total Amount: {result.Sum(c => c.Amount * (c.TransactionType == TransactionType.Sell ? -1 : 1)).ToMoneyStirng(0)}{(avarageConst != 0 ? $", Avarage Const: {avarageConst.ToMoneyStirng(2)}" : "") }, {(totalValue > 0 ? "Advantage" : "Loss")} : {Math.Abs(totalValue).ToMoneyStirng(2)}]";
+            lblInformations.Text = $"[Total Gain: {stockAnalyses.Sum(c => c.Gain).ToMoneyStirng(2)}, Total Const: {stockAnalyses.Sum(c=>c.TotalConst).ToMoneyStirng(2)}, Available Value: {totalValue.ToMoneyStirng(2)}]";
         }
     }
 
@@ -186,7 +195,10 @@ namespace Borsa
         }
 
         public string StockCode { get; set; }
+        public decimal Gain { get { return TotalAmount == 0 ? (TotalValue - TotalConst) : 0; } }
         public decimal TotalAmount { get { return StockTransactions.Sum(c => c.Amount * (c.TransactionType == TransactionType.Sell ? -1 : 1)); } }
+        public decimal TotalBuyAmount { get { return StockTransactions.Where(c => c.TransactionType == TransactionType.Buy).Sum(c => c.Amount); } }
+        public decimal TotalSellAmount { get { return StockTransactions.Where(c => c.TransactionType == TransactionType.Sell).Sum(c => c.Amount); } }
         public decimal TotalConst { get { return StockTransactions.Sum(c => c.Const); } }
         public decimal BuyPrice
         {

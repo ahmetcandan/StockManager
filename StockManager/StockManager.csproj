@@ -102,6 +102,7 @@
     <Compile Include="Db.cs" />
     <Compile Include="Model\Account.cs" />
     <Compile Include="Model\AccountTransaction.cs" />
+    <Compile Include="Model\Dto.cs" />
     <Compile Include="Model\Setting.cs" />
     <Compile Include="Model\Stock.cs" />
     <Compile Include="Model\StockTransaction.cs" />

@@ -1,4 +1,5 @@
 ﻿using Borsa.Model;
+using StockManager;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -309,10 +310,13 @@ namespace Borsa
 
         private void analysisToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            List<string> stockCodes = new List<string>();
+            StockAnalysisRequest request = new StockAnalysisRequest();
             for (int i = 0; i < lvList.SelectedItems.Count; i++)
-                stockCodes.Add(lvList.SelectedItems[i].SubItems["StockCode"].Text);
-            frmStockAnalysis frm = new frmStockAnalysis(string.Join(",", stockCodes.Distinct()));
+                request.StockCodes.Add(lvList.SelectedItems[i].SubItems["StockCode"].Text);
+            request.StartDate = dtDateStart.Value;
+            request.EndDate = dtDateEnd.Value;
+            request.StockCodes = request.StockCodes.Distinct().ToList();
+            frmStockAnalysis frm = new frmStockAnalysis(request);
             frm.ShowDialog();
         }
 

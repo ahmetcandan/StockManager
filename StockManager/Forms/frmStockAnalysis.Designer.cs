@@ -45,6 +45,7 @@
             this.TotalAmount = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.BuyPrice = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.SellPrice = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.Gain = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.TotalValue = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.listMenu.SuspendLayout();
             this.SuspendLayout();
@@ -130,7 +131,7 @@
             this.label1.Location = new System.Drawing.Point(1, 584);
             this.label1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(1409, 30);
+            this.label1.Size = new System.Drawing.Size(1413, 30);
             this.label1.TabIndex = 9;
             this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
@@ -147,6 +148,7 @@
             this.TotalAmount,
             this.BuyPrice,
             this.SellPrice,
+            this.Gain,
             this.TotalValue});
             this.lvList.Font = new System.Drawing.Font("Hermit", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lvList.ForeColor = System.Drawing.Color.Lime;
@@ -157,7 +159,7 @@
             this.lvList.Location = new System.Drawing.Point(1, -4);
             this.lvList.Margin = new System.Windows.Forms.Padding(4);
             this.lvList.Name = "lvList";
-            this.lvList.Size = new System.Drawing.Size(1409, 584);
+            this.lvList.Size = new System.Drawing.Size(1413, 584);
             this.lvList.TabIndex = 8;
             this.lvList.UseCompatibleStateImageBehavior = false;
             this.lvList.View = System.Windows.Forms.View.Details;
@@ -176,31 +178,37 @@
             // 
             this.TotalAmount.Text = "Total Amount";
             this.TotalAmount.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            this.TotalAmount.Width = 180;
+            this.TotalAmount.Width = 150;
             // 
             // BuyPrice
             // 
             this.BuyPrice.Text = "Buy Price";
             this.BuyPrice.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            this.BuyPrice.Width = 184;
+            this.BuyPrice.Width = 150;
             // 
             // SellPrice
             // 
             this.SellPrice.Text = "Sell Price";
             this.SellPrice.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            this.SellPrice.Width = 174;
+            this.SellPrice.Width = 150;
+            // 
+            // Gain
+            // 
+            this.Gain.Text = "Gain";
+            this.Gain.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.Gain.Width = 150;
             // 
             // TotalValue
             // 
             this.TotalValue.Text = "Total Value";
             this.TotalValue.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            this.TotalValue.Width = 188;
+            this.TotalValue.Width = 150;
             // 
             // frmStockAnalysis
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1410, 614);
+            this.ClientSize = new System.Drawing.Size(1414, 614);
             this.Controls.Add(this.lblInformations);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.lvList);
@@ -230,8 +238,9 @@
         private System.Windows.Forms.ColumnHeader TotalAmount;
         private System.Windows.Forms.ColumnHeader BuyPrice;
         private System.Windows.Forms.ColumnHeader Status;
-        private System.Windows.Forms.ColumnHeader TotalValue;
+        private System.Windows.Forms.ColumnHeader Gain;
         private System.Windows.Forms.ColumnHeader SellPrice;
         private System.Windows.Forms.ColumnHeader StockCode;
+        private System.Windows.Forms.ColumnHeader TotalValue;
     }
 }
