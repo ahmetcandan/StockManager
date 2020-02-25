@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Borsa.Model
+namespace StockManager.Model
 {
     public class Account
     {

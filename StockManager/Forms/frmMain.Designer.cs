@@ -1,4 +1,4 @@
-﻿namespace Borsa
+﻿namespace StockManager
 {
     partial class frmMain
     {
@@ -49,6 +49,7 @@
             this.analysisToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
             this.changeAccountToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.periodListToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuNotify = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.exitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.notifyIcon = new System.Windows.Forms.NotifyIcon(this.components);
@@ -58,9 +59,8 @@
             this.lblInformation2 = new System.Windows.Forms.Label();
             this.cbStock = new System.Windows.Forms.ComboBox();
             this.label4 = new System.Windows.Forms.Label();
-            this.dtDateStart = new System.Windows.Forms.DateTimePicker();
             this.label5 = new System.Windows.Forms.Label();
-            this.dtDateEnd = new System.Windows.Forms.DateTimePicker();
+            this.cbPeriod = new System.Windows.Forms.ComboBox();
             this.listMenu.SuspendLayout();
             this.menuNotify.SuspendLayout();
             this.SuspendLayout();
@@ -92,7 +92,7 @@
             this.lvList.Location = new System.Drawing.Point(0, 40);
             this.lvList.Margin = new System.Windows.Forms.Padding(4);
             this.lvList.Name = "lvList";
-            this.lvList.Size = new System.Drawing.Size(1206, 484);
+            this.lvList.Size = new System.Drawing.Size(1360, 414);
             this.lvList.TabIndex = 0;
             this.lvList.UseCompatibleStateImageBehavior = false;
             this.lvList.View = System.Windows.Forms.View.Details;
@@ -160,9 +160,10 @@
             this.deleteToolStripMenuItem,
             this.analysisToolStripMenuItem,
             this.toolStripSeparator2,
-            this.changeAccountToolStripMenuItem});
+            this.changeAccountToolStripMenuItem,
+            this.periodListToolStripMenuItem});
             this.listMenu.Name = "listMenu";
-            this.listMenu.Size = new System.Drawing.Size(250, 208);
+            this.listMenu.Size = new System.Drawing.Size(250, 240);
             this.listMenu.Opening += new System.ComponentModel.CancelEventHandler(this.listMenu_Opening);
             // 
             // editToolStripMenuItem
@@ -227,6 +228,14 @@
             this.changeAccountToolStripMenuItem.Text = "Change Account";
             this.changeAccountToolStripMenuItem.Click += new System.EventHandler(this.changeAccountToolStripMenuItem_Click);
             // 
+            // periodListToolStripMenuItem
+            // 
+            this.periodListToolStripMenuItem.Font = new System.Drawing.Font("Hermit", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.periodListToolStripMenuItem.Name = "periodListToolStripMenuItem";
+            this.periodListToolStripMenuItem.Size = new System.Drawing.Size(249, 32);
+            this.periodListToolStripMenuItem.Text = "Period List";
+            this.periodListToolStripMenuItem.Click += new System.EventHandler(this.periodListToolStripMenuItem_Click);
+            // 
             // menuNotify
             // 
             this.menuNotify.ImageScalingSize = new System.Drawing.Size(20, 20);
@@ -261,10 +270,10 @@
             this.label1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.label1.Font = new System.Drawing.Font("Hermit", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label1.ForeColor = System.Drawing.Color.PaleGreen;
-            this.label1.Location = new System.Drawing.Point(0, 524);
+            this.label1.Location = new System.Drawing.Point(0, 454);
             this.label1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(1206, 30);
+            this.label1.Size = new System.Drawing.Size(1360, 30);
             this.label1.TabIndex = 6;
             this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
@@ -277,7 +286,7 @@
             this.lblInformations.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.lblInformations.Font = new System.Drawing.Font("Hermit", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblInformations.ForeColor = System.Drawing.Color.PaleGreen;
-            this.lblInformations.Location = new System.Drawing.Point(0, 524);
+            this.lblInformations.Location = new System.Drawing.Point(0, 454);
             this.lblInformations.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblInformations.Name = "lblInformations";
             this.lblInformations.Size = new System.Drawing.Size(170, 30);
@@ -295,7 +304,7 @@
             this.lblInformation2.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.lblInformation2.Font = new System.Drawing.Font("Hermit", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblInformation2.ForeColor = System.Drawing.Color.PaleGreen;
-            this.lblInformation2.Location = new System.Drawing.Point(0, 524);
+            this.lblInformation2.Location = new System.Drawing.Point(0, 454);
             this.lblInformation2.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblInformation2.Name = "lblInformation2";
             this.lblInformation2.Size = new System.Drawing.Size(170, 30);
@@ -313,7 +322,7 @@
             this.cbStock.Items.AddRange(new object[] {
             "Buy",
             "Sell"});
-            this.cbStock.Location = new System.Drawing.Point(221, 3);
+            this.cbStock.Location = new System.Drawing.Point(131, 3);
             this.cbStock.Margin = new System.Windows.Forms.Padding(4);
             this.cbStock.Name = "cbStock";
             this.cbStock.Size = new System.Drawing.Size(248, 36);
@@ -329,21 +338,10 @@
             this.label4.Location = new System.Drawing.Point(0, 3);
             this.label4.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(213, 36);
+            this.label4.Size = new System.Drawing.Size(123, 36);
             this.label4.TabIndex = 10;
             this.label4.Text = "Stock : ";
             this.label4.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            // 
-            // dtDateStart
-            // 
-            this.dtDateStart.CalendarMonthBackground = System.Drawing.Color.Black;
-            this.dtDateStart.Font = new System.Drawing.Font("Hermit", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.dtDateStart.Location = new System.Drawing.Point(698, 3);
-            this.dtDateStart.Margin = new System.Windows.Forms.Padding(4);
-            this.dtDateStart.Name = "dtDateStart";
-            this.dtDateStart.Size = new System.Drawing.Size(248, 36);
-            this.dtDateStart.TabIndex = 11;
-            this.dtDateStart.ValueChanged += new System.EventHandler(this.dtDateStart_ValueChanged);
             // 
             // label5
             // 
@@ -351,33 +349,38 @@
             this.label5.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.label5.Font = new System.Drawing.Font("Hermit", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label5.ForeColor = System.Drawing.Color.PaleGreen;
-            this.label5.Location = new System.Drawing.Point(477, 3);
+            this.label5.Location = new System.Drawing.Point(387, 3);
             this.label5.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(213, 36);
+            this.label5.Size = new System.Drawing.Size(130, 36);
             this.label5.TabIndex = 12;
-            this.label5.Text = "Date : ";
+            this.label5.Text = "Period : ";
             this.label5.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
-            // dtDateEnd
+            // cbPeriod
             // 
-            this.dtDateEnd.CalendarMonthBackground = System.Drawing.Color.Black;
-            this.dtDateEnd.Font = new System.Drawing.Font("Hermit", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.dtDateEnd.Location = new System.Drawing.Point(954, 3);
-            this.dtDateEnd.Margin = new System.Windows.Forms.Padding(4);
-            this.dtDateEnd.Name = "dtDateEnd";
-            this.dtDateEnd.Size = new System.Drawing.Size(248, 36);
-            this.dtDateEnd.TabIndex = 13;
-            this.dtDateEnd.ValueChanged += new System.EventHandler(this.dtDateEnd_ValueChanged);
+            this.cbPeriod.BackColor = System.Drawing.Color.Black;
+            this.cbPeriod.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cbPeriod.Font = new System.Drawing.Font("Hermit", 12F);
+            this.cbPeriod.ForeColor = System.Drawing.Color.Lime;
+            this.cbPeriod.FormattingEnabled = true;
+            this.cbPeriod.Items.AddRange(new object[] {
+            "Buy",
+            "Sell"});
+            this.cbPeriod.Location = new System.Drawing.Point(525, 3);
+            this.cbPeriod.Margin = new System.Windows.Forms.Padding(4);
+            this.cbPeriod.Name = "cbPeriod";
+            this.cbPeriod.Size = new System.Drawing.Size(248, 36);
+            this.cbPeriod.TabIndex = 13;
+            this.cbPeriod.SelectedIndexChanged += new System.EventHandler(this.cbPeriod_SelectedIndexChanged);
             // 
             // frmMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            this.ClientSize = new System.Drawing.Size(1207, 554);
-            this.Controls.Add(this.dtDateEnd);
-            this.Controls.Add(this.dtDateStart);
+            this.ClientSize = new System.Drawing.Size(1361, 484);
+            this.Controls.Add(this.cbPeriod);
             this.Controls.Add(this.label5);
             this.Controls.Add(this.cbStock);
             this.Controls.Add(this.label4);
@@ -387,7 +390,7 @@
             this.Controls.Add(this.lvList);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Margin = new System.Windows.Forms.Padding(4);
-            this.MinimumSize = new System.Drawing.Size(1225, 601);
+            this.MinimumSize = new System.Drawing.Size(1025, 400);
             this.Name = "frmMain";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Stock Tracking";
@@ -431,9 +434,9 @@
         private System.Windows.Forms.ToolStripMenuItem changeAccountToolStripMenuItem;
         private System.Windows.Forms.ComboBox cbStock;
         private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.DateTimePicker dtDateStart;
         private System.Windows.Forms.Label label5;
-        private System.Windows.Forms.DateTimePicker dtDateEnd;
+        private System.Windows.Forms.ToolStripMenuItem periodListToolStripMenuItem;
+        private System.Windows.Forms.ComboBox cbPeriod;
     }
 }
 

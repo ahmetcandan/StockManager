@@ -1,4 +1,4 @@
-﻿namespace Borsa
+﻿namespace StockManager
 {
     partial class frmAccount
     {

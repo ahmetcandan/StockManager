@@ -11,11 +11,9 @@ using System.Windows.Forms;
 
 namespace StockManager
 {
-    public partial class frmAccountChoose : Form
+    public partial class frmPeriodList : Form
     {
-        List<Stock> stocks = new List<Stock>();
-
-        public frmAccountChoose()
+        public frmPeriodList()
         {
             InitializeComponent();
         }
@@ -28,19 +26,24 @@ namespace StockManager
         private void refreshList()
         {
             lvList.Items.Clear();
-            foreach (var account in DB.User.Accounts)
+            foreach (var period in DB.Entities.Periods.Where(c => c.AccountId == DB.DefaultAccount.AccountId))
             {
                 var li = new ListViewItem();
-                li.Text = account.AccountId.ToString();
+                li.Text = period.PeriodId.ToString();
                 li.SubItems.Add(new ListViewItem.ListViewSubItem()
                 {
-                    Name = "AccountName",
-                    Text = account.AccountName
-                }); ;
+                    Name = "PeriodName",
+                    Text = period.PeriodName
+                });
                 li.SubItems.Add(new ListViewItem.ListViewSubItem()
                 {
-                    Name = "MoneyType",
-                    Text = account.MoneyType.MoneyTypeToString()
+                    Name = "StartDate",
+                    Text = period.StartDate.ToShortDateString()
+                });
+                li.SubItems.Add(new ListViewItem.ListViewSubItem()
+                {
+                    Name = "EndDate",
+                    Text = period.EndDate.ToShortDateString()
                 });
 
                 lvList.Items.Add(li);
@@ -51,8 +54,10 @@ namespace StockManager
         {
             if (lvList.SelectedItems.Count > 0)
             {
-                DB.DefaultAccount = DB.Entities.GetAccount(int.Parse(lvList.SelectedItems[0].Text));
-                Close();
+                int periodId = int.Parse(lvList.SelectedItems[0].Text);
+                frmPeriod frm = new frmPeriod(periodId);
+                frm.ShowDialog();
+                refreshList();
             }
         }
 
@@ -63,40 +68,31 @@ namespace StockManager
 
         private void addToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            frmAccount frm = new frmAccount();
+            frmPeriod frm = new frmPeriod();
             frm.ShowDialog();
             refreshList();
         }
 
         private void editToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            frmAccount frm = new frmAccount(int.Parse(lvList.SelectedItems[0].Text));
-            frm.ShowDialog();
-            refreshList();
+            lvList_DoubleClick(sender, e);
         }
 
         private void deleteToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            if (MessageBox.Show("Delete account?", "Delete?", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+            if (MessageBox.Show("Delete period?", "Delete?", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
             {
-                int accountId = int.Parse(lvList.SelectedItems[0].Text);
-                DB.User.Accounts.RemoveAll(c => c.AccountId == accountId);
-                DB.Entities.Accounts.RemoveAll(c => c.AccountId == accountId);
+                int periodId = int.Parse(lvList.SelectedItems[0].Text);
+                DB.Entities.Periods.RemoveAll(c => c.PeriodId == periodId);
                 DB.Save();
                 refreshList();
             }
-        }
-
-        private void chooseAccountToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            lvList_DoubleClick(sender, e);
         }
 
         private void listMenu_Opening(object sender, CancelEventArgs e)
         {
             editToolStripMenuItem.Enabled = lvList.SelectedItems.Count == 1;
             deleteToolStripMenuItem.Enabled = editToolStripMenuItem.Enabled;
-            chooseAccountToolStripMenuItem.Enabled = editToolStripMenuItem.Enabled;
         }
     }
 }

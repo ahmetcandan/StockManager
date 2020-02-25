@@ -1,13 +1,14 @@
-﻿using Borsa.Model;
+﻿using StockManager.Model;
 using Newtonsoft.Json;
 using RestSharp;
+using StockManager;
 using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Threading;
 
-namespace Borsa
+namespace StockManager
 {
     public class DataAccess
     {
@@ -15,7 +16,6 @@ namespace Borsa
         {
             fileExistCreate();
             read();
-            GetStockService();
         }
 
         public List<Account> Accounts { get; set; }
@@ -24,6 +24,8 @@ namespace Borsa
         public List<StockTransaction> StockTransactions { get; set; }
         public List<User> Users { get; set; }
         public Setting Setting { get; set; }
+        public List<StockCurrent> CurrentStocks { get; set; }
+        public List<Period> Periods { get; set; }
 
         public int GenerateAccontTransactionId()
         {
@@ -46,6 +48,13 @@ namespace Borsa
             return 1;
         }
 
+        public int GeneratePeriodId()
+        {
+            if (Periods.Count > 0)
+                return Periods.Max(c => c.PeriodId) + 1;
+            return 1;
+        }
+
         public StockTransaction GetStockTransaction(int stockTransactionId)
         {
             if (StockTransactions.Any(c => c.StockTransactionId == stockTransactionId))
@@ -56,6 +65,15 @@ namespace Borsa
                 if (result.Stock == null)
                     result.Stock = GetStock(result.StockCode);
                 return result;
+            }
+            return null;
+        }
+
+        public Period GetPeriod(int periodId)
+        {
+            if (Periods.Any(c => c.PeriodId == periodId))
+            {
+                return Periods.First(c => c.PeriodId == periodId);
             }
             return null;
         }
@@ -254,6 +272,23 @@ namespace Borsa
             }
         }
 
+        public Period PostPeriod(Period period)
+        {
+            period.AccountId = DB.DefaultAccount.AccountId;
+            var item = Periods.FirstOrDefault(c => c.PeriodId == period.PeriodId);
+            if (item != null)
+            {
+                item = period;
+                return item;
+            }
+            else
+            {
+                period.PeriodId = GeneratePeriodId();
+                Periods.Add(period);
+                return period;
+            }
+        }
+
         private void getUserAccounts()
         {
             DB.User.Accounts = (from a in Accounts
@@ -278,6 +313,13 @@ namespace Borsa
             Save();
         }
 
+        public void DeletePeriod(int periodId)
+        {
+            var period = GetPeriod(periodId);
+            if (period != null)
+                Periods.Remove(period);
+        }
+
         public void Save()
         {
             foreach (var account in Accounts)
@@ -285,50 +327,34 @@ namespace Borsa
             write();
         }
 
-        public void GetStockService()
-        {
-            foreach (var stockCode in (from s in StockTransactions select s.StockCode).Distinct())
-            {
-                Stock stock = new Stock();
-                if (Stocks.Any(c => c.StockCode == stockCode))
-                    stock = Stocks.First(c => c.StockCode == stockCode);
-                dynamic data = getStock(stockCode);
-                if (data == null)
-                    continue;
-                stock.Value = data.data.hisseYuzeysel.alis;
-                stock.Name = data.data.hisseYuzeysel.aciklama;
-                stock.HighestValueOfDay = data.data.hisseYuzeysel.yuksek;
-                stock.LowestValueOfDay = data.data.hisseYuzeysel.dusuk;
-                stock.UpdateDate = data.data.hisseYuzeysel.tarih;
-            }
-        }
-
-        public Stock GetStockService(string stockCode)
+        public StockCurrent GetStockService(string stockCode)
         {
             stockCode = stockCode.ToUpper();
-            Stock stock = new Stock();
-            if (Stocks.Any(c => c.StockCode == stockCode))
-                stock = Stocks.First(c => c.StockCode == stockCode);
-            dynamic data = getStock(stockCode);
-            if (data == null)
+            var stock = GetStock(stockCode);
+            if (CurrentStocks.Any(c => c.StockCode == stockCode && c.CreatedDate.AddMinutes(30) > DateTime.Now))
+                return CurrentStocks.OrderByDescending(c => c.CreatedDate).FirstOrDefault(c => c.StockCode == stockCode);
+            dynamic stockService = getStock(stockCode);
+            if (stockService == null) return null;
+            var result = new StockCurrent()
             {
-                if (DB.Entities.Stocks.Any(c => c.StockCode == stockCode))
-                    return DB.Entities.GetStock(stockCode);
-                return new Stock();
-            }
-            stock.Value = data.data.hisseYuzeysel.alis;
-            stock.Name = data.data.hisseYuzeysel.aciklama;
-            stock.HighestValueOfDay = data.data.hisseYuzeysel.yuksek;
-            stock.LowestValueOfDay = data.data.hisseYuzeysel.dusuk;
-            stock.UpdateDate = data.data.hisseYuzeysel.tarih;
-            return stock;
+                StockCode = stockCode,
+                Price = stockService.data.hisseYuzeysel.alis,
+                StockName = stockService.data.hisseYuzeysel.aciklama,
+                UpdateDate = stockService.data.hisseYuzeysel.tarih,
+                CreatedDate = DateTime.Now
+            };
+            stock.Name = result.StockName;
+            stock.Value = result.Price;
+            stock.UpdateDate = result.UpdateDate;
+            CurrentStocks.Add(result);
+            Save();
+            return result;
         }
 
         private dynamic getStock(string stockCode)
         {
             try
             {
-                return null;
                 var client = new RestClient("http://bigpara.hurriyet.com.tr/api/v1/borsa/hisseyuzeysel/" + stockCode.ToUpper());
                 var request = new RestRequest("", Method.GET);
                 var response = client.Execute(request);
@@ -349,7 +375,14 @@ namespace Borsa
                     if (Accounts == null || Accounts.Count == 0)
                         sw.Write("[]");
                     else
-                        sw.Write(JsonConvert.SerializeObject(from a in Accounts select new { a.AccountId, a.AccountName, a.MoneyType, a.TotalAmount, a.DefaultAccount }));
+                        sw.Write(JsonConvert.SerializeObject(from a in Accounts select new { a.AccountId, a.AccountName, a.MoneyType, a.TotalAmount, a.DefaultAccount, }));
+                }
+                using (StreamWriter sw = new StreamWriter("Data/CurrentStocks.json"))
+                {
+                    if (CurrentStocks == null || CurrentStocks.Count == 0)
+                        sw.Write("[]");
+                    else
+                        sw.Write(JsonConvert.SerializeObject(from a in CurrentStocks select new { a.StockCode, a.StockName, a.Price, a.UpdateDate, a.CreatedDate }));
                 }
                 using (StreamWriter sw = new StreamWriter("Data/AccountTransactions.json"))
                 {
@@ -379,6 +412,13 @@ namespace Borsa
                     else
                         sw.Write(JsonConvert.SerializeObject(from u in Users select new User { UserName = u.UserName, Password = u.Password, IsActive = u.IsActive, Accounts = u.Accounts.Select(c => new Account { AccountId = c.AccountId, DefaultAccount = c.DefaultAccount }).ToList() }));
                 }
+                using (StreamWriter sw = new StreamWriter("Data/Periods.json"))
+                {
+                    if (Periods == null || Periods.Count == 0)
+                        sw.Write("[]");
+                    else
+                        sw.Write(JsonConvert.SerializeObject((from u in Periods select new Period { PeriodId = u.PeriodId, PeriodName = u.PeriodName, StartDate = u.StartDate, EndDate = u.EndDate, AccountId = u.AccountId }).ToList()));
+                }
                 using (StreamWriter sw = new StreamWriter("Data/Settings.json"))
                 {
                     if (Setting == null)
@@ -402,6 +442,12 @@ namespace Borsa
                     Accounts = JsonConvert.DeserializeObject<List<Account>>(sw.ReadToEnd());
                     if (Accounts == null)
                         Accounts = new List<Account>();
+                }
+                using (StreamReader sw = new StreamReader("Data/CurrentStocks.json"))
+                {
+                    CurrentStocks = JsonConvert.DeserializeObject<List<StockCurrent>>(sw.ReadToEnd());
+                    if (CurrentStocks == null)
+                        CurrentStocks = new List<StockCurrent>();
                 }
                 using (StreamReader sw = new StreamReader("Data/AccountTransactions.json"))
                 {
@@ -433,6 +479,12 @@ namespace Borsa
                     if (Setting == null)
                         Setting = new Setting();
                 }
+                using (StreamReader sw = new StreamReader("Data/Periods.json"))
+                {
+                    Periods = JsonConvert.DeserializeObject<List<Period>>(sw.ReadToEnd());
+                    if (Periods == null)
+                        Periods = new List<Period>();
+                }
             }
             catch (Exception ex)
             {
@@ -455,6 +507,26 @@ namespace Borsa
                 {
                     save = true;
                     Accounts = new List<Account>();
+                    file.Close();
+                }
+            }
+
+            if (!File.Exists("Data/CurrentStocks.json"))
+            {
+                using (var file = File.Create("Data/CurrentStocks.json"))
+                {
+                    save = true;
+                    CurrentStocks = new List<StockCurrent>();
+                    file.Close();
+                }
+            }
+
+            if (!File.Exists("Data/Periods.json"))
+            {
+                using (var file = File.Create("Data/Periods.json"))
+                {
+                    save = true;
+                    Periods = new List<Period>();
                     file.Close();
                 }
             }

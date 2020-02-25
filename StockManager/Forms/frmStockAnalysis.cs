@@ -1,4 +1,4 @@
-﻿using Borsa.Model;
+﻿using StockManager.Model;
 using StockManager;
 using System;
 using System.Collections.Generic;
@@ -10,7 +10,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace Borsa
+namespace StockManager
 {
     public partial class frmStockAnalysis : Form
     {
@@ -29,6 +29,7 @@ namespace Borsa
                     var stock = DB.Entities.GetStock(stockCode);
                     if (stock != null) stocks.Add(stock);
                 }
+            Text = $"{request.Period.PeriodName} - Stock Analysis";
         }
 
         private void timer1_Tick(object sender, EventArgs e)
@@ -49,18 +50,70 @@ namespace Borsa
             StockAnalysis stockAnalysis = new StockAnalysis();
             decimal avarageConst = 0;
             decimal totalValue = 0;
+            decimal totalGain = 0;
+            List<StockTransaction> stockTransactions = new List<StockTransaction>();
+            stockTransactions = DB.Entities.StockTransactions.Where(c => c.Date >= request.Period.StartDate && c.Date <= request.Period.EndDate).ToList();
+
+            {
+                var lastPeriodStockTransaciton = from st in DB.Entities.StockTransactions.DeepCopy()
+                                                 where st.Date < request.Period.StartDate
+                                                 group st by st.StockCode into StockTransaction
+                                                 select new { StockCode = StockTransaction.Key, StockTransaction };
+
+                foreach (var stock in lastPeriodStockTransaciton)
+                {
+                    if (stock.StockTransaction.Sum(c => c.Amount * (c.TransactionType == TransactionType.Sell ? -1 : 1)) > 0)
+                    {
+                        foreach (var stockTransaction in stock.StockTransaction.OrderBy(c => c.Date).Where(c => c.TransactionType == TransactionType.Sell))
+                        {
+                            decimal sellAmount = stockTransaction.Amount;
+
+                            while (sellAmount > 0)
+                            {
+                                var buyTransaction = stock.StockTransaction.OrderBy(c => c.Date).FirstOrDefault(c => c.TransactionType == TransactionType.Buy && c.Amount > 0);
+                                if (sellAmount > buyTransaction.Amount)
+                                {
+                                    sellAmount -= buyTransaction.Amount;
+                                    buyTransaction.Amount = 0;
+                                }
+                                else
+                                {
+                                    buyTransaction.Amount -= sellAmount;
+                                    sellAmount = 0;
+                                }
+                            }
+                        }
+
+                        decimal sumBuyAmount = stock.StockTransaction.Where(c => c.TransactionType == TransactionType.Buy && c.Amount > 0).Sum(c => c.Amount);
+                        decimal sumBuyPrice = stock.StockTransaction.Where(c => c.TransactionType == TransactionType.Buy && c.Amount > 0).Sum(c => c.UnitPrice * c.Amount);
+                        DateTime buyDate = stock.StockTransaction.Where(c => c.TransactionType == TransactionType.Buy && c.Amount > 0).Min(c => c.Date);
+                        int stockTransactionId = stock.StockTransaction.OrderBy(c => c.Date).FirstOrDefault(c => c.TransactionType == TransactionType.Buy && c.Amount > 0).StockTransactionId;
+                        stockTransactions.Add(new StockTransaction
+                        {
+                            Amount = sumBuyAmount,
+                            UnitPrice = sumBuyPrice / sumBuyAmount,
+                            TotalPrice = sumBuyPrice,
+                            StockCode = stock.StockCode,
+                            Date = buyDate,
+                            TransactionType = TransactionType.Buy,
+                            StockTransactionId = stockTransactionId,
+                        });
+                    }
+                }
+            }
 
             var result = from a in DB.Entities.Accounts
                          join al in DB.Entities.AccountTransactions on a.AccountId equals al.AccountId
-                         join st in DB.Entities.StockTransactions on al.StockTransactionId equals st.StockTransactionId
+                         join st in stockTransactions on al.StockTransactionId equals st.StockTransactionId
                          join s in DB.Entities.Stocks on st.StockCode equals s.StockCode
                          join s1 in stocks.Distinct() on s.StockCode equals s1.StockCode
                          where a.AccountId == DB.DefaultAccount.AccountId && s1 != null
-                         && st.Date >= request.StartDate
-                         && st.Date <= request.EndDate
                          orderby st.Date
                          group st by s into StockTransactions
                          select new { Stock = StockTransactions.Key, StockTransactions };
+
+            foreach (var item in result.Where(c => c.StockTransactions.Sum(t => t.Amount * (t.TransactionType == TransactionType.Sell ? -1 : 1)) > 0))
+                DB.Entities.GetStockService(item.Stock.StockCode);
 
             foreach (var stock in result)
             {
@@ -151,6 +204,14 @@ namespace Borsa
                     li.BackColor = Color.Tan;
                     li.ForeColor = Color.Black;
                 }
+
+                decimal? curValue = null;
+                if (DB.Entities.CurrentStocks.Any(c => c.StockCode == item.StockCode))
+                    curValue = DB.Entities.CurrentStocks.OrderByDescending(c => c.CreatedDate).FirstOrDefault(c => c.StockCode == item.StockCode).Price;
+                decimal value = item.TotalAmount == 0 ? (item.TotalSellAmount * item.SellPrice - item.TotalConst) : (item.TotalBuyAmount * (curValue.HasValue ? curValue.Value : item.BuyPrice));
+                if (item.TotalAmount > 0)
+                    totalValue += value;
+
                 li.SubItems.Add(new ListViewItem.ListViewSubItem()
                 {
                     Name = "TotalAmount",
@@ -164,16 +225,15 @@ namespace Borsa
                 li.SubItems.Add(new ListViewItem.ListViewSubItem()
                 {
                     Name = "SellPrice",
-                    Text = item.SellPrice == 0 ? "" : item.SellPrice.ToMoneyStirng(6)
+                    Text = item.TotalAmount > 0 && curValue.HasValue ? $"[{curValue.Value.ToMoneyStirng(6)}]" : (item.SellPrice > 0 ? item.SellPrice.ToMoneyStirng(6) : "")
                 });
+                decimal gain = item.TotalAmount == 0 ? (item.TotalValue - item.TotalConst) : (curValue.HasValue ? (item.TotalBuyAmount * curValue.Value - item.TotalBuyAmount * item.BuyPrice - item.TotalConst) : 0);
                 li.SubItems.Add(new ListViewItem.ListViewSubItem()
                 {
                     Name = "Gain",
-                    Text = item.TotalAmount == 0 ? Math.Abs(item.TotalValue - item.TotalConst).ToMoneyStirng(2) : ""
+                    Text = gain == 0 ? "" : gain.ToMoneyStirng(2)
                 });
-                decimal value = item.TotalAmount == 0 ? (item.TotalSellAmount * item.SellPrice - item.TotalConst) : (item.TotalBuyAmount * item.BuyPrice);
-                if (item.TotalAmount > 0)
-                    totalValue += value;
+                totalGain += gain;
                 li.SubItems.Add(new ListViewItem.ListViewSubItem()
                 {
                     Name = "TotalValue",
@@ -183,7 +243,7 @@ namespace Borsa
                 lvList.Items.Add(li);
             }
 
-            lblInformations.Text = $"[Total Gain: {stockAnalyses.Sum(c => c.Gain).ToMoneyStirng(2)}, Total Const: {stockAnalyses.Sum(c=>c.TotalConst).ToMoneyStirng(2)}, Available Value: {totalValue.ToMoneyStirng(2)}]";
+            lblInformations.Text = $"[Total Gain: {totalGain.ToMoneyStirng(2)}, Total Const: {stockAnalyses.Sum(c => c.TotalConst).ToMoneyStirng(2)}, Available Value: {totalValue.ToMoneyStirng(2)}]";
         }
     }
 

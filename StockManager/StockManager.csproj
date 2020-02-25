@@ -57,6 +57,18 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="DataAccess\DataAccess.cs" />
+    <Compile Include="Forms\frmPeriodList.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\frmPeriodList.Designer.cs">
+      <DependentUpon>frmPeriodList.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\frmPeriod.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\frmPeriod.Designer.cs">
+      <DependentUpon>frmPeriod.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\frmUser.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -103,12 +115,19 @@
     <Compile Include="Model\Account.cs" />
     <Compile Include="Model\AccountTransaction.cs" />
     <Compile Include="Model\Dto.cs" />
+    <Compile Include="Model\Period.cs" />
     <Compile Include="Model\Setting.cs" />
     <Compile Include="Model\Stock.cs" />
     <Compile Include="Model\StockTransaction.cs" />
     <Compile Include="Model\User.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="Forms\frmPeriodList.resx">
+      <DependentUpon>frmPeriodList.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\frmPeriod.resx">
+      <DependentUpon>frmPeriod.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Forms\frmUser.resx">
       <DependentUpon>frmUser.cs</DependentUpon>
     </EmbeddedResource>

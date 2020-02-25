@@ -1,4 +1,4 @@
-﻿using Borsa.Model;
+﻿using StockManager.Model;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -9,7 +9,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace Borsa
+namespace StockManager
 {
     public partial class frmStockTransaction : Form
     {
@@ -140,8 +140,7 @@ namespace Borsa
         {
             if (!string.IsNullOrEmpty(stockCode))
             {
-                stock = DB.Entities.GetStockService(stockCode);
-                //txtUnitPrice.Text = stock.Value.ToString("N");
+                stock = DB.Entities.GetStock(stockCode);
                 txtStockName.Text = stock.Name;
                 txtStockCode.Text = string.IsNullOrEmpty(stock.StockCode) ? stockCode.ToUpper() : stockCode;
                 txtStockName.Enabled = stock.Value == 0;

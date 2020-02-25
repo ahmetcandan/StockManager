@@ -1,4 +1,4 @@
-﻿using Borsa.Model;
+﻿using StockManager.Model;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -9,7 +9,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace Borsa
+namespace StockManager
 {
     public partial class frmLogin : Form
     {
@@ -128,6 +128,11 @@ namespace Borsa
                     txtPassword.Text = "PASSWORD";
                     passwordIsHash = true;
                 }
+
+                if (DB.Entities.Setting.RememberUserName)
+                    txtPassword.Focus();
+                if (DB.Entities.Setting.RememberPassword)
+                    txtUserName.Focus();
             }
             catch (Exception ex)
             {

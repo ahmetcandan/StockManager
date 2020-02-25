@@ -1,18 +1,36 @@
-﻿using Borsa.Model;
+﻿using Newtonsoft.Json;
+using StockManager.Model;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
+using System.Runtime.Serialization.Formatters.Binary;
 using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Borsa
+namespace StockManager
 {
     public static class DB
     {
         public static DataAccess Entities;
         public static Account DefaultAccount;
         public static User User;
+
+        public static T DeepCopy<T>(this T item)
+        {
+            return JsonConvert.DeserializeObject<T>(JsonConvert.SerializeObject(item));
+        }
+
+        public static List<T> DeepCopy<T>(this List<T> item)
+        {
+            return JsonConvert.DeserializeObject<List<T>>(JsonConvert.SerializeObject(item));
+        }
+
+        public static DateTime SmallDate(this DateTime date)
+        {
+            return new DateTime(date.Year, date.Month, date.Day);
+        }
 
         public static void Save()
         {

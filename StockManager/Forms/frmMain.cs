@@ -1,4 +1,4 @@
-﻿using Borsa.Model;
+﻿using StockManager.Model;
 using StockManager;
 using System;
 using System.Collections.Generic;
@@ -10,11 +10,13 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace Borsa
+namespace StockManager
 {
     public partial class frmMain : Form
     {
         bool left = false;
+        Period period;
+        int periodSelectedIndex;
 
         public frmMain()
         {
@@ -24,13 +26,26 @@ namespace Borsa
         private void frmMain_Load(object sender, EventArgs e)
         {
             timer1.Start();
-            refreshList();
             cbStock_Fill();
-            dtDateStart.Value = new DateTime(DateTime.Now.Year, DateTime.Now.Month, 1);
-            var endDate = new DateTime(DateTime.Now.Year, DateTime.Now.Month, 1);
-            endDate = endDate.AddMonths(1);
-            endDate = endDate.AddDays(-1);
-            dtDateEnd.Value = endDate;
+            period = DB.Entities.Periods.Where(c => c.AccountId == DB.DefaultAccount.AccountId).OrderByDescending(c => c.StartDate).FirstOrDefault();
+            cbPeriod_Fill();
+            cbStock.SelectedIndex = 0;
+            if (period == null)
+            {
+                var endDate = new DateTime(DateTime.Now.Year, DateTime.Now.Month, 1);
+                endDate = endDate.AddMonths(1);
+                endDate = endDate.AddDays(-1);
+                period = new Period()
+                {
+                    StartDate = new DateTime(DateTime.Now.Year, DateTime.Now.Month, 1),
+                    EndDate = endDate
+                };
+            }
+            else
+            {
+                cbPeriod.SelectedIndex = 0;
+                periodSelectedIndex = 0;
+            }
         }
 
         private void cbStock_Fill()
@@ -51,11 +66,26 @@ namespace Borsa
             }
         }
 
+        private void cbPeriod_Fill()
+        {
+            cbPeriod.Items.Clear();
+            foreach (var stock in DB.Entities.Periods.Where(c => c.AccountId == DB.DefaultAccount.AccountId).OrderByDescending(c => c.StartDate))
+            {
+                cbPeriod.Items.Add(new ComboboxItem
+                {
+                    Code = stock.PeriodId.ToString(),
+                    Value = stock.PeriodName,
+                    Object = stock
+                });
+            }
+            cbPeriod.SelectedIndex = periodSelectedIndex;
+        }
+
         private void refreshList()
         {
             string selectedStockCode = cbStock.SelectedItem != null ? ((ComboboxItem)cbStock.SelectedItem).Code : "";
-            DateTime startDate = dtDateStart.Value;
-            DateTime endDate = dtDateEnd.Value;
+            DateTime startDate = period.StartDate;
+            DateTime endDate = period.EndDate;
             lvList.Items.Clear();
             var list = from a in DB.Entities.Accounts
                        join al in DB.Entities.AccountTransactions on a.AccountId equals al.AccountId
@@ -313,8 +343,7 @@ namespace Borsa
             StockAnalysisRequest request = new StockAnalysisRequest();
             for (int i = 0; i < lvList.SelectedItems.Count; i++)
                 request.StockCodes.Add(lvList.SelectedItems[i].SubItems["StockCode"].Text);
-            request.StartDate = dtDateStart.Value;
-            request.EndDate = dtDateEnd.Value;
+            request.Period = period;
             request.StockCodes = request.StockCodes.Distinct().ToList();
             frmStockAnalysis frm = new frmStockAnalysis(request);
             frm.ShowDialog();
@@ -352,12 +381,27 @@ namespace Borsa
         {
             refreshList();
         }
+
+        private void periodListToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            frmPeriodList frm = new frmPeriodList();
+            frm.ShowDialog();
+            cbPeriod_Fill();
+        }
+
+        private void cbPeriod_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            periodSelectedIndex = cbPeriod.Items.IndexOf(cbPeriod.SelectedItem);
+            period = (Period)((ComboboxItem)cbPeriod.SelectedItem).Object;
+            refreshList();
+        }
     }
 
     class ComboboxItem
     {
         public string Value { get; set; }
         public string Code { get; set; }
+        public object Object { get; set; }
 
         public override string ToString()
         {
