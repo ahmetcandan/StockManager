@@ -29,7 +29,7 @@ namespace StockManager
                     var stock = DB.Entities.GetStock(stockCode);
                     if (stock != null) stocks.Add(stock);
                 }
-            Text = $"{request.Period.PeriodName} - Stock Analysis";
+            Text = $"{request.Period.PeriodName} - {Translate.GetMessage("stock-analysis")}";
         }
 
         private void timer1_Tick(object sender, EventArgs e)
@@ -51,6 +51,7 @@ namespace StockManager
             decimal avarageConst = 0;
             decimal totalValue = 0;
             decimal totalGain = 0;
+            decimal expectedGain = 0;
             List<StockTransaction> stockTransactions = new List<StockTransaction>();
             stockTransactions = DB.Entities.StockTransactions.Where(c => c.Date >= request.Period.StartDate && c.Date <= request.Period.EndDate).ToList();
 
@@ -186,7 +187,7 @@ namespace StockManager
                 li.SubItems.Add(new ListViewItem.ListViewSubItem()
                 {
                     Name = "Status",
-                    Text = item.TotalAmount > 0 ? "Available" : ((item.TotalValue - item.TotalConst) > 0 ? "Advantage" : "Loss")
+                    Text = item.TotalAmount > 0 ? Translate.GetMessage("available") : ((item.TotalValue - item.TotalConst) > 0 ? Translate.GetMessage("avantage") : Translate.GetMessage("loss"))
                 });
                 if (item.TotalAmount == 0)
                     if ((item.TotalValue - item.TotalConst) > 0)
@@ -233,7 +234,10 @@ namespace StockManager
                     Name = "Gain",
                     Text = gain == 0 ? "" : gain.ToMoneyStirng(2)
                 });
-                totalGain += gain;
+                if (item.TotalAmount > 0)
+                    expectedGain += gain;
+                else
+                    totalGain += gain;
                 li.SubItems.Add(new ListViewItem.ListViewSubItem()
                 {
                     Name = "TotalValue",
@@ -243,7 +247,7 @@ namespace StockManager
                 lvList.Items.Add(li);
             }
 
-            lblInformations.Text = $"[Total Gain: {totalGain.ToMoneyStirng(2)}, Total Const: {stockAnalyses.Sum(c => c.TotalConst).ToMoneyStirng(2)}, Available Value: {totalValue.ToMoneyStirng(2)}]";
+            lblInformations.Text = $"[{Translate.GetMessage("total-gain")}: {totalGain.ToMoneyStirng(2)}, {Translate.GetMessage("total-const")}: {stockAnalyses.Sum(c => c.TotalConst).ToMoneyStirng(2)}, {Translate.GetMessage("available-value")}: {totalValue.ToMoneyStirng(2)}, {Translate.GetMessage("expected-gain")}: {expectedGain.ToMoneyStirng(2)}]";
         }
     }
 

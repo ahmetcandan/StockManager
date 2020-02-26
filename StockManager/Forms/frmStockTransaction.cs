@@ -30,7 +30,7 @@ namespace StockManager
                 txtStockName.Text = stock.Name;
                 txtTotalPrice.Text = stockTransaction.TotalPrice.ToMoneyStirng(2);
                 txtUnitPrice.Text = stockTransaction.UnitPrice.ToMoneyStirng(6);
-                cbType.Text = stockTransaction.TransactionType == TransactionType.Buy ? "Buy" : "Sell";
+                cbType.Text = stockTransaction.TransactionType == TransactionType.Buy ? Translate.GetMessage("buy") : Translate.GetMessage("sell");
                 dtDate.Value = stockTransaction.Date;
             }
             else
@@ -57,9 +57,9 @@ namespace StockManager
                 if (stockTransaction.StockTransactionId > 0)
                     currentAmount += stockTransaction.Amount;
 
-                if(cbType.Text == "Sell" && amount > currentAmount)
+                if(cbType.Text == Translate.GetMessage("Sell") && amount > currentAmount)
                 {
-                    MessageBox.Show("There is not enough stock.", "Stock Amount Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MessageBox.Show(Translate.GetMessage("there-is-not-enough-stock"), Translate.GetMessage("error"), MessageBoxButtons.OK, MessageBoxIcon.Error);
                     return;
                 }
 
@@ -67,9 +67,9 @@ namespace StockManager
                 stockTransaction.Date = dtDate.Value;
                 stockTransaction.UnitPrice = stock.Value;
 
-                if (cbType.Text == "Buy")
+                if (cbType.Text == Translate.GetMessage("buy"))
                     stockTransaction.TransactionType = TransactionType.Buy;
-                else if (cbType.Text == "Sell")
+                else if (cbType.Text == Translate.GetMessage("sell"))
                     stockTransaction.TransactionType = TransactionType.Sell;
 
                 stockTransaction.Amount = amount;
@@ -78,7 +78,7 @@ namespace StockManager
 
                 DB.Entities.PostStock(stock);
                 DB.Entities.PostStockTransaction(stockTransaction);
-                DB.Save();
+                DB.SaveChanges();
                 Close();
             }
         }
@@ -91,35 +91,35 @@ namespace StockManager
             if (string.IsNullOrEmpty(cbType.Text))
             {
                 result = false;
-                errorProvider1.SetError(cbType, "Can't be empty");
+                errorProvider1.SetError(cbType, Translate.GetMessage("cant-be-empty"));
             }
 
             if (string.IsNullOrEmpty(txtAmount.Text))
             {
                 result = false;
-                errorProvider1.SetError(txtAmount, "Can't be empty");
+                errorProvider1.SetError(txtAmount, Translate.GetMessage("cant-be-empty"));
             }
             else if (!decimal.TryParse(txtAmount.Text, out amount))
             {
                 result = false;
-                errorProvider1.SetError(txtAmount, "Enter a numerical value");
+                errorProvider1.SetError(txtAmount, Translate.GetMessage("enter-a-numerical-value"));
             }
 
             if (string.IsNullOrEmpty(txtUnitPrice.Text))
             {
                 result = false;
-                errorProvider1.SetError(txtUnitPrice, "Can't be empty");
+                errorProvider1.SetError(txtUnitPrice, Translate.GetMessage("cant-be-empty"));
             }
             else if (!decimal.TryParse(txtUnitPrice.Text, out unitPrice))
             {
                 result = false;
-                errorProvider1.SetError(txtUnitPrice, "Enter a numerical value");
+                errorProvider1.SetError(txtUnitPrice, Translate.GetMessage("enter-a-numerical-value"));
             }
 
             if (string.IsNullOrEmpty(txtStockCode.Text))
             {
                 result = false;
-                errorProvider1.SetError(txtStockCode, "Can't be empty");
+                errorProvider1.SetError(txtStockCode, Translate.GetMessage("cant-be-empty"));
             }
 
             return result;
@@ -150,9 +150,9 @@ namespace StockManager
         private void txtUnitPrice_Leave(object sender, EventArgs e)
         {
             if (string.IsNullOrEmpty(txtUnitPrice.Text))
-                errorProvider1.SetError(txtUnitPrice, "Can't be empty");
+                errorProvider1.SetError(txtUnitPrice, Translate.GetMessage("cant-be-empty"));
             else if (!decimal.TryParse(txtUnitPrice.Text, out unitPrice))
-                errorProvider1.SetError(txtUnitPrice, "Enter a numerical value");
+                errorProvider1.SetError(txtUnitPrice, Translate.GetMessage("enter-a-numerical-value"));
             else
             {
                 stockTransaction.UnitPrice = unitPrice;
@@ -164,9 +164,9 @@ namespace StockManager
         private void txtAmount_Leave(object sender, EventArgs e)
         {
             if (string.IsNullOrEmpty(txtAmount.Text))
-                errorProvider1.SetError(txtAmount, "Can't be empty");
+                errorProvider1.SetError(txtAmount, Translate.GetMessage("cant-be-empty"));
             else if (!decimal.TryParse(txtAmount.Text, out amount))
-                errorProvider1.SetError(txtAmount, "Enter a numerical value");
+                errorProvider1.SetError(txtAmount, Translate.GetMessage("enter-a-numerical-value"));
             else
             {
                 calculateTotalPrice();

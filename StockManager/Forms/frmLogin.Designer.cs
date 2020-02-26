@@ -54,7 +54,7 @@
             this.btnLogin.Name = "btnLogin";
             this.btnLogin.Size = new System.Drawing.Size(159, 43);
             this.btnLogin.TabIndex = 4;
-            this.btnLogin.Text = "Login";
+            this.btnLogin.Text = Translate.GetMessage("login");
             this.btnLogin.UseVisualStyleBackColor = false;
             this.btnLogin.Click += new System.EventHandler(this.btnLogin_Click);
             // 
@@ -82,7 +82,7 @@
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(213, 36);
             this.label1.TabIndex = 2;
-            this.label1.Text = "User Name : ";
+            this.label1.Text = $"{Translate.GetMessage("user-name")} : ";
             this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
             // label2
@@ -96,7 +96,7 @@
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(213, 36);
             this.label2.TabIndex = 4;
-            this.label2.Text = "Password : ";
+            this.label2.Text = $"{Translate.GetMessage("password")} : ";
             this.label2.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
             // txtPassword
@@ -130,7 +130,7 @@
             this.btnCreate.Name = "btnCreate";
             this.btnCreate.Size = new System.Drawing.Size(159, 43);
             this.btnCreate.TabIndex = 5;
-            this.btnCreate.Text = "Create";
+            this.btnCreate.Text = Translate.GetMessage("create");
             this.btnCreate.UseVisualStyleBackColor = false;
             this.btnCreate.Click += new System.EventHandler(this.btnCreate_Click);
             // 
@@ -142,7 +142,7 @@
             this.cbRememberUserName.Name = "cbRememberUserName";
             this.cbRememberUserName.Size = new System.Drawing.Size(250, 32);
             this.cbRememberUserName.TabIndex = 2;
-            this.cbRememberUserName.Text = "Remember User Name";
+            this.cbRememberUserName.Text = Translate.GetMessage("remember-user-name");
             this.cbRememberUserName.UseVisualStyleBackColor = true;
             this.cbRememberUserName.CheckedChanged += new System.EventHandler(this.cbRememberUserName_CheckedChanged);
             // 
@@ -155,7 +155,7 @@
             this.cbRememberPassword.Name = "cbRememberPassword";
             this.cbRememberPassword.Size = new System.Drawing.Size(238, 32);
             this.cbRememberPassword.TabIndex = 3;
-            this.cbRememberPassword.Text = "Remember Password";
+            this.cbRememberPassword.Text = Translate.GetMessage("remember-password");
             this.cbRememberPassword.UseVisualStyleBackColor = true;
             // 
             // frmLogin
@@ -178,7 +178,7 @@
             this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "frmLogin";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "Login";
+            this.Text = Translate.GetMessage("login");
             this.Load += new System.EventHandler(this.frmLogin_Load);
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).EndInit();
             this.ResumeLayout(false);

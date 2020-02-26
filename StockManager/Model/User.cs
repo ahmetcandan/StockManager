@@ -17,5 +17,6 @@ namespace StockManager.Model
         public string Password { get; set; }
         public bool IsActive { get; set; }
         public List<Account> Accounts { get; set; }
+        public string LanguageCode { get; set; }
     }
 }

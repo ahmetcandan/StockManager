@@ -13,8 +13,6 @@ namespace StockManager
 {
     public partial class frmAccountChoose : Form
     {
-        List<Stock> stocks = new List<Stock>();
-
         public frmAccountChoose()
         {
             InitializeComponent();
@@ -77,12 +75,12 @@ namespace StockManager
 
         private void deleteToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            if (MessageBox.Show("Delete account?", "Delete?", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+            if (MessageBox.Show($"{Translate.GetMessage("delete-account")}?", $"{Translate.GetMessage("delete")}?", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
             {
                 int accountId = int.Parse(lvList.SelectedItems[0].Text);
                 DB.User.Accounts.RemoveAll(c => c.AccountId == accountId);
                 DB.Entities.Accounts.RemoveAll(c => c.AccountId == accountId);
-                DB.Save();
+                DB.SaveChanges();
                 refreshList();
             }
         }

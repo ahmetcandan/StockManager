@@ -30,19 +30,19 @@ namespace StockManager
             if (string.IsNullOrEmpty(txtPeriodName.Text))
             {
                 result = false;
-                errorProvider1.SetError(txtPeriodName, "Can't be empty");
+                errorProvider1.SetError(txtPeriodName, Translate.GetMessage("cant-be-empty"));
             }
 
             if (dtStartDate.Value >= dtEndDate.Value)
             {
                 result = false;
-                errorProvider1.SetError(dtEndDate, "Start date cannot be greater than the end date");
+                errorProvider1.SetError(dtEndDate, Translate.GetMessage("startdate-cannot-be*greater-than-the-enddate"));
             }
 
             if (DB.Entities.Periods.Where(c => c.PeriodId != period.PeriodId && ((dtStartDate.Value <= c.EndDate && dtStartDate.Value >= c.StartDate) || (dtEndDate.Value <= c.EndDate && dtEndDate.Value >= c.StartDate))).Any())
             {
                 result = false;
-                MessageBox.Show("This date range is used.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show(Translate.GetMessage("this-date-range-is-used"), Translate.GetMessage("error"), MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
 
             return result;
@@ -71,7 +71,7 @@ namespace StockManager
                 period.EndDate = dtEndDate.Value.SmallDate();
                 period.StartDate = dtStartDate.Value.SmallDate();
                 DB.Entities.PostPeriod(period);
-                DB.Save();
+                DB.SaveChanges();
             }
         }
     }

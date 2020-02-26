@@ -42,6 +42,7 @@
             this.Date = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.listMenu = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.editToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.languageToolStripMenuItem = new System.Windows.Forms.ToolStripComboBox();
             this.refreshToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.addToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -61,6 +62,8 @@
             this.label4 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
             this.cbPeriod = new System.Windows.Forms.ComboBox();
+            this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
+            this.translateMessagesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.listMenu.SuspendLayout();
             this.menuNotify.SuspendLayout();
             this.SuspendLayout();
@@ -93,7 +96,7 @@
             this.lvList.Margin = new System.Windows.Forms.Padding(4);
             this.lvList.Name = "lvList";
             this.lvList.Size = new System.Drawing.Size(1360, 414);
-            this.lvList.TabIndex = 0;
+            this.lvList.TabIndex = 2;
             this.lvList.UseCompatibleStateImageBehavior = false;
             this.lvList.View = System.Windows.Forms.View.Details;
             this.lvList.SelectedIndexChanged += new System.EventHandler(this.lvList_SelectedIndexChanged);
@@ -107,46 +110,46 @@
             // 
             // StockCode
             // 
-            this.StockCode.Text = "Stock Code";
+            this.StockCode.Text = Translate.GetMessage("stock-code");
             this.StockCode.Width = 119;
             // 
             // StockName
             // 
-            this.StockName.Text = "Stock Name";
+            this.StockName.Text = Translate.GetMessage("stock-name");
             this.StockName.Width = 250;
             // 
             // UnitPrice
             // 
-            this.UnitPrice.Text = "Unit Price";
+            this.UnitPrice.Text = Translate.GetMessage("unit-price");
             this.UnitPrice.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.UnitPrice.Width = 114;
             // 
             // Amount
             // 
-            this.Amount.Text = "Amount";
+            this.Amount.Text = Translate.GetMessage("amount");
             this.Amount.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.Amount.Width = 116;
             // 
             // Type
             // 
-            this.Type.Text = "Type";
+            this.Type.Text = Translate.GetMessage("type");
             this.Type.Width = 117;
             // 
             // TotalPrice
             // 
-            this.TotalPrice.Text = "Total Price";
+            this.TotalPrice.Text = Translate.GetMessage("total-price");
             this.TotalPrice.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.TotalPrice.Width = 135;
             // 
             // Const
             // 
-            this.Const.Text = "Const";
+            this.Const.Text = Translate.GetMessage("const");
             this.Const.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.Const.Width = 100;
             // 
             // Date
             // 
-            this.Date.Text = "Date";
+            this.Date.Text = Translate.GetMessage("date");
             this.Date.Width = 154;
             // 
             // listMenu
@@ -161,40 +164,52 @@
             this.analysisToolStripMenuItem,
             this.toolStripSeparator2,
             this.changeAccountToolStripMenuItem,
-            this.periodListToolStripMenuItem});
+            this.periodListToolStripMenuItem,
+            this.toolStripSeparator3,
+            this.translateMessagesToolStripMenuItem,
+            this.languageToolStripMenuItem});
             this.listMenu.Name = "listMenu";
-            this.listMenu.Size = new System.Drawing.Size(250, 240);
+            this.listMenu.Size = new System.Drawing.Size(298, 306);
             this.listMenu.Opening += new System.ComponentModel.CancelEventHandler(this.listMenu_Opening);
             // 
             // editToolStripMenuItem
             // 
             this.editToolStripMenuItem.Font = new System.Drawing.Font("Hermit", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.editToolStripMenuItem.Name = "editToolStripMenuItem";
-            this.editToolStripMenuItem.Size = new System.Drawing.Size(249, 32);
-            this.editToolStripMenuItem.Text = "Edit";
+            this.editToolStripMenuItem.Size = new System.Drawing.Size(297, 32);
+            this.editToolStripMenuItem.Text = Translate.GetMessage("edit");
             this.editToolStripMenuItem.Click += new System.EventHandler(this.editToolStripMenuItem_Click);
+            //
+            // languageToolStripMenuItem
+            //
+            this.languageToolStripMenuItem.Font = new System.Drawing.Font("Hermit", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.languageToolStripMenuItem.Name = "languageToolStripMenuItem";
+            this.languageToolStripMenuItem.Size = new System.Drawing.Size(297, 32);
+            this.languageToolStripMenuItem.Text = Translate.GetMessage("language-choose");
+            this.languageToolStripMenuItem.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.languageToolStripMenuItem.SelectedIndexChanged += new System.EventHandler(this.languageToolStripMenuItem_Click);
             // 
             // refreshToolStripMenuItem
             // 
             this.refreshToolStripMenuItem.Font = new System.Drawing.Font("Hermit", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.refreshToolStripMenuItem.Name = "refreshToolStripMenuItem";
             this.refreshToolStripMenuItem.ShortcutKeys = System.Windows.Forms.Keys.F5;
-            this.refreshToolStripMenuItem.Size = new System.Drawing.Size(249, 32);
-            this.refreshToolStripMenuItem.Text = "Refresh";
+            this.refreshToolStripMenuItem.Size = new System.Drawing.Size(297, 32);
+            this.refreshToolStripMenuItem.Text = Translate.GetMessage("refresh");
             this.refreshToolStripMenuItem.Click += new System.EventHandler(this.refreshToolStripMenuItem_Click);
             // 
             // toolStripSeparator1
             // 
             this.toolStripSeparator1.Name = "toolStripSeparator1";
-            this.toolStripSeparator1.Size = new System.Drawing.Size(246, 6);
+            this.toolStripSeparator1.Size = new System.Drawing.Size(294, 6);
             // 
             // addToolStripMenuItem
             // 
             this.addToolStripMenuItem.Font = new System.Drawing.Font("Hermit", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.addToolStripMenuItem.Name = "addToolStripMenuItem";
             this.addToolStripMenuItem.ShortcutKeys = System.Windows.Forms.Keys.F2;
-            this.addToolStripMenuItem.Size = new System.Drawing.Size(249, 32);
-            this.addToolStripMenuItem.Text = "Add";
+            this.addToolStripMenuItem.Size = new System.Drawing.Size(297, 32);
+            this.addToolStripMenuItem.Text = Translate.GetMessage("add");
             this.addToolStripMenuItem.Click += new System.EventHandler(this.addToolStripMenuItem_Click);
             // 
             // deleteToolStripMenuItem
@@ -202,8 +217,8 @@
             this.deleteToolStripMenuItem.Font = new System.Drawing.Font("Hermit", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.deleteToolStripMenuItem.Name = "deleteToolStripMenuItem";
             this.deleteToolStripMenuItem.ShortcutKeys = System.Windows.Forms.Keys.Delete;
-            this.deleteToolStripMenuItem.Size = new System.Drawing.Size(249, 32);
-            this.deleteToolStripMenuItem.Text = "Delete";
+            this.deleteToolStripMenuItem.Size = new System.Drawing.Size(297, 32);
+            this.deleteToolStripMenuItem.Text = Translate.GetMessage("delete");
             this.deleteToolStripMenuItem.Click += new System.EventHandler(this.deleteToolStripMenuItem_Click);
             // 
             // analysisToolStripMenuItem
@@ -211,29 +226,29 @@
             this.analysisToolStripMenuItem.Font = new System.Drawing.Font("Hermit", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.analysisToolStripMenuItem.Name = "analysisToolStripMenuItem";
             this.analysisToolStripMenuItem.ShortcutKeys = System.Windows.Forms.Keys.F3;
-            this.analysisToolStripMenuItem.Size = new System.Drawing.Size(249, 32);
-            this.analysisToolStripMenuItem.Text = "Analysis";
+            this.analysisToolStripMenuItem.Size = new System.Drawing.Size(297, 32);
+            this.analysisToolStripMenuItem.Text = Translate.GetMessage("analysis");
             this.analysisToolStripMenuItem.Click += new System.EventHandler(this.analysisToolStripMenuItem_Click);
             // 
             // toolStripSeparator2
             // 
             this.toolStripSeparator2.Name = "toolStripSeparator2";
-            this.toolStripSeparator2.Size = new System.Drawing.Size(246, 6);
+            this.toolStripSeparator2.Size = new System.Drawing.Size(294, 6);
             // 
             // changeAccountToolStripMenuItem
             // 
             this.changeAccountToolStripMenuItem.Font = new System.Drawing.Font("Hermit", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.changeAccountToolStripMenuItem.Name = "changeAccountToolStripMenuItem";
-            this.changeAccountToolStripMenuItem.Size = new System.Drawing.Size(249, 32);
-            this.changeAccountToolStripMenuItem.Text = "Change Account";
+            this.changeAccountToolStripMenuItem.Size = new System.Drawing.Size(297, 32);
+            this.changeAccountToolStripMenuItem.Text = Translate.GetMessage("change-account");
             this.changeAccountToolStripMenuItem.Click += new System.EventHandler(this.changeAccountToolStripMenuItem_Click);
             // 
             // periodListToolStripMenuItem
             // 
             this.periodListToolStripMenuItem.Font = new System.Drawing.Font("Hermit", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.periodListToolStripMenuItem.Name = "periodListToolStripMenuItem";
-            this.periodListToolStripMenuItem.Size = new System.Drawing.Size(249, 32);
-            this.periodListToolStripMenuItem.Text = "Period List";
+            this.periodListToolStripMenuItem.Size = new System.Drawing.Size(297, 32);
+            this.periodListToolStripMenuItem.Text = Translate.GetMessage("period-list");
             this.periodListToolStripMenuItem.Click += new System.EventHandler(this.periodListToolStripMenuItem_Click);
             // 
             // menuNotify
@@ -248,13 +263,13 @@
             // 
             this.exitToolStripMenuItem.Name = "exitToolStripMenuItem";
             this.exitToolStripMenuItem.Size = new System.Drawing.Size(102, 24);
-            this.exitToolStripMenuItem.Text = "Exit";
+            this.exitToolStripMenuItem.Text = Translate.GetMessage("exit");
             this.exitToolStripMenuItem.Click += new System.EventHandler(this.exitToolStripMenuItem_Click);
             // 
             // notifyIcon
             // 
             this.notifyIcon.Icon = ((System.Drawing.Icon)(resources.GetObject("notifyIcon.Icon")));
-            this.notifyIcon.Text = "Stock Tracking";
+            this.notifyIcon.Text = Translate.GetMessage("stock-tracing");
             this.notifyIcon.Visible = true;
             // 
             // timer1
@@ -291,7 +306,7 @@
             this.lblInformations.Name = "lblInformations";
             this.lblInformations.Size = new System.Drawing.Size(170, 30);
             this.lblInformations.TabIndex = 7;
-            this.lblInformations.Text = "Informations ";
+            this.lblInformations.Text = Translate.GetMessage("information");
             this.lblInformations.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.lblInformations.TextChanged += new System.EventHandler(this.lblInformations_TextChanged);
             // 
@@ -309,7 +324,7 @@
             this.lblInformation2.Name = "lblInformation2";
             this.lblInformation2.Size = new System.Drawing.Size(170, 30);
             this.lblInformation2.TabIndex = 8;
-            this.lblInformation2.Text = "Informations ";
+            this.lblInformation2.Text = Translate.GetMessage("information");
             this.lblInformation2.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
             // cbStock
@@ -320,13 +335,13 @@
             this.cbStock.ForeColor = System.Drawing.Color.Lime;
             this.cbStock.FormattingEnabled = true;
             this.cbStock.Items.AddRange(new object[] {
-            "Buy",
-            "Sell"});
+            Translate.GetMessage("buy"),
+            Translate.GetMessage("sell")});
             this.cbStock.Location = new System.Drawing.Point(131, 3);
             this.cbStock.Margin = new System.Windows.Forms.Padding(4);
             this.cbStock.Name = "cbStock";
             this.cbStock.Size = new System.Drawing.Size(248, 36);
-            this.cbStock.TabIndex = 9;
+            this.cbStock.TabIndex = 0;
             this.cbStock.SelectedIndexChanged += new System.EventHandler(this.cbStock_SelectedIndexChanged);
             // 
             // label4
@@ -340,7 +355,7 @@
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(123, 36);
             this.label4.TabIndex = 10;
-            this.label4.Text = "Stock : ";
+            this.label4.Text = $"{Translate.GetMessage("stock")} : ";
             this.label4.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
             // label5
@@ -354,7 +369,7 @@
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(130, 36);
             this.label5.TabIndex = 12;
-            this.label5.Text = "Period : ";
+            this.label5.Text = $"{Translate.GetMessage("period")} : ";
             this.label5.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
             // cbPeriod
@@ -365,14 +380,27 @@
             this.cbPeriod.ForeColor = System.Drawing.Color.Lime;
             this.cbPeriod.FormattingEnabled = true;
             this.cbPeriod.Items.AddRange(new object[] {
-            "Buy",
-            "Sell"});
+            Translate.GetMessage("buy"),
+            Translate.GetMessage("sell")});
             this.cbPeriod.Location = new System.Drawing.Point(525, 3);
             this.cbPeriod.Margin = new System.Windows.Forms.Padding(4);
             this.cbPeriod.Name = "cbPeriod";
             this.cbPeriod.Size = new System.Drawing.Size(248, 36);
-            this.cbPeriod.TabIndex = 13;
+            this.cbPeriod.TabIndex = 1;
             this.cbPeriod.SelectedIndexChanged += new System.EventHandler(this.cbPeriod_SelectedIndexChanged);
+            // 
+            // toolStripSeparator3
+            // 
+            this.toolStripSeparator3.Name = "toolStripSeparator3";
+            this.toolStripSeparator3.Size = new System.Drawing.Size(294, 6);
+            // 
+            // translateMessagesToolStripMenuItem
+            // 
+            this.translateMessagesToolStripMenuItem.Font = new System.Drawing.Font("Hermit", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.translateMessagesToolStripMenuItem.Name = "translateMessagesToolStripMenuItem";
+            this.translateMessagesToolStripMenuItem.Size = new System.Drawing.Size(297, 32);
+            this.translateMessagesToolStripMenuItem.Text = Translate.GetMessage("translate-message");
+            this.translateMessagesToolStripMenuItem.Click += new System.EventHandler(this.translateMessagesToolStripMenuItem_Click);
             // 
             // frmMain
             // 
@@ -393,7 +421,7 @@
             this.MinimumSize = new System.Drawing.Size(1025, 400);
             this.Name = "frmMain";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "Stock Tracking";
+            this.Text = Translate.GetMessage("stock-trancing");
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.frmMain_FormClosing);
             this.Load += new System.EventHandler(this.frmMain_Load);
@@ -421,6 +449,7 @@
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
         private System.Windows.Forms.ColumnHeader Amount;
         private System.Windows.Forms.ToolStripMenuItem editToolStripMenuItem;
+        private System.Windows.Forms.ToolStripComboBox languageToolStripMenuItem;
         private System.Windows.Forms.ColumnHeader StockTransactionId;
         private System.Windows.Forms.ColumnHeader Date;
         private System.Windows.Forms.Label lblInformations;
@@ -437,6 +466,8 @@
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.ToolStripMenuItem periodListToolStripMenuItem;
         private System.Windows.Forms.ComboBox cbPeriod;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator3;
+        private System.Windows.Forms.ToolStripMenuItem translateMessagesToolStripMenuItem;
     }
 }
 

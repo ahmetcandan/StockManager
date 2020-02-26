@@ -11,9 +11,9 @@ using System.Windows.Forms;
 
 namespace StockManager
 {
-    public partial class frmPeriodList : Form
+    public partial class frmTranslateMessageList : Form
     {
-        public frmPeriodList()
+        public frmTranslateMessageList()
         {
             InitializeComponent();
         }
@@ -26,24 +26,24 @@ namespace StockManager
         private void refreshList()
         {
             lvList.Items.Clear();
-            foreach (var period in DB.Entities.Periods.Where(c => c.AccountId == DB.DefaultAccount.AccountId))
+            foreach (var message in DB.Entities.TranslateMessages.OrderBy(c => c.LanguageCode).OrderBy(c => c.Code))
             {
                 var li = new ListViewItem();
-                li.Text = period.PeriodId.ToString();
+                li.Text = message.Code.ToString();
                 li.SubItems.Add(new ListViewItem.ListViewSubItem()
                 {
-                    Name = "PeriodName",
-                    Text = period.PeriodName
+                    Name = "LanguageCode",
+                    Text = message.LanguageCode
                 });
                 li.SubItems.Add(new ListViewItem.ListViewSubItem()
                 {
-                    Name = "StartDate",
-                    Text = period.StartDate.ToShortDateString()
+                    Name = "Code",
+                    Text = message.Code
                 });
                 li.SubItems.Add(new ListViewItem.ListViewSubItem()
                 {
-                    Name = "EndDate",
-                    Text = period.EndDate.ToShortDateString()
+                    Name = "Value",
+                    Text = message.Value
                 });
 
                 lvList.Items.Add(li);
@@ -54,8 +54,8 @@ namespace StockManager
         {
             if (lvList.SelectedItems.Count > 0)
             {
-                int periodId = int.Parse(lvList.SelectedItems[0].Text);
-                frmPeriod frm = new frmPeriod(periodId);
+                string code = lvList.SelectedItems[0].Text;
+                frmTranslateMessage frm = new frmTranslateMessage(code);
                 frm.ShowDialog();
                 refreshList();
             }
@@ -68,7 +68,7 @@ namespace StockManager
 
         private void addToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            frmPeriod frm = new frmPeriod();
+            frmTranslateMessage frm = new frmTranslateMessage();
             frm.ShowDialog();
             refreshList();
         }
@@ -80,10 +80,10 @@ namespace StockManager
 
         private void deleteToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            if (MessageBox.Show(Translate.GetMessage("delete-period"), Translate.GetMessage("delete"), MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+            if (MessageBox.Show(Translate.GetMessage("delete-message"), Translate.GetMessage("delete"), MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
             {
-                int periodId = int.Parse(lvList.SelectedItems[0].Text);
-                DB.Entities.Periods.RemoveAll(c => c.PeriodId == periodId);
+                string code = lvList.SelectedItems[0].Text;
+                DB.Entities.TranslateMessages.RemoveAll(c => c.Code == code);
                 DB.SaveChanges();
                 refreshList();
             }

@@ -16,7 +16,7 @@ namespace StockManager
     {
         bool left = false;
         Period period;
-        int periodSelectedIndex;
+        string periodSelectedText;
 
         public frmMain()
         {
@@ -27,7 +27,11 @@ namespace StockManager
         {
             timer1.Start();
             cbStock_Fill();
-            period = DB.Entities.Periods.Where(c => c.AccountId == DB.DefaultAccount.AccountId).OrderByDescending(c => c.StartDate).FirstOrDefault();
+            cbLanguage_Fill();
+            languageToolStripMenuItem.Text = DB.LanguageCode;
+            period = DB.Entities.Periods.Where(c => c.AccountId == DB.DefaultAccount.AccountId && (c.StartDate <= DateTime.Now && c.EndDate >= DateTime.Now)).OrderByDescending(c => c.StartDate).FirstOrDefault();
+            if(period == null)
+                period = DB.Entities.Periods.Where(c => c.AccountId == DB.DefaultAccount.AccountId).OrderByDescending(c => c.StartDate).FirstOrDefault();
             cbPeriod_Fill();
             cbStock.SelectedIndex = 0;
             if (period == null)
@@ -40,12 +44,14 @@ namespace StockManager
                     StartDate = new DateTime(DateTime.Now.Year, DateTime.Now.Month, 1),
                     EndDate = endDate
                 };
+                periodSelectedText = string.Empty;
             }
             else
             {
-                cbPeriod.SelectedIndex = 0;
-                periodSelectedIndex = 0;
+                periodSelectedText = period.PeriodName;
+                cbPeriod.Text = periodSelectedText;
             }
+            refreshList();
         }
 
         private void cbStock_Fill()
@@ -54,7 +60,7 @@ namespace StockManager
             cbStock.Items.Add(new ComboboxItem
             {
                 Code = "",
-                Value = "All"
+                Value = Translate.GetMessage("all")
             });
             foreach (var stock in DB.Entities.Stocks)
             {
@@ -78,11 +84,25 @@ namespace StockManager
                     Object = stock
                 });
             }
-            cbPeriod.SelectedIndex = periodSelectedIndex;
+            cbPeriod.Text = periodSelectedText;
+        }
+
+        private void cbLanguage_Fill()
+        {
+            foreach (var language in DB.Entities.GetLanguageCode())
+            {
+                languageToolStripMenuItem.Items.Add(new ComboboxItem
+                {
+                    Code = language,
+                    Object = language,
+                    Value = language
+                });
+            }
         }
 
         private void refreshList()
         {
+            Text = $"{Translate.GetMessage("stock-tracing")} - [{DB.DefaultAccount.AccountName} - {DB.DefaultAccount.MoneyType.MoneyTypeToString()}]";
             string selectedStockCode = cbStock.SelectedItem != null ? ((ComboboxItem)cbStock.SelectedItem).Code : "";
             DateTime startDate = period.StartDate;
             DateTime endDate = period.EndDate;
@@ -95,7 +115,7 @@ namespace StockManager
                        && (string.IsNullOrEmpty(selectedStockCode) || s.StockCode == selectedStockCode)
                        && st.Date >= startDate
                        && st.Date <= endDate
-                       orderby st.Date
+                       orderby st.Date descending
                        select new
                        {
                            Stock = s,
@@ -128,7 +148,7 @@ namespace StockManager
                 li.SubItems.Add(new ListViewItem.ListViewSubItem()
                 {
                     Name = "Status",
-                    Text = item.StockTransaction.TransactionType == TransactionType.Buy ? "Buy" : "Sell"
+                    Text = item.StockTransaction.TransactionType == TransactionType.Buy ? Translate.GetMessage("buy") : Translate.GetMessage("sell")
                 });
                 li.SubItems.Add(new ListViewItem.ListViewSubItem()
                 {
@@ -174,8 +194,8 @@ namespace StockManager
             liTotal.SubItems.Add(new ListViewItem.ListViewSubItem()
             {
                 Name = "Status",
-                Text = "Total"
-            });
+                Text = Translate.GetMessage("total")
+            }); ;
             var totalPrice = list.Sum(c => c.StockTransaction.TotalPrice * (c.StockTransaction.TransactionType == TransactionType.Buy ? -1 : 1));
             liTotal.SubItems.Add(new ListViewItem.ListViewSubItem()
             {
@@ -290,9 +310,9 @@ namespace StockManager
 
             foreach (var item in stocks)
             {
-                lblInformations.Text += $"[Stock Code: {item.Stock.StockCode}, Total Amount: {item.TotalAmount.ToMoneyStirng(0)}, Total Price: {(item.TotalPrice).ToMoneyStirng(2)}] | ";
+                lblInformations.Text += $"[{Translate.GetMessage("stock-code")}: {item.Stock.StockCode}, {Translate.GetMessage("total-amount")}: {item.TotalAmount.ToMoneyStirng(0)}, {Translate.GetMessage("total-price")}: {(item.TotalPrice).ToMoneyStirng(2)}] | ";
             }
-            lblInformations.Text += $"[Const: {stocks.Sum(c => c.Const).ToMoneyStirng(2)}, Total Price: {stocks.Sum(c => c.TotalPrice - c.Const).ToMoneyStirng(2)}]";
+            lblInformations.Text += $"[{Translate.GetMessage("const")}: {stocks.Sum(c => c.Const).ToMoneyStirng(2)}, {Translate.GetMessage("total-price")}: {stocks.Sum(c => c.TotalPrice - c.Const).ToMoneyStirng(2)}]";
             lblInformation2.Text = lblInformations.Text;
         }
 
@@ -331,7 +351,7 @@ namespace StockManager
 
         private void deleteToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            if (MessageBox.Show("Delete record", "Delete", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+            if (MessageBox.Show(Translate.GetMessage("delete-record"), Translate.GetMessage("delete"), MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
             {
                 DB.Entities.DeleteStockTransaction(int.Parse(lvList.SelectedItems[0].Text));
                 refreshList();
@@ -358,6 +378,7 @@ namespace StockManager
         {
             frmAccountChoose frm = new frmAccountChoose();
             frm.ShowDialog();
+            cbPeriod_Fill();
             refreshList();
         }
 
@@ -391,9 +412,22 @@ namespace StockManager
 
         private void cbPeriod_SelectedIndexChanged(object sender, EventArgs e)
         {
-            periodSelectedIndex = cbPeriod.Items.IndexOf(cbPeriod.SelectedItem);
+            periodSelectedText = cbPeriod.Text;
             period = (Period)((ComboboxItem)cbPeriod.SelectedItem).Object;
             refreshList();
+        }
+
+        private void translateMessagesToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            frmTranslateMessageList frm = new frmTranslateMessageList();
+            frm.ShowDialog();
+        }
+
+        private void languageToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            DB.LanguageCode = languageToolStripMenuItem.Text;
+            DB.User.LanguageCode = DB.LanguageCode;
+            DB.SaveChanges();
         }
     }
 

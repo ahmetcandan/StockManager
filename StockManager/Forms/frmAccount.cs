@@ -30,13 +30,13 @@ namespace StockManager
             if (string.IsNullOrEmpty(txtAccountName.Text))
             {
                 result = false;
-                errorProvider1.SetError(txtAccountName, "Can't be empty");
+                errorProvider1.SetError(txtAccountName, Translate.GetMessage("cant-be-empty"));
             }
 
             if (string.IsNullOrEmpty(cbMoneyType.Text))
             {
                 result = false;
-                errorProvider1.SetError(cbMoneyType, "Can't be empty");
+                errorProvider1.SetError(cbMoneyType, Translate.GetMessage("cant-be-empty"));
             }
 
             return result;
@@ -77,7 +77,7 @@ namespace StockManager
                 }
                 account.DefaultAccount = cbSetDefault.Checked;
                 DB.Entities.PostAccount(account);
-                DB.Save();
+                DB.SaveChanges();
             }
         }
     }

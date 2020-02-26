@@ -26,6 +26,7 @@ namespace StockManager
         public Setting Setting { get; set; }
         public List<StockCurrent> CurrentStocks { get; set; }
         public List<Period> Periods { get; set; }
+        public List<TranslateMessage> TranslateMessages { get; set; }
 
         public int GenerateAccontTransactionId()
         {
@@ -55,6 +56,11 @@ namespace StockManager
             return 1;
         }
 
+        public List<string> GetLanguageCode()
+        {
+            return TranslateMessages.Select(c => c.LanguageCode).Distinct().ToList();
+        }
+
         public StockTransaction GetStockTransaction(int stockTransactionId)
         {
             if (StockTransactions.Any(c => c.StockTransactionId == stockTransactionId))
@@ -74,6 +80,15 @@ namespace StockManager
             if (Periods.Any(c => c.PeriodId == periodId))
             {
                 return Periods.First(c => c.PeriodId == periodId);
+            }
+            return null;
+        }
+
+        public TranslateMessage GetMessage(string code)
+        {
+            if (TranslateMessages.Any(c => c.Code == code && c.LanguageCode == DB.LanguageCode))
+            {
+                return TranslateMessages.First(c => c.Code == code && c.LanguageCode == DB.LanguageCode);
             }
             return null;
         }
@@ -206,16 +221,16 @@ namespace StockManager
             User item = Users.FirstOrDefault(c => c.UserName == user.UserName);
 
             if (isNew && item != null)
-                throw new Exception("This user name is used");
+                throw new Exception(Translate.GetMessage("this-username-is-used"));
 
             if (!isNew && string.IsNullOrEmpty(currentPasswordHash))
-                throw new Exception("Current password is empty");
+                throw new Exception(Translate.GetMessage("current-password-is-empty"));
 
             if (!isNew && item == null)
-                throw new Exception("User name is not found");
+                throw new Exception(Translate.GetMessage("username-is-not-found"));
 
             if (!isNew && item.Password != currentPasswordHash)
-                throw new Exception("Current password is in correct");
+                throw new Exception(Translate.GetMessage("current-password-is-incorrect"));
 
             foreach (var account in user.Accounts)
                 DB.Entities.PostAccount(account);
@@ -289,6 +304,21 @@ namespace StockManager
             }
         }
 
+        public TranslateMessage PostMessage(TranslateMessage message)
+        {
+            var item = TranslateMessages.FirstOrDefault(c => c.Code == message.Code && c.LanguageCode == message.LanguageCode);
+            if (item != null)
+            {
+                item = message;
+                return item;
+            }
+            else
+            {
+                TranslateMessages.Add(message);
+                return message;
+            }
+        }
+
         private void getUserAccounts()
         {
             DB.User.Accounts = (from a in Accounts
@@ -318,6 +348,13 @@ namespace StockManager
             var period = GetPeriod(periodId);
             if (period != null)
                 Periods.Remove(period);
+        }
+
+        public void DeleteMessage(string code)
+        {
+            var message = GetMessage(code);
+            if (message != null)
+                TranslateMessages.Remove(message);
         }
 
         public void Save()
@@ -410,7 +447,14 @@ namespace StockManager
                     if (Users == null || Users.Count == 0)
                         sw.Write("[]");
                     else
-                        sw.Write(JsonConvert.SerializeObject(from u in Users select new User { UserName = u.UserName, Password = u.Password, IsActive = u.IsActive, Accounts = u.Accounts.Select(c => new Account { AccountId = c.AccountId, DefaultAccount = c.DefaultAccount }).ToList() }));
+                        sw.Write(JsonConvert.SerializeObject(from u in Users select new User { UserName = u.UserName, LanguageCode = u.LanguageCode, Password = u.Password, IsActive = u.IsActive, Accounts = u.Accounts.Select(c => new Account { AccountId = c.AccountId, DefaultAccount = c.DefaultAccount }).ToList() }));
+                }
+                using (StreamWriter sw = new StreamWriter("Data/TranslateMessages.json"))
+                {
+                    if (TranslateMessages == null || TranslateMessages.Count == 0)
+                        sw.Write("[]");
+                    else
+                        sw.Write(JsonConvert.SerializeObject(from u in TranslateMessages select new TranslateMessage { Code = u.Code, LanguageCode = u.LanguageCode, Value = u.Value }));
                 }
                 using (StreamWriter sw = new StreamWriter("Data/Periods.json"))
                 {
@@ -466,6 +510,12 @@ namespace StockManager
                     StockTransactions = JsonConvert.DeserializeObject<List<StockTransaction>>(sw.ReadToEnd());
                     if (StockTransactions == null)
                         StockTransactions = new List<StockTransaction>();
+                }
+                using (StreamReader sw = new StreamReader("Data/TranslateMessages.json"))
+                {
+                    TranslateMessages = JsonConvert.DeserializeObject<List<TranslateMessage>>(sw.ReadToEnd());
+                    if (TranslateMessages == null)
+                        TranslateMessages = new List<TranslateMessage>();
                 }
                 using (StreamReader sw = new StreamReader("Data/Users.json"))
                 {
@@ -567,6 +617,16 @@ namespace StockManager
                 {
                     save = true;
                     Users = new List<User>();
+                    file.Close();
+                }
+            }
+
+            if (!File.Exists("Data/TranslateMessages.json"))
+            {
+                using (var file = File.Create("Data/TranslateMessages.json"))
+                {
+                    save = true;
+                    TranslateMessages = new List<TranslateMessage>();
                     file.Close();
                 }
             }

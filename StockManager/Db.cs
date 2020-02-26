@@ -15,6 +15,7 @@ namespace StockManager
     {
         public static DataAccess Entities;
         public static Account DefaultAccount;
+        public static string LanguageCode = "tr";
         public static User User;
 
         public static T DeepCopy<T>(this T item)
@@ -32,7 +33,7 @@ namespace StockManager
             return new DateTime(date.Year, date.Month, date.Day);
         }
 
-        public static void Save()
+        public static void SaveChanges()
         {
             Entities.Save();
         }

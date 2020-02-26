@@ -7,6 +7,17 @@ using System.Threading.Tasks;
 
 namespace StockManager
 {
+    public static class Translate
+    {
+        public static string GetMessage(string code)
+        {
+            var message = DB.Entities.TranslateMessages.FirstOrDefault(c => c.Code == code && c.LanguageCode == DB.LanguageCode);
+            if (message != null)
+                return message.Value;
+            return code;
+        }
+    }
+
     public class StockAnalysisRequest
     {
         public StockAnalysisRequest()
@@ -16,6 +27,13 @@ namespace StockManager
 
         public List<string> StockCodes { get; set; }
         public Period Period { get; set; }
+    }
+
+    public class TranslateMessage
+    {
+        public string LanguageCode { get; set; }
+        public string Code { get; set; }
+        public string Value { get; set; }
     }
 
     public class StockCurrent

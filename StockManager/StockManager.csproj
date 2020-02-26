@@ -57,6 +57,18 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="DataAccess\DataAccess.cs" />
+    <Compile Include="Forms\frmTranslateMessageList.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\frmTranslateMessageList.Designer.cs">
+      <DependentUpon>frmTranslateMessageList.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\frmTranslateMessage.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\frmTranslateMessage.Designer.cs">
+      <DependentUpon>frmTranslateMessage.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\frmPeriodList.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -122,6 +134,12 @@
     <Compile Include="Model\User.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="Forms\frmTranslateMessageList.resx">
+      <DependentUpon>frmTranslateMessageList.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\frmTranslateMessage.resx">
+      <DependentUpon>frmTranslateMessage.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Forms\frmPeriodList.resx">
       <DependentUpon>frmPeriodList.cs</DependentUpon>
     </EmbeddedResource>

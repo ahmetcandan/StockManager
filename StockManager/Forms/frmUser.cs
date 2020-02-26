@@ -42,29 +42,29 @@ namespace StockManager
             if (string.IsNullOrEmpty(txtUserName.Text))
             {
                 result = false;
-                errorProvider1.SetError(txtUserName, "Can't be empty");
+                errorProvider1.SetError(txtUserName, Translate.GetMessage("cant-be-empty"));
             }
             else if (txtPassword.Text.Length < 3)
             {
                 result = false;
-                errorProvider1.SetError(txtUserName, "User Name min. length is 3 charecter");
+                errorProvider1.SetError(txtUserName, Translate.GetMessage("username-min-length-3-charecter"));
             }
 
             if (!isNew && string.IsNullOrEmpty(txtCurrentPassword.Text))
             {
                 result = false;
-                errorProvider1.SetError(txtCurrentPassword, "Can't be empty");
+                errorProvider1.SetError(txtCurrentPassword, Translate.GetMessage("cant-be-empty"));
             }
 
             if (string.IsNullOrEmpty(txtPassword.Text))
             {
                 result = false;
-                errorProvider1.SetError(txtPassword, "Can't be empty");
+                errorProvider1.SetError(txtPassword, Translate.GetMessage("cant-be-empty"));
             }
             else if (txtPassword.Text.Length < 4)
             {
                 result = false;
-                errorProvider1.SetError(txtPassword, "Password min. length is 4 charecter");
+                errorProvider1.SetError(txtPassword, Translate.GetMessage("password-min-length-is-4-charecter"));
             }
 
             if (string.IsNullOrEmpty(txtConfirmPassword.Text))
@@ -75,7 +75,7 @@ namespace StockManager
             else if (txtConfirmPassword.Text != txtPassword.Text)
             {
                 result = false;
-                errorProvider1.SetError(txtConfirmPassword, "Password and Confirm Password are not equals");
+                errorProvider1.SetError(txtConfirmPassword, Translate.GetMessage("password-and-confirmpassword-are-not-equals"));
             }
 
             return result;
@@ -108,11 +108,11 @@ namespace StockManager
                         user.Password = txtPassword.Text.ComputeSha256Hash(txtUserName.Text);
                     user.IsActive = cbIsActive.Checked;
                     DB.Entities.PostUser(user, isNew);
-                    DB.Save();
+                    DB.SaveChanges();
                 }
                 catch (Exception ex)
                 {
-                    MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MessageBox.Show(ex.Message, Translate.GetMessage("error"), MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
             }
         }

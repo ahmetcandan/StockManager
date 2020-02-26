@@ -57,7 +57,7 @@
             this.btnSave.Name = "btnSave";
             this.btnSave.Size = new System.Drawing.Size(159, 43);
             this.btnSave.TabIndex = 4;
-            this.btnSave.Text = "Save";
+            this.btnSave.Text = Translate.GetMessage("save");
             this.btnSave.UseVisualStyleBackColor = false;
             this.btnSave.Click += new System.EventHandler(this.btnSave_Click);
             // 
@@ -84,7 +84,7 @@
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(252, 36);
             this.label1.TabIndex = 2;
-            this.label1.Text = "User Name : ";
+            this.label1.Text = $"{Translate.GetMessage("user-name")} : ";
             this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
             // errorProvider1
@@ -104,7 +104,7 @@
             this.btnCancel.Name = "btnCancel";
             this.btnCancel.Size = new System.Drawing.Size(159, 43);
             this.btnCancel.TabIndex = 5;
-            this.btnCancel.Text = "Cancel";
+            this.btnCancel.Text = Translate.GetMessage("cancel");
             this.btnCancel.UseVisualStyleBackColor = false;
             this.btnCancel.Click += new System.EventHandler(this.btnCancel_Click);
             // 
@@ -118,7 +118,7 @@
             this.cbIsActive.Name = "cbIsActive";
             this.cbIsActive.Size = new System.Drawing.Size(142, 32);
             this.cbIsActive.TabIndex = 3;
-            this.cbIsActive.Text = "Is Active";
+            this.cbIsActive.Text = Translate.GetMessage("is-active");
             this.cbIsActive.UseVisualStyleBackColor = true;
             // 
             // txtPassword
@@ -146,7 +146,7 @@
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(252, 36);
             this.label2.TabIndex = 2;
-            this.label2.Text = "Password : ";
+            this.label2.Text = $"{Translate.GetMessage("password")} : ";
             this.label2.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
             // txtConfirmPassword
@@ -174,7 +174,7 @@
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(252, 36);
             this.label3.TabIndex = 2;
-            this.label3.Text = "Confirm Password : ";
+            this.label3.Text = $"{Translate.GetMessage("confirm-password")} : ";
             this.label3.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
             // txtCurrentPassword
@@ -202,7 +202,7 @@
             this.lblCurrentPassword.Name = "lblCurrentPassword";
             this.lblCurrentPassword.Size = new System.Drawing.Size(252, 36);
             this.lblCurrentPassword.TabIndex = 2;
-            this.lblCurrentPassword.Text = "Current Password : ";
+            this.lblCurrentPassword.Text = $"{Translate.GetMessage("current-password")} : ";
             this.lblCurrentPassword.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
             // frmUser
@@ -229,7 +229,7 @@
             this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "frmUser";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "User";
+            this.Text = Translate.GetMessage("user");
             this.Load += new System.EventHandler(this.frmAccount_Load);
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).EndInit();
             this.ResumeLayout(false);

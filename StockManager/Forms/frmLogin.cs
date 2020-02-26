@@ -26,13 +26,13 @@ namespace StockManager
             if (string.IsNullOrEmpty(txtUserName.Text))
             {
                 result = false;
-                errorProvider1.SetError(txtUserName, "Can't be empty");
+                errorProvider1.SetError(txtUserName, Translate.GetMessage("cant-be-empty"));
             }
 
             if (string.IsNullOrEmpty(txtPassword.Text))
             {
                 result = false;
-                errorProvider1.SetError(txtPassword, "Can't be empty");
+                errorProvider1.SetError(txtPassword, Translate.GetMessage("cant-be-empty"));
             }
 
             return result;
@@ -49,6 +49,8 @@ namespace StockManager
             if (validation())
             {
                 var user = DB.Entities.GetUser(txtUserName.Text, passwordIsHash ? DB.Entities.Setting.PasswordHash : txtPassword.Text.ComputeSha256Hash(txtUserName.Text));
+                if (!string.IsNullOrEmpty(user.LanguageCode))
+                    DB.LanguageCode = user.LanguageCode;
                 if (user != null)
                 {
                     SettingSave();
@@ -66,7 +68,7 @@ namespace StockManager
                             frmMain.Show();
                         }
                         else
-                            MessageBox.Show("Account not found", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                            MessageBox.Show(Translate.GetMessage("account-not-found"), Translate.GetMessage("error"), MessageBoxButtons.OK, MessageBoxIcon.Error);
                     }
                     else if (DB.User.Accounts.Count == 1)
                     {
@@ -93,7 +95,7 @@ namespace StockManager
                 }
                 else
                 {
-                    MessageBox.Show("User name or password is incorrect", "Login Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MessageBox.Show(Translate.GetMessage("username-or-password-incorrect"), Translate.GetMessage("error"), MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
             }
         }
@@ -110,14 +112,13 @@ namespace StockManager
                 DB.Entities.Setting.PasswordHash = passwordIsHash ? DB.Entities.Setting.PasswordHash : txtPassword.Text.ComputeSha256Hash(txtUserName.Text);
             else
                 DB.Entities.Setting.PasswordHash = string.Empty;
-            DB.Save();
+            DB.SaveChanges();
         }
 
         private void frmLogin_Load(object sender, EventArgs e)
         {
             try
             {
-                DB.Entities = new DataAccess();
                 DB.DefaultAccount = null;
                 cbRememberUserName.Checked = DB.Entities.Setting.RememberUserName;
                 cbRememberPassword.Checked = DB.Entities.Setting.RememberPassword;
@@ -136,7 +137,7 @@ namespace StockManager
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show(ex.Message, Translate.GetMessage("error"), MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 

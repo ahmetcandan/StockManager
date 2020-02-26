@@ -62,7 +62,7 @@
             this.btnSave.Name = "btnSave";
             this.btnSave.Size = new System.Drawing.Size(159, 43);
             this.btnSave.TabIndex = 7;
-            this.btnSave.Text = "Save";
+            this.btnSave.Text = Translate.GetMessage("save");
             this.btnSave.UseVisualStyleBackColor = false;
             this.btnSave.Click += new System.EventHandler(this.btnSave_Click);
             // 
@@ -90,7 +90,7 @@
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(213, 36);
             this.label1.TabIndex = 2;
-            this.label1.Text = "Stock Code : ";
+            this.label1.Text = $"{Translate.GetMessage("stock-code")} : ";
             this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
             // label2
@@ -104,7 +104,7 @@
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(213, 36);
             this.label2.TabIndex = 4;
-            this.label2.Text = "Stock Name : ";
+            this.label2.Text = $"{Translate.GetMessage("stock-name")} : ";
             this.label2.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
             // txtStockName
@@ -131,7 +131,7 @@
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(213, 36);
             this.label3.TabIndex = 6;
-            this.label3.Text = "Amount : ";
+            this.label3.Text = $"{Translate.GetMessage("amount")} : ";
             this.label3.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
             // txtAmount
@@ -158,7 +158,7 @@
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(213, 36);
             this.label4.TabIndex = 6;
-            this.label4.Text = "Type : ";
+            this.label4.Text = $"{Translate.GetMessage("type")} : ";
             this.label4.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
             // cbType
@@ -169,8 +169,8 @@
             this.cbType.ForeColor = System.Drawing.Color.Lime;
             this.cbType.FormattingEnabled = true;
             this.cbType.Items.AddRange(new object[] {
-            "Buy",
-            "Sell"});
+            Translate.GetMessage("buy"),
+            Translate.GetMessage("sell")});
             this.cbType.Location = new System.Drawing.Point(236, 235);
             this.cbType.Margin = new System.Windows.Forms.Padding(4);
             this.cbType.Name = "cbType";
@@ -193,7 +193,7 @@
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(213, 36);
             this.label5.TabIndex = 6;
-            this.label5.Text = "Date : ";
+            this.label5.Text = $"{Translate.GetMessage("date")} : ";
             this.label5.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
             // dtDate
@@ -230,7 +230,7 @@
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(213, 36);
             this.label6.TabIndex = 4;
-            this.label6.Text = "Unit Price : ";
+            this.label6.Text = $"{Translate.GetMessage("unit-price")} : ";
             this.label6.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
             // txtTotalPrice
@@ -257,7 +257,7 @@
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(213, 36);
             this.label7.TabIndex = 6;
-            this.label7.Text = "Total Price : ";
+            this.label7.Text = $"{Translate.GetMessage("total-price")} : ";
             this.label7.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
             // btnCancel
@@ -273,7 +273,7 @@
             this.btnCancel.Name = "btnCancel";
             this.btnCancel.Size = new System.Drawing.Size(159, 43);
             this.btnCancel.TabIndex = 7;
-            this.btnCancel.Text = "Cancel";
+            this.btnCancel.Text = Translate.GetMessage("cancel");
             this.btnCancel.UseVisualStyleBackColor = false;
             this.btnCancel.Click += new System.EventHandler(this.btnCancel_Click);
             // 
@@ -306,7 +306,7 @@
             this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "frmStockTransaction";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "Stock Transaction";
+            this.Text = Translate.GetMessage("stock-transaction");
             this.Load += new System.EventHandler(this.frmStock_Load);
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).EndInit();
             this.ResumeLayout(false);
