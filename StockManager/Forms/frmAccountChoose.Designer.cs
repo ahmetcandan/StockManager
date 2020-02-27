@@ -80,12 +80,12 @@
             // 
             // AccountName
             // 
-            this.AccountName.Text = Translate.GetMessage("account-name");
+            this.AccountName.Text = "account-name";// Translate.GetMessage("account-name");
             this.AccountName.Width = 330;
             // 
             // MoneyType
             // 
-            this.MoneyType.Text = Translate.GetMessage("money-type");
+            this.MoneyType.Text = "money-type";// Translate.GetMessage("money-type");
             this.MoneyType.Width = 170;
             // 
             // listMenu
@@ -109,7 +109,7 @@
             this.chooseAccountToolStripMenuItem.Font = new System.Drawing.Font("Hermit", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.chooseAccountToolStripMenuItem.Name = "chooseAccountToolStripMenuItem";
             this.chooseAccountToolStripMenuItem.Size = new System.Drawing.Size(249, 32);
-            this.chooseAccountToolStripMenuItem.Text = Translate.GetMessage("choose-account");
+            this.chooseAccountToolStripMenuItem.Text = "choose-account";// Translate.GetMessage("choose-account");
             this.chooseAccountToolStripMenuItem.Click += new System.EventHandler(this.chooseAccountToolStripMenuItem_Click);
             // 
             // toolStripSeparator3
@@ -123,7 +123,7 @@
             this.refreshToolStripMenuItem.Name = "refreshToolStripMenuItem";
             this.refreshToolStripMenuItem.ShortcutKeys = System.Windows.Forms.Keys.F5;
             this.refreshToolStripMenuItem.Size = new System.Drawing.Size(249, 32);
-            this.refreshToolStripMenuItem.Text = Translate.GetMessage("refresh");
+            this.refreshToolStripMenuItem.Text = "refresh";// Translate.GetMessage("refresh");
             this.refreshToolStripMenuItem.Click += new System.EventHandler(this.refreshToolStripMenuItem_Click);
             // 
             // toolStripSeparator1
@@ -136,7 +136,7 @@
             this.editToolStripMenuItem.Font = new System.Drawing.Font("Hermit", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.editToolStripMenuItem.Name = "editToolStripMenuItem";
             this.editToolStripMenuItem.Size = new System.Drawing.Size(249, 32);
-            this.editToolStripMenuItem.Text = Translate.GetMessage("edit");
+            this.editToolStripMenuItem.Text = "edit";// Translate.GetMessage("edit");
             this.editToolStripMenuItem.Click += new System.EventHandler(this.editToolStripMenuItem_Click);
             // 
             // addToolStripMenuItem
@@ -145,7 +145,7 @@
             this.addToolStripMenuItem.Name = "addToolStripMenuItem";
             this.addToolStripMenuItem.ShortcutKeys = System.Windows.Forms.Keys.F2;
             this.addToolStripMenuItem.Size = new System.Drawing.Size(249, 32);
-            this.addToolStripMenuItem.Text = Translate.GetMessage("add");
+            this.addToolStripMenuItem.Text = "add";// Translate.GetMessage("add");
             this.addToolStripMenuItem.Click += new System.EventHandler(this.addToolStripMenuItem_Click);
             // 
             // deleteToolStripMenuItem
@@ -154,7 +154,7 @@
             this.deleteToolStripMenuItem.Name = "deleteToolStripMenuItem";
             this.deleteToolStripMenuItem.ShortcutKeys = System.Windows.Forms.Keys.Delete;
             this.deleteToolStripMenuItem.Size = new System.Drawing.Size(249, 32);
-            this.deleteToolStripMenuItem.Text = Translate.GetMessage("delete");
+            this.deleteToolStripMenuItem.Text = "delete";// Translate.GetMessage("delete");
             this.deleteToolStripMenuItem.Click += new System.EventHandler(this.deleteToolStripMenuItem_Click);
             // 
             // toolStripSeparator2
@@ -171,7 +171,7 @@
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "frmAccountChoose";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = Translate.GetMessage("bank-choose");
+            this.Text = "bank-choose";// Translate.GetMessage("bank-choose");
             this.Load += new System.EventHandler(this.frmStockAnalysis_Load);
             this.listMenu.ResumeLayout(false);
             this.ResumeLayout(false);

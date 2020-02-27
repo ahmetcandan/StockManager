@@ -29,7 +29,7 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmPeriodList));
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmTranslateMessageList));
             this.lvList = new System.Windows.Forms.ListView();
             this.PeriodId = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.PeriodName = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
@@ -42,6 +42,9 @@
             this.deleteToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.refreshToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
+            this.cbLanguage = new System.Windows.Forms.ComboBox();
+            this.label2 = new System.Windows.Forms.Label();
+            this.txtSearch = new System.Windows.Forms.TextBox();
             this.listMenu.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -64,10 +67,10 @@
             this.lvList.GridLines = true;
             this.lvList.HideSelection = false;
             this.lvList.LabelEdit = true;
-            this.lvList.Location = new System.Drawing.Point(1, -4);
+            this.lvList.Location = new System.Drawing.Point(1, 41);
             this.lvList.Margin = new System.Windows.Forms.Padding(4);
             this.lvList.Name = "lvList";
-            this.lvList.Size = new System.Drawing.Size(556, 494);
+            this.lvList.Size = new System.Drawing.Size(556, 449);
             this.lvList.TabIndex = 8;
             this.lvList.UseCompatibleStateImageBehavior = false;
             this.lvList.View = System.Windows.Forms.View.Details;
@@ -80,17 +83,17 @@
             // 
             // PeriodName
             // 
-            this.PeriodName.Text = Translate.GetMessage("language-code");
+            this.PeriodName.Text = "language-code";
             this.PeriodName.Width = 160;
             // 
             // StartDate
             // 
-            this.StartDate.Text = Translate.GetMessage("code");
-            this.StartDate.Width = 120;
+            this.StartDate.Text = "code";
+            this.StartDate.Width = 121;
             // 
             // EndDate
             // 
-            this.EndDate.Text = Translate.GetMessage("value");
+            this.EndDate.Text = "value";
             this.EndDate.Width = 120;
             // 
             // listMenu
@@ -112,7 +115,7 @@
             this.editToolStripMenuItem.Font = new System.Drawing.Font("Hermit", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.editToolStripMenuItem.Name = "editToolStripMenuItem";
             this.editToolStripMenuItem.Size = new System.Drawing.Size(201, 32);
-            this.editToolStripMenuItem.Text = Translate.GetMessage("edit");
+            this.editToolStripMenuItem.Text = "edit";
             this.editToolStripMenuItem.Click += new System.EventHandler(this.editToolStripMenuItem_Click);
             // 
             // toolStripSeparator1
@@ -126,7 +129,7 @@
             this.addToolStripMenuItem.Name = "addToolStripMenuItem";
             this.addToolStripMenuItem.ShortcutKeys = System.Windows.Forms.Keys.F2;
             this.addToolStripMenuItem.Size = new System.Drawing.Size(201, 32);
-            this.addToolStripMenuItem.Text = Translate.GetMessage("add");
+            this.addToolStripMenuItem.Text = "add";
             this.addToolStripMenuItem.Click += new System.EventHandler(this.addToolStripMenuItem_Click);
             // 
             // deleteToolStripMenuItem
@@ -135,7 +138,7 @@
             this.deleteToolStripMenuItem.Name = "deleteToolStripMenuItem";
             this.deleteToolStripMenuItem.ShortcutKeys = System.Windows.Forms.Keys.Delete;
             this.deleteToolStripMenuItem.Size = new System.Drawing.Size(201, 32);
-            this.deleteToolStripMenuItem.Text = Translate.GetMessage("delete");
+            this.deleteToolStripMenuItem.Text = "delete";
             this.deleteToolStripMenuItem.Click += new System.EventHandler(this.deleteToolStripMenuItem_Click);
             // 
             // refreshToolStripMenuItem
@@ -144,7 +147,7 @@
             this.refreshToolStripMenuItem.Name = "refreshToolStripMenuItem";
             this.refreshToolStripMenuItem.ShortcutKeys = System.Windows.Forms.Keys.F5;
             this.refreshToolStripMenuItem.Size = new System.Drawing.Size(201, 32);
-            this.refreshToolStripMenuItem.Text = Translate.GetMessage("refresh");
+            this.refreshToolStripMenuItem.Text = "refresh";
             this.refreshToolStripMenuItem.Click += new System.EventHandler(this.refreshToolStripMenuItem_Click);
             // 
             // toolStripSeparator2
@@ -152,20 +155,66 @@
             this.toolStripSeparator2.Name = "toolStripSeparator2";
             this.toolStripSeparator2.Size = new System.Drawing.Size(198, 6);
             // 
-            // frmPeriodList
+            // cbLanguage
+            // 
+            this.cbLanguage.BackColor = System.Drawing.Color.Black;
+            this.cbLanguage.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cbLanguage.Font = new System.Drawing.Font("Hermit", 12F);
+            this.cbLanguage.ForeColor = System.Drawing.Color.Lime;
+            this.cbLanguage.FormattingEnabled = true;
+            this.cbLanguage.Location = new System.Drawing.Point(139, 1);
+            this.cbLanguage.Margin = new System.Windows.Forms.Padding(4);
+            this.cbLanguage.Name = "cbLanguage";
+            this.cbLanguage.Size = new System.Drawing.Size(128, 36);
+            this.cbLanguage.TabIndex = 15;
+            this.cbLanguage.SelectedIndexChanged += new System.EventHandler(this.cbLanguage_SelectedIndexChanged);
+            // 
+            // label2
+            // 
+            this.label2.BackColor = System.Drawing.Color.DarkSlateGray;
+            this.label2.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.label2.Font = new System.Drawing.Font("Hermit", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label2.ForeColor = System.Drawing.Color.PaleGreen;
+            this.label2.Location = new System.Drawing.Point(1, 1);
+            this.label2.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(130, 36);
+            this.label2.TabIndex = 16;
+            this.label2.Text = "language";
+            this.label2.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            // 
+            // txtSearch
+            // 
+            this.txtSearch.BackColor = System.Drawing.Color.Black;
+            this.txtSearch.Font = new System.Drawing.Font("Hermit", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtSearch.ForeColor = System.Drawing.Color.Lime;
+            this.txtSearch.Location = new System.Drawing.Point(275, 2);
+            this.txtSearch.Margin = new System.Windows.Forms.Padding(4);
+            this.txtSearch.MaxLength = 30;
+            this.txtSearch.Name = "txtSearch";
+            this.txtSearch.Size = new System.Drawing.Size(249, 36);
+            this.txtSearch.TabIndex = 17;
+            this.txtSearch.TextChanged += new System.EventHandler(this.txtSearch_TextChanged);
+            // 
+            // frmTranslateMessageList
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
             this.ClientSize = new System.Drawing.Size(557, 490);
+            this.Controls.Add(this.txtSearch);
+            this.Controls.Add(this.cbLanguage);
+            this.Controls.Add(this.label2);
             this.Controls.Add(this.lvList);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MinimumSize = new System.Drawing.Size(538, 506);
-            this.Name = "frmPeriodList";
+            this.Name = "frmTranslateMessageList";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = Translate.GetMessage("period-list");
+            this.Text = "period-list";
             this.Load += new System.EventHandler(this.frmStockAnalysis_Load);
             this.listMenu.ResumeLayout(false);
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -182,5 +231,8 @@
         private System.Windows.Forms.ToolStripMenuItem deleteToolStripMenuItem;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator2;
         private System.Windows.Forms.ColumnHeader EndDate;
+        private System.Windows.Forms.ComboBox cbLanguage;
+        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.TextBox txtSearch;
     }
 }

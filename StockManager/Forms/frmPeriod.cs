@@ -18,10 +18,21 @@ namespace StockManager
         public frmPeriod(int? periodId = null)
         {
             InitializeComponent();
+            setTranslateMessage();
             if (periodId.HasValue)
                 period = DB.Entities.GetPeriod(periodId.Value);
             else
                 period = new Period();
+        }
+
+        private void setTranslateMessage()
+        {
+            btnSave.Text = Translate.GetMessage("save");
+            label1.Text = $"{Translate.GetMessage("period-name")} : ";
+            btnCancel.Text = Translate.GetMessage("cancel");
+            label2.Text = $"{Translate.GetMessage("start-date")} : ";
+            label3.Text = $"{Translate.GetMessage("end-date")} : ";
+            Text = Translate.GetMessage("period");
         }
 
         private bool validation()

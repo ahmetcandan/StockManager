@@ -18,6 +18,7 @@ namespace StockManager
         public frmAccount(int? accountId = null)
         {
             InitializeComponent();
+            setTranslateMessage();
             if (accountId.HasValue)
                 account = DB.Entities.GetAccount(accountId.Value);
             else
@@ -48,6 +49,16 @@ namespace StockManager
             cbMoneyType.Text = account.MoneyType.MoneyTypeToString();
             if (account.AccountId > 0)
                 cbSetDefault.Checked = DB.User.Accounts.FirstOrDefault(c => c.AccountId == account.AccountId).DefaultAccount;
+        }
+
+        private void setTranslateMessage()
+        {
+            btnSave.Text = Translate.GetMessage("save");
+            label1.Text = $"{Translate.GetMessage("account-name")} : ";
+            btnCancel.Text = Translate.GetMessage("cancel");
+            cbSetDefault.Text = Translate.GetMessage("default-account");
+            label4.Text = $"{Translate.GetMessage("money-type")} : ";
+            Text = Translate.GetMessage("account");
         }
 
         private void btnCancel_Click(object sender, EventArgs e)

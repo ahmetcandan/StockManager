@@ -21,6 +21,7 @@ namespace StockManager
         public frmStockTransaction(int? stockTransactionId = null)
         {
             InitializeComponent();
+            setTranslateMessage();
             if (stockTransactionId.HasValue)
             {
                 stockTransaction = DB.Entities.GetStockTransaction(stockTransactionId.Value);
@@ -39,6 +40,23 @@ namespace StockManager
                 stock = new Stock();
             }
             dtDate.Value = DateTime.Now;
+        }
+
+        private void setTranslateMessage()
+        {
+            btnSave.Text = Translate.GetMessage("save");
+            label1.Text = $"{Translate.GetMessage("stock-code")} : ";
+            label2.Text = $"{Translate.GetMessage("stock-name")} : ";
+            label3.Text = $"{Translate.GetMessage("amount")} : ";
+            label4.Text = $"{Translate.GetMessage("type")} : ";
+            cbType.Items.AddRange(new object[] {
+            Translate.GetMessage("buy"),
+            Translate.GetMessage("sell")});
+            label5.Text = $"{Translate.GetMessage("date")} : ";
+            label6.Text = $"{Translate.GetMessage("unit-price")} : ";
+            label7.Text = $"{Translate.GetMessage("total-price")} : ";
+            btnCancel.Text = Translate.GetMessage("cancel");
+            Text = Translate.GetMessage("stock-transaction");
         }
 
         private void btnSave_Click(object sender, EventArgs e)

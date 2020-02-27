@@ -64,7 +64,7 @@
             this.lblInformations.Name = "lblInformations";
             this.lblInformations.Size = new System.Drawing.Size(170, 30);
             this.lblInformations.TabIndex = 10;
-            this.lblInformations.Text = Translate.GetMessage("information");
+            this.lblInformations.Text = "information"; //;Translate.GetMessage("information");
             this.lblInformations.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
             // timer1
@@ -78,7 +78,7 @@
             this.refreshToolStripMenuItem.Name = "refreshToolStripMenuItem";
             this.refreshToolStripMenuItem.ShortcutKeys = System.Windows.Forms.Keys.F5;
             this.refreshToolStripMenuItem.Size = new System.Drawing.Size(201, 32);
-            this.refreshToolStripMenuItem.Text = Translate.GetMessage("refresh");
+            this.refreshToolStripMenuItem.Text = "refresh";// Translate.GetMessage("refresh");
             // 
             // toolStripSeparator1
             // 
@@ -91,7 +91,7 @@
             this.deleteToolStripMenuItem.Name = "deleteToolStripMenuItem";
             this.deleteToolStripMenuItem.ShortcutKeys = System.Windows.Forms.Keys.Delete;
             this.deleteToolStripMenuItem.Size = new System.Drawing.Size(201, 32);
-            this.deleteToolStripMenuItem.Text = Translate.GetMessage("delete");
+            this.deleteToolStripMenuItem.Text = "delete";// Translate.GetMessage("delete");
             // 
             // addToolStripMenuItem
             // 
@@ -99,14 +99,14 @@
             this.addToolStripMenuItem.Name = "addToolStripMenuItem";
             this.addToolStripMenuItem.ShortcutKeys = System.Windows.Forms.Keys.F2;
             this.addToolStripMenuItem.Size = new System.Drawing.Size(201, 32);
-            this.addToolStripMenuItem.Text = Translate.GetMessage("add");
+            this.addToolStripMenuItem.Text = "add";// Translate.GetMessage("add");
             // 
             // editToolStripMenuItem
             // 
             this.editToolStripMenuItem.Font = new System.Drawing.Font("Hermit", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.editToolStripMenuItem.Name = "editToolStripMenuItem";
             this.editToolStripMenuItem.Size = new System.Drawing.Size(201, 32);
-            this.editToolStripMenuItem.Text = Translate.GetMessage("edit");
+            this.editToolStripMenuItem.Text = "edit";// Translate.GetMessage("edit");
             // 
             // listMenu
             // 
@@ -166,41 +166,41 @@
             // 
             // StockCode
             // 
-            this.StockCode.Text = Translate.GetMessage("stock-code");
+            this.StockCode.Text = "stock-code";// Translate.GetMessage("stock-code");
             this.StockCode.Width = 155;
             // 
             // Status
             // 
-            this.Status.Text = Translate.GetMessage("status");
+            this.Status.Text = "status";// Translate.GetMessage("status");
             this.Status.Width = 151;
             // 
             // TotalAmount
             // 
-            this.TotalAmount.Text = Translate.GetMessage("total-amount");
+            this.TotalAmount.Text = "total-amount";// Translate.GetMessage("total-amount");
             this.TotalAmount.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.TotalAmount.Width = 150;
             // 
             // BuyPrice
             // 
-            this.BuyPrice.Text = Translate.GetMessage("buy-price");
+            this.BuyPrice.Text = "buy-price";// Translate.GetMessage("buy-price");
             this.BuyPrice.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.BuyPrice.Width = 150;
             // 
             // SellPrice
             // 
-            this.SellPrice.Text = Translate.GetMessage("sell-price");
+            this.SellPrice.Text = "sell-price";// Translate.GetMessage("sell-price");
             this.SellPrice.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.SellPrice.Width = 150;
             // 
             // Gain
             // 
-            this.Gain.Text = Translate.GetMessage("gain");
+            this.Gain.Text = "gain";// Translate.GetMessage("gain");
             this.Gain.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.Gain.Width = 150;
             // 
             // TotalValue
             // 
-            this.TotalValue.Text = Translate.GetMessage("total-value");
+            this.TotalValue.Text = "total-value";// Translate.GetMessage("total-value");
             this.TotalValue.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.TotalValue.Width = 150;
             // 
@@ -215,7 +215,7 @@
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "frmStockAnalysis";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = Translate.GetMessage("stock-analysis");
+            this.Text = "stock-analysis";// Translate.GetMessage("stock-analysis");
             this.Load += new System.EventHandler(this.frmStockAnalysis_Load);
             this.listMenu.ResumeLayout(false);
             this.ResumeLayout(false);

@@ -54,7 +54,7 @@
             this.btnSave.Name = "btnSave";
             this.btnSave.Size = new System.Drawing.Size(159, 43);
             this.btnSave.TabIndex = 4;
-            this.btnSave.Text = Translate.GetMessage("save");
+            this.btnSave.Text = "save";// Translate.GetMessage("save");
             this.btnSave.UseVisualStyleBackColor = false;
             this.btnSave.Click += new System.EventHandler(this.btnSave_Click);
             // 
@@ -81,7 +81,7 @@
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(213, 36);
             this.label1.TabIndex = 2;
-            this.label1.Text = $"{Translate.GetMessage("language-code")} : ";
+            this.label1.Text = "language-code";// $"{Translate.GetMessage("language-code")} : ";
             this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
             // errorProvider1
@@ -101,7 +101,7 @@
             this.btnCancel.Name = "btnCancel";
             this.btnCancel.Size = new System.Drawing.Size(159, 43);
             this.btnCancel.TabIndex = 5;
-            this.btnCancel.Text = Translate.GetMessage("cancel");
+            this.btnCancel.Text = "cancel";// Translate.GetMessage("cancel");
             this.btnCancel.UseVisualStyleBackColor = false;
             this.btnCancel.Click += new System.EventHandler(this.btnCancel_Click);
             // 
@@ -116,7 +116,7 @@
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(213, 36);
             this.label2.TabIndex = 2;
-            this.label2.Text = $"{Translate.GetMessage("code")} : ";
+            this.label2.Text = "code";// $"{Translate.GetMessage("code")} : ";
             this.label2.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
             // label3
@@ -130,7 +130,7 @@
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(213, 36);
             this.label3.TabIndex = 2;
-            this.label3.Text = $"{Translate.GetMessage("value")} : ";
+            this.label3.Text = "value";// $"{Translate.GetMessage("value")} : ";
             this.label3.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
             // txtCode
@@ -178,7 +178,7 @@
             this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "frmTranslateMessage";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = Translate.GetMessage("period");
+            this.Text = "period";// Translate.GetMessage("period");
             this.Load += new System.EventHandler(this.frmTranslateMessage_Load);
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).EndInit();
             this.ResumeLayout(false);

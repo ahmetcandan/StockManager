@@ -21,6 +21,7 @@ namespace StockManager
         {
             this.request = request;
             InitializeComponent();
+            setTranslateMessage();
             if (request.StockCodes.Count == 0)
                 stocks = DB.Entities.Stocks;
             else
@@ -30,6 +31,23 @@ namespace StockManager
                     if (stock != null) stocks.Add(stock);
                 }
             Text = $"{request.Period.PeriodName} - {Translate.GetMessage("stock-analysis")}";
+        }
+
+        private void setTranslateMessage()
+        {
+            lblInformations.Text = Translate.GetMessage("information");
+            refreshToolStripMenuItem.Text = Translate.GetMessage("refresh");
+            deleteToolStripMenuItem.Text = Translate.GetMessage("delete");
+            addToolStripMenuItem.Text = Translate.GetMessage("add");
+            editToolStripMenuItem.Text = Translate.GetMessage("edit");
+            StockCode.Text = Translate.GetMessage("stock-code");
+            Status.Text = Translate.GetMessage("status");
+            TotalAmount.Text = Translate.GetMessage("total-amount");
+            BuyPrice.Text = Translate.GetMessage("buy-price");
+            SellPrice.Text = Translate.GetMessage("sell-price");
+            Gain.Text = Translate.GetMessage("gain");
+            TotalValue.Text = Translate.GetMessage("total-value");
+            Text = Translate.GetMessage("stock-analysis");
         }
 
         private void timer1_Tick(object sender, EventArgs e)

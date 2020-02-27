@@ -18,6 +18,18 @@ namespace StockManager
         public frmLogin()
         {
             InitializeComponent();
+            setTranslateMessage();
+        }
+
+        private void setTranslateMessage()
+        {
+            btnLogin.Text = Translate.GetMessage("login");
+            label1.Text = $"{Translate.GetMessage("user-name")} : ";
+            label2.Text = $"{Translate.GetMessage("password")} : ";
+            btnCreate.Text = Translate.GetMessage("create");
+            cbRememberUserName.Text = Translate.GetMessage("remember-user-name");
+            cbRememberPassword.Text = Translate.GetMessage("remember-password");
+            Text = Translate.GetMessage("login");
         }
 
         private bool validation()

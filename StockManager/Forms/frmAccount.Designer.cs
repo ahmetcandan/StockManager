@@ -53,7 +53,7 @@
             this.btnSave.Name = "btnSave";
             this.btnSave.Size = new System.Drawing.Size(159, 43);
             this.btnSave.TabIndex = 4;
-            this.btnSave.Text = Translate.GetMessage("save");
+            this.btnSave.Text = "save";
             this.btnSave.UseVisualStyleBackColor = false;
             this.btnSave.Click += new System.EventHandler(this.btnSave_Click);
             // 
@@ -80,7 +80,7 @@
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(213, 36);
             this.label1.TabIndex = 2;
-            this.label1.Text = $"{Translate.GetMessage("account-name")} : ";
+            this.label1.Text = "account-name";
             this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
             // errorProvider1
@@ -100,7 +100,7 @@
             this.btnCancel.Name = "btnCancel";
             this.btnCancel.Size = new System.Drawing.Size(159, 43);
             this.btnCancel.TabIndex = 5;
-            this.btnCancel.Text = Translate.GetMessage("cancel");
+            this.btnCancel.Text = "cancel";//Translate.GetMessage("cancel");
             this.btnCancel.UseVisualStyleBackColor = false;
             this.btnCancel.Click += new System.EventHandler(this.btnCancel_Click);
             // 
@@ -112,7 +112,7 @@
             this.cbSetDefault.Name = "cbSetDefault";
             this.cbSetDefault.Size = new System.Drawing.Size(214, 32);
             this.cbSetDefault.TabIndex = 2;
-            this.cbSetDefault.Text = Translate.GetMessage("default-account");
+            this.cbSetDefault.Text = "default-account";//Translate.GetMessage("default-account");
             this.cbSetDefault.UseVisualStyleBackColor = true;
             // 
             // cbMoneyType
@@ -143,7 +143,7 @@
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(213, 36);
             this.label4.TabIndex = 8;
-            this.label4.Text = $"{Translate.GetMessage("money-type")} : ";
+            this.label4.Text = "money-type";// $"{Translate.GetMessage("money-type")} : ";
             this.label4.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
             // frmAccount
@@ -166,7 +166,7 @@
             this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "frmAccount";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = Translate.GetMessage("account");
+            this.Text = "account";//Translate.GetMessage("account");
             this.Load += new System.EventHandler(this.frmAccount_Load);
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).EndInit();
             this.ResumeLayout(false);

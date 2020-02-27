@@ -16,17 +16,48 @@ namespace StockManager
         public frmTranslateMessageList()
         {
             InitializeComponent();
+            setTranslateMessage();
+        }
+
+        private void cbLanguage_Fill()
+        {
+            foreach (var language in DB.Entities.GetLanguageCode())
+            {
+                cbLanguage.Items.Add(new ComboboxItem
+                {
+                    Code = language,
+                    Object = language,
+                    Value = language
+                });
+            }
+        }
+
+        private void setTranslateMessage()
+        {
+            PeriodName.Text = Translate.GetMessage("language-code");
+            StartDate.Text = Translate.GetMessage("code");
+            EndDate.Text = Translate.GetMessage("value");
+            editToolStripMenuItem.Text = Translate.GetMessage("edit");
+            addToolStripMenuItem.Text = Translate.GetMessage("add");
+            deleteToolStripMenuItem.Text = Translate.GetMessage("delete");
+            refreshToolStripMenuItem.Text = Translate.GetMessage("refresh");
+            Text = Translate.GetMessage("period-list");
+            label2.Text = $"{Translate.GetMessage("language")} : ";
         }
 
         private void frmStockAnalysis_Load(object sender, EventArgs e)
         {
+            cbLanguage_Fill();
+            cbLanguage.Text = DB.LanguageCode;
             refreshList();
         }
 
         private void refreshList()
         {
             lvList.Items.Clear();
-            foreach (var message in DB.Entities.TranslateMessages.OrderBy(c => c.LanguageCode).OrderBy(c => c.Code))
+            foreach (var message in DB.Entities.TranslateMessages.Where(c=>c.LanguageCode == cbLanguage.Text && 
+            (c.Value.IndexOf(txtSearch.Text, StringComparison.OrdinalIgnoreCase) >= 0 || c.Code.IndexOf(txtSearch.Text, StringComparison.OrdinalIgnoreCase) >= 0)
+            ).OrderBy(c => c.LanguageCode).OrderBy(c => c.Code))
             {
                 var li = new ListViewItem();
                 li.Text = message.Code.ToString();
@@ -93,6 +124,16 @@ namespace StockManager
         {
             editToolStripMenuItem.Enabled = lvList.SelectedItems.Count == 1;
             deleteToolStripMenuItem.Enabled = editToolStripMenuItem.Enabled;
+        }
+
+        private void cbLanguage_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            refreshList();
+        }
+
+        private void txtSearch_TextChanged(object sender, EventArgs e)
+        {
+            refreshList();
         }
     }
 }

@@ -80,17 +80,17 @@
             // 
             // PeriodName
             // 
-            this.PeriodName.Text = Translate.GetMessage("period-name");
+            this.PeriodName.Text = "period-name";// Translate.GetMessage("period-name");
             this.PeriodName.Width = 160;
             // 
             // StartDate
             // 
-            this.StartDate.Text = Translate.GetMessage("start-date");
+            this.StartDate.Text = "start-date";// Translate.GetMessage("start-date");
             this.StartDate.Width = 120;
             // 
             // EndDate
             // 
-            this.EndDate.Text = Translate.GetMessage("end-date");
+            this.EndDate.Text = "end-date";// Translate.GetMessage("end-date");
             this.EndDate.Width = 120;
             // 
             // listMenu
@@ -112,7 +112,7 @@
             this.editToolStripMenuItem.Font = new System.Drawing.Font("Hermit", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.editToolStripMenuItem.Name = "editToolStripMenuItem";
             this.editToolStripMenuItem.Size = new System.Drawing.Size(201, 32);
-            this.editToolStripMenuItem.Text = Translate.GetMessage("edit");
+            this.editToolStripMenuItem.Text = "edit";// Translate.GetMessage("edit");
             this.editToolStripMenuItem.Click += new System.EventHandler(this.editToolStripMenuItem_Click);
             // 
             // toolStripSeparator1
@@ -126,7 +126,7 @@
             this.addToolStripMenuItem.Name = "addToolStripMenuItem";
             this.addToolStripMenuItem.ShortcutKeys = System.Windows.Forms.Keys.F2;
             this.addToolStripMenuItem.Size = new System.Drawing.Size(201, 32);
-            this.addToolStripMenuItem.Text = Translate.GetMessage("add");
+            this.addToolStripMenuItem.Text = "add";// Translate.GetMessage("add");
             this.addToolStripMenuItem.Click += new System.EventHandler(this.addToolStripMenuItem_Click);
             // 
             // deleteToolStripMenuItem
@@ -135,7 +135,7 @@
             this.deleteToolStripMenuItem.Name = "deleteToolStripMenuItem";
             this.deleteToolStripMenuItem.ShortcutKeys = System.Windows.Forms.Keys.Delete;
             this.deleteToolStripMenuItem.Size = new System.Drawing.Size(201, 32);
-            this.deleteToolStripMenuItem.Text = Translate.GetMessage("delete");
+            this.deleteToolStripMenuItem.Text = "delete";// Translate.GetMessage("delete");
             this.deleteToolStripMenuItem.Click += new System.EventHandler(this.deleteToolStripMenuItem_Click);
             // 
             // refreshToolStripMenuItem
@@ -144,7 +144,7 @@
             this.refreshToolStripMenuItem.Name = "refreshToolStripMenuItem";
             this.refreshToolStripMenuItem.ShortcutKeys = System.Windows.Forms.Keys.F5;
             this.refreshToolStripMenuItem.Size = new System.Drawing.Size(201, 32);
-            this.refreshToolStripMenuItem.Text = Translate.GetMessage("refresh");
+            this.refreshToolStripMenuItem.Text = "refresh";// Translate.GetMessage("refresh");
             this.refreshToolStripMenuItem.Click += new System.EventHandler(this.refreshToolStripMenuItem_Click);
             // 
             // toolStripSeparator2
@@ -162,7 +162,7 @@
             this.MinimumSize = new System.Drawing.Size(538, 506);
             this.Name = "frmPeriodList";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = Translate.GetMessage("period-list");
+            this.Text = "period-list";// Translate.GetMessage("period-list");
             this.Load += new System.EventHandler(this.frmStockAnalysis_Load);
             this.listMenu.ResumeLayout(false);
             this.ResumeLayout(false);

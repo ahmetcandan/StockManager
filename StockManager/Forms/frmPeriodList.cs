@@ -18,6 +18,18 @@ namespace StockManager
             InitializeComponent();
         }
 
+        private void setTranslateMessage()
+        {
+            PeriodName.Text = Translate.GetMessage("period-name");
+            StartDate.Text = Translate.GetMessage("start-date");
+            EndDate.Text = Translate.GetMessage("end-date");
+            editToolStripMenuItem.Text = Translate.GetMessage("edit");
+            addToolStripMenuItem.Text = Translate.GetMessage("add");
+            deleteToolStripMenuItem.Text = Translate.GetMessage("delete");
+            refreshToolStripMenuItem.Text = Translate.GetMessage("refresh");
+            Text = Translate.GetMessage("period-list");
+        }
+
         private void frmStockAnalysis_Load(object sender, EventArgs e)
         {
             refreshList();

@@ -42,7 +42,6 @@
             this.Date = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.listMenu = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.editToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.languageToolStripMenuItem = new System.Windows.Forms.ToolStripComboBox();
             this.refreshToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.addToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -51,6 +50,8 @@
             this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
             this.changeAccountToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.periodListToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
+            this.translateMessagesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuNotify = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.exitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.notifyIcon = new System.Windows.Forms.NotifyIcon(this.components);
@@ -62,8 +63,8 @@
             this.label4 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
             this.cbPeriod = new System.Windows.Forms.ComboBox();
-            this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
-            this.translateMessagesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.cbLanguage = new System.Windows.Forms.ComboBox();
+            this.label2 = new System.Windows.Forms.Label();
             this.listMenu.SuspendLayout();
             this.menuNotify.SuspendLayout();
             this.SuspendLayout();
@@ -110,46 +111,46 @@
             // 
             // StockCode
             // 
-            this.StockCode.Text = Translate.GetMessage("stock-code");
+            this.StockCode.Text = "stock-code";
             this.StockCode.Width = 119;
             // 
             // StockName
             // 
-            this.StockName.Text = Translate.GetMessage("stock-name");
+            this.StockName.Text = "stock-name";
             this.StockName.Width = 250;
             // 
             // UnitPrice
             // 
-            this.UnitPrice.Text = Translate.GetMessage("unit-price");
+            this.UnitPrice.Text = "unit-price";
             this.UnitPrice.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.UnitPrice.Width = 114;
             // 
             // Amount
             // 
-            this.Amount.Text = Translate.GetMessage("amount");
+            this.Amount.Text = "amount";
             this.Amount.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.Amount.Width = 116;
             // 
             // Type
             // 
-            this.Type.Text = Translate.GetMessage("type");
+            this.Type.Text = "type";
             this.Type.Width = 117;
             // 
             // TotalPrice
             // 
-            this.TotalPrice.Text = Translate.GetMessage("total-price");
+            this.TotalPrice.Text = "total-price";
             this.TotalPrice.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.TotalPrice.Width = 135;
             // 
             // Const
             // 
-            this.Const.Text = Translate.GetMessage("const");
+            this.Const.Text = "const";
             this.Const.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.Const.Width = 100;
             // 
             // Date
             // 
-            this.Date.Text = Translate.GetMessage("date");
+            this.Date.Text = "date";
             this.Date.Width = 154;
             // 
             // listMenu
@@ -166,50 +167,40 @@
             this.changeAccountToolStripMenuItem,
             this.periodListToolStripMenuItem,
             this.toolStripSeparator3,
-            this.translateMessagesToolStripMenuItem,
-            this.languageToolStripMenuItem});
+            this.translateMessagesToolStripMenuItem});
             this.listMenu.Name = "listMenu";
-            this.listMenu.Size = new System.Drawing.Size(298, 306);
+            this.listMenu.Size = new System.Drawing.Size(286, 278);
             this.listMenu.Opening += new System.ComponentModel.CancelEventHandler(this.listMenu_Opening);
             // 
             // editToolStripMenuItem
             // 
             this.editToolStripMenuItem.Font = new System.Drawing.Font("Hermit", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.editToolStripMenuItem.Name = "editToolStripMenuItem";
-            this.editToolStripMenuItem.Size = new System.Drawing.Size(297, 32);
-            this.editToolStripMenuItem.Text = Translate.GetMessage("edit");
+            this.editToolStripMenuItem.Size = new System.Drawing.Size(285, 32);
+            this.editToolStripMenuItem.Text = "edit";
             this.editToolStripMenuItem.Click += new System.EventHandler(this.editToolStripMenuItem_Click);
-            //
-            // languageToolStripMenuItem
-            //
-            this.languageToolStripMenuItem.Font = new System.Drawing.Font("Hermit", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.languageToolStripMenuItem.Name = "languageToolStripMenuItem";
-            this.languageToolStripMenuItem.Size = new System.Drawing.Size(297, 32);
-            this.languageToolStripMenuItem.Text = Translate.GetMessage("language-choose");
-            this.languageToolStripMenuItem.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.languageToolStripMenuItem.SelectedIndexChanged += new System.EventHandler(this.languageToolStripMenuItem_Click);
             // 
             // refreshToolStripMenuItem
             // 
             this.refreshToolStripMenuItem.Font = new System.Drawing.Font("Hermit", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.refreshToolStripMenuItem.Name = "refreshToolStripMenuItem";
             this.refreshToolStripMenuItem.ShortcutKeys = System.Windows.Forms.Keys.F5;
-            this.refreshToolStripMenuItem.Size = new System.Drawing.Size(297, 32);
-            this.refreshToolStripMenuItem.Text = Translate.GetMessage("refresh");
+            this.refreshToolStripMenuItem.Size = new System.Drawing.Size(285, 32);
+            this.refreshToolStripMenuItem.Text = "refresh";
             this.refreshToolStripMenuItem.Click += new System.EventHandler(this.refreshToolStripMenuItem_Click);
             // 
             // toolStripSeparator1
             // 
             this.toolStripSeparator1.Name = "toolStripSeparator1";
-            this.toolStripSeparator1.Size = new System.Drawing.Size(294, 6);
+            this.toolStripSeparator1.Size = new System.Drawing.Size(282, 6);
             // 
             // addToolStripMenuItem
             // 
             this.addToolStripMenuItem.Font = new System.Drawing.Font("Hermit", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.addToolStripMenuItem.Name = "addToolStripMenuItem";
             this.addToolStripMenuItem.ShortcutKeys = System.Windows.Forms.Keys.F2;
-            this.addToolStripMenuItem.Size = new System.Drawing.Size(297, 32);
-            this.addToolStripMenuItem.Text = Translate.GetMessage("add");
+            this.addToolStripMenuItem.Size = new System.Drawing.Size(285, 32);
+            this.addToolStripMenuItem.Text = "add";
             this.addToolStripMenuItem.Click += new System.EventHandler(this.addToolStripMenuItem_Click);
             // 
             // deleteToolStripMenuItem
@@ -217,8 +208,8 @@
             this.deleteToolStripMenuItem.Font = new System.Drawing.Font("Hermit", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.deleteToolStripMenuItem.Name = "deleteToolStripMenuItem";
             this.deleteToolStripMenuItem.ShortcutKeys = System.Windows.Forms.Keys.Delete;
-            this.deleteToolStripMenuItem.Size = new System.Drawing.Size(297, 32);
-            this.deleteToolStripMenuItem.Text = Translate.GetMessage("delete");
+            this.deleteToolStripMenuItem.Size = new System.Drawing.Size(285, 32);
+            this.deleteToolStripMenuItem.Text = "delete";
             this.deleteToolStripMenuItem.Click += new System.EventHandler(this.deleteToolStripMenuItem_Click);
             // 
             // analysisToolStripMenuItem
@@ -226,30 +217,43 @@
             this.analysisToolStripMenuItem.Font = new System.Drawing.Font("Hermit", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.analysisToolStripMenuItem.Name = "analysisToolStripMenuItem";
             this.analysisToolStripMenuItem.ShortcutKeys = System.Windows.Forms.Keys.F3;
-            this.analysisToolStripMenuItem.Size = new System.Drawing.Size(297, 32);
-            this.analysisToolStripMenuItem.Text = Translate.GetMessage("analysis");
+            this.analysisToolStripMenuItem.Size = new System.Drawing.Size(285, 32);
+            this.analysisToolStripMenuItem.Text = "analysis";
             this.analysisToolStripMenuItem.Click += new System.EventHandler(this.analysisToolStripMenuItem_Click);
             // 
             // toolStripSeparator2
             // 
             this.toolStripSeparator2.Name = "toolStripSeparator2";
-            this.toolStripSeparator2.Size = new System.Drawing.Size(294, 6);
+            this.toolStripSeparator2.Size = new System.Drawing.Size(282, 6);
             // 
             // changeAccountToolStripMenuItem
             // 
             this.changeAccountToolStripMenuItem.Font = new System.Drawing.Font("Hermit", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.changeAccountToolStripMenuItem.Name = "changeAccountToolStripMenuItem";
-            this.changeAccountToolStripMenuItem.Size = new System.Drawing.Size(297, 32);
-            this.changeAccountToolStripMenuItem.Text = Translate.GetMessage("change-account");
+            this.changeAccountToolStripMenuItem.Size = new System.Drawing.Size(285, 32);
+            this.changeAccountToolStripMenuItem.Text = "change-account";
             this.changeAccountToolStripMenuItem.Click += new System.EventHandler(this.changeAccountToolStripMenuItem_Click);
             // 
             // periodListToolStripMenuItem
             // 
             this.periodListToolStripMenuItem.Font = new System.Drawing.Font("Hermit", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.periodListToolStripMenuItem.Name = "periodListToolStripMenuItem";
-            this.periodListToolStripMenuItem.Size = new System.Drawing.Size(297, 32);
-            this.periodListToolStripMenuItem.Text = Translate.GetMessage("period-list");
+            this.periodListToolStripMenuItem.Size = new System.Drawing.Size(285, 32);
+            this.periodListToolStripMenuItem.Text = "period-list";
             this.periodListToolStripMenuItem.Click += new System.EventHandler(this.periodListToolStripMenuItem_Click);
+            // 
+            // toolStripSeparator3
+            // 
+            this.toolStripSeparator3.Name = "toolStripSeparator3";
+            this.toolStripSeparator3.Size = new System.Drawing.Size(282, 6);
+            // 
+            // translateMessagesToolStripMenuItem
+            // 
+            this.translateMessagesToolStripMenuItem.Font = new System.Drawing.Font("Hermit", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.translateMessagesToolStripMenuItem.Name = "translateMessagesToolStripMenuItem";
+            this.translateMessagesToolStripMenuItem.Size = new System.Drawing.Size(285, 32);
+            this.translateMessagesToolStripMenuItem.Text = "translate-message";
+            this.translateMessagesToolStripMenuItem.Click += new System.EventHandler(this.translateMessagesToolStripMenuItem_Click);
             // 
             // menuNotify
             // 
@@ -263,13 +267,13 @@
             // 
             this.exitToolStripMenuItem.Name = "exitToolStripMenuItem";
             this.exitToolStripMenuItem.Size = new System.Drawing.Size(102, 24);
-            this.exitToolStripMenuItem.Text = Translate.GetMessage("exit");
+            this.exitToolStripMenuItem.Text = "exit";
             this.exitToolStripMenuItem.Click += new System.EventHandler(this.exitToolStripMenuItem_Click);
             // 
             // notifyIcon
             // 
             this.notifyIcon.Icon = ((System.Drawing.Icon)(resources.GetObject("notifyIcon.Icon")));
-            this.notifyIcon.Text = Translate.GetMessage("stock-tracing");
+            this.notifyIcon.Text = "stock-tracing";
             this.notifyIcon.Visible = true;
             // 
             // timer1
@@ -304,9 +308,9 @@
             this.lblInformations.Location = new System.Drawing.Point(0, 454);
             this.lblInformations.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblInformations.Name = "lblInformations";
-            this.lblInformations.Size = new System.Drawing.Size(170, 30);
+            this.lblInformations.Size = new System.Drawing.Size(146, 30);
             this.lblInformations.TabIndex = 7;
-            this.lblInformations.Text = Translate.GetMessage("information");
+            this.lblInformations.Text = "information";
             this.lblInformations.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.lblInformations.TextChanged += new System.EventHandler(this.lblInformations_TextChanged);
             // 
@@ -322,9 +326,9 @@
             this.lblInformation2.Location = new System.Drawing.Point(0, 454);
             this.lblInformation2.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblInformation2.Name = "lblInformation2";
-            this.lblInformation2.Size = new System.Drawing.Size(170, 30);
+            this.lblInformation2.Size = new System.Drawing.Size(146, 30);
             this.lblInformation2.TabIndex = 8;
-            this.lblInformation2.Text = Translate.GetMessage("information");
+            this.lblInformation2.Text = "information";
             this.lblInformation2.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
             // cbStock
@@ -334,10 +338,7 @@
             this.cbStock.Font = new System.Drawing.Font("Hermit", 12F);
             this.cbStock.ForeColor = System.Drawing.Color.Lime;
             this.cbStock.FormattingEnabled = true;
-            this.cbStock.Items.AddRange(new object[] {
-            Translate.GetMessage("buy"),
-            Translate.GetMessage("sell")});
-            this.cbStock.Location = new System.Drawing.Point(131, 3);
+            this.cbStock.Location = new System.Drawing.Point(176, 3);
             this.cbStock.Margin = new System.Windows.Forms.Padding(4);
             this.cbStock.Name = "cbStock";
             this.cbStock.Size = new System.Drawing.Size(248, 36);
@@ -353,9 +354,9 @@
             this.label4.Location = new System.Drawing.Point(0, 3);
             this.label4.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(123, 36);
+            this.label4.Size = new System.Drawing.Size(168, 36);
             this.label4.TabIndex = 10;
-            this.label4.Text = $"{Translate.GetMessage("stock")} : ";
+            this.label4.Text = "stock";
             this.label4.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
             // label5
@@ -364,12 +365,12 @@
             this.label5.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.label5.Font = new System.Drawing.Font("Hermit", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label5.ForeColor = System.Drawing.Color.PaleGreen;
-            this.label5.Location = new System.Drawing.Point(387, 3);
+            this.label5.Location = new System.Drawing.Point(430, 3);
             this.label5.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(130, 36);
+            this.label5.Size = new System.Drawing.Size(174, 36);
             this.label5.TabIndex = 12;
-            this.label5.Text = $"{Translate.GetMessage("period")} : ";
+            this.label5.Text = "period";
             this.label5.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
             // cbPeriod
@@ -379,28 +380,42 @@
             this.cbPeriod.Font = new System.Drawing.Font("Hermit", 12F);
             this.cbPeriod.ForeColor = System.Drawing.Color.Lime;
             this.cbPeriod.FormattingEnabled = true;
-            this.cbPeriod.Items.AddRange(new object[] {
-            Translate.GetMessage("buy"),
-            Translate.GetMessage("sell")});
-            this.cbPeriod.Location = new System.Drawing.Point(525, 3);
+            this.cbPeriod.Location = new System.Drawing.Point(612, 3);
             this.cbPeriod.Margin = new System.Windows.Forms.Padding(4);
             this.cbPeriod.Name = "cbPeriod";
             this.cbPeriod.Size = new System.Drawing.Size(248, 36);
             this.cbPeriod.TabIndex = 1;
             this.cbPeriod.SelectedIndexChanged += new System.EventHandler(this.cbPeriod_SelectedIndexChanged);
             // 
-            // toolStripSeparator3
+            // cbLanguage
             // 
-            this.toolStripSeparator3.Name = "toolStripSeparator3";
-            this.toolStripSeparator3.Size = new System.Drawing.Size(294, 6);
+            this.cbLanguage.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.cbLanguage.BackColor = System.Drawing.Color.Black;
+            this.cbLanguage.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cbLanguage.Font = new System.Drawing.Font("Hermit", 12F);
+            this.cbLanguage.ForeColor = System.Drawing.Color.Lime;
+            this.cbLanguage.FormattingEnabled = true;
+            this.cbLanguage.Location = new System.Drawing.Point(1232, 3);
+            this.cbLanguage.Margin = new System.Windows.Forms.Padding(4);
+            this.cbLanguage.Name = "cbLanguage";
+            this.cbLanguage.Size = new System.Drawing.Size(128, 36);
+            this.cbLanguage.TabIndex = 13;
+            this.cbLanguage.SelectedIndexChanged += new System.EventHandler(this.cbLanguage_SelectedIndexChanged);
             // 
-            // translateMessagesToolStripMenuItem
+            // label2
             // 
-            this.translateMessagesToolStripMenuItem.Font = new System.Drawing.Font("Hermit", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.translateMessagesToolStripMenuItem.Name = "translateMessagesToolStripMenuItem";
-            this.translateMessagesToolStripMenuItem.Size = new System.Drawing.Size(297, 32);
-            this.translateMessagesToolStripMenuItem.Text = Translate.GetMessage("translate-message");
-            this.translateMessagesToolStripMenuItem.Click += new System.EventHandler(this.translateMessagesToolStripMenuItem_Click);
+            this.label2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.label2.BackColor = System.Drawing.Color.DarkSlateGray;
+            this.label2.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.label2.Font = new System.Drawing.Font("Hermit", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label2.ForeColor = System.Drawing.Color.PaleGreen;
+            this.label2.Location = new System.Drawing.Point(1053, 3);
+            this.label2.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(171, 36);
+            this.label2.TabIndex = 14;
+            this.label2.Text = "language";
+            this.label2.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
             // frmMain
             // 
@@ -408,6 +423,8 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
             this.ClientSize = new System.Drawing.Size(1361, 484);
+            this.Controls.Add(this.cbLanguage);
+            this.Controls.Add(this.label2);
             this.Controls.Add(this.cbPeriod);
             this.Controls.Add(this.label5);
             this.Controls.Add(this.cbStock);
@@ -421,7 +438,7 @@
             this.MinimumSize = new System.Drawing.Size(1025, 400);
             this.Name = "frmMain";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = Translate.GetMessage("stock-trancing");
+            this.Text = "stock-trancing";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.frmMain_FormClosing);
             this.Load += new System.EventHandler(this.frmMain_Load);
@@ -449,7 +466,6 @@
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
         private System.Windows.Forms.ColumnHeader Amount;
         private System.Windows.Forms.ToolStripMenuItem editToolStripMenuItem;
-        private System.Windows.Forms.ToolStripComboBox languageToolStripMenuItem;
         private System.Windows.Forms.ColumnHeader StockTransactionId;
         private System.Windows.Forms.ColumnHeader Date;
         private System.Windows.Forms.Label lblInformations;
@@ -468,6 +484,8 @@
         private System.Windows.Forms.ComboBox cbPeriod;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator3;
         private System.Windows.Forms.ToolStripMenuItem translateMessagesToolStripMenuItem;
+        private System.Windows.Forms.ComboBox cbLanguage;
+        private System.Windows.Forms.Label label2;
     }
 }
 

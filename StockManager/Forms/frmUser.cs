@@ -21,15 +21,29 @@ namespace StockManager
         public frmUser(string userName, string passwordHash)
         {
             InitializeComponent();
+            setTranslateMessage();
             this.passwordHash = passwordHash;
             passwordIsHash = true;
             isNew = false;
             user = DB.Entities.GetUser(userName, passwordHash);
         }
 
+        private void setTranslateMessage()
+        {
+            btnSave.Text = Translate.GetMessage("save");
+            label1.Text = $"{Translate.GetMessage("user-name")} : ";
+            btnCancel.Text = Translate.GetMessage("cancel");
+            cbIsActive.Text = Translate.GetMessage("is-active");
+            label2.Text = $"{Translate.GetMessage("password")} : ";
+            label3.Text = $"{Translate.GetMessage("confirm-password")} : ";
+            lblCurrentPassword.Text = $"{Translate.GetMessage("current-password")} : ";
+            Text = Translate.GetMessage("user");
+        }
+
         public frmUser()
         {
             InitializeComponent();
+            setTranslateMessage();
             user = new User();
             isNew = true;
             lblCurrentPassword.Visible = false;

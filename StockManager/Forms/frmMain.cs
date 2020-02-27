@@ -21,6 +21,41 @@ namespace StockManager
         public frmMain()
         {
             InitializeComponent();
+            setTranslateMessage();
+        }
+
+        private void setTranslateMessage()
+        {
+            StockCode.Text = Translate.GetMessage("stock-code");
+            StockName.Text = Translate.GetMessage("stock-name");
+            UnitPrice.Text = Translate.GetMessage("unit-price");
+            Amount.Text = Translate.GetMessage("amount");
+            Type.Text = Translate.GetMessage("type");
+            TotalPrice.Text = Translate.GetMessage("total-price");
+            Const.Text = Translate.GetMessage("const");
+            Date.Text = Translate.GetMessage("date");
+            editToolStripMenuItem.Text = Translate.GetMessage("edit");
+            refreshToolStripMenuItem.Text = Translate.GetMessage("refresh");
+            addToolStripMenuItem.Text = Translate.GetMessage("add");
+            deleteToolStripMenuItem.Text = Translate.GetMessage("delete");
+            analysisToolStripMenuItem.Text = Translate.GetMessage("analysis");
+            changeAccountToolStripMenuItem.Text = Translate.GetMessage("change-account");
+            periodListToolStripMenuItem.Text = Translate.GetMessage("period-list");
+            exitToolStripMenuItem.Text = Translate.GetMessage("exit");
+            notifyIcon.Text = Translate.GetMessage("stock-tracing");
+            lblInformations.Text = Translate.GetMessage("information");
+            lblInformation2.Text = Translate.GetMessage("information");
+            cbStock.Items.AddRange(new object[] {
+            Translate.GetMessage("buy"),
+            Translate.GetMessage("sell")});
+            label4.Text = $"{Translate.GetMessage("stock")} : ";
+            label5.Text = $"{Translate.GetMessage("period")} : ";
+            cbPeriod.Items.AddRange(new object[] {
+            Translate.GetMessage("buy"),
+            Translate.GetMessage("sell")});
+            translateMessagesToolStripMenuItem.Text = Translate.GetMessage("translate-message");
+            Text = $"{Translate.GetMessage("stock-tracing")} - [{(period != null ? period.PeriodName : "")}]";
+            label2.Text = $"{Translate.GetMessage("language")} : ";
         }
 
         private void frmMain_Load(object sender, EventArgs e)
@@ -28,9 +63,9 @@ namespace StockManager
             timer1.Start();
             cbStock_Fill();
             cbLanguage_Fill();
-            languageToolStripMenuItem.Text = DB.LanguageCode;
+            cbLanguage.Text = DB.LanguageCode;
             period = DB.Entities.Periods.Where(c => c.AccountId == DB.DefaultAccount.AccountId && (c.StartDate <= DateTime.Now && c.EndDate >= DateTime.Now)).OrderByDescending(c => c.StartDate).FirstOrDefault();
-            if(period == null)
+            if (period == null)
                 period = DB.Entities.Periods.Where(c => c.AccountId == DB.DefaultAccount.AccountId).OrderByDescending(c => c.StartDate).FirstOrDefault();
             cbPeriod_Fill();
             cbStock.SelectedIndex = 0;
@@ -72,6 +107,19 @@ namespace StockManager
             }
         }
 
+        private void cbLanguage_Fill()
+        {
+            foreach (var language in DB.Entities.GetLanguageCode())
+            {
+                cbLanguage.Items.Add(new ComboboxItem
+                {
+                    Code = language,
+                    Object = language,
+                    Value = language
+                });
+            }
+        }
+
         private void cbPeriod_Fill()
         {
             cbPeriod.Items.Clear();
@@ -85,19 +133,6 @@ namespace StockManager
                 });
             }
             cbPeriod.Text = periodSelectedText;
-        }
-
-        private void cbLanguage_Fill()
-        {
-            foreach (var language in DB.Entities.GetLanguageCode())
-            {
-                languageToolStripMenuItem.Items.Add(new ComboboxItem
-                {
-                    Code = language,
-                    Object = language,
-                    Value = language
-                });
-            }
         }
 
         private void refreshList()
@@ -423,11 +458,16 @@ namespace StockManager
             frm.ShowDialog();
         }
 
-        private void languageToolStripMenuItem_Click(object sender, EventArgs e)
+        bool first = true;
+        private void cbLanguage_SelectedIndexChanged(object sender, EventArgs e)
         {
-            DB.LanguageCode = languageToolStripMenuItem.Text;
+            DB.LanguageCode = cbLanguage.Text;
             DB.User.LanguageCode = DB.LanguageCode;
             DB.SaveChanges();
+            setTranslateMessage();
+            refreshInformations();
+            if (!first) refreshList();
+            else first = false;
         }
     }
 

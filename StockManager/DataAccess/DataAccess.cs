@@ -314,6 +314,8 @@ namespace StockManager
             }
             else
             {
+                if (DB.Entities.TranslateMessages.Any(c => c.Code == message.Code && c.LanguageCode == message.LanguageCode))
+                    throw new Exception(Translate.GetMessage("dublicate-message"));
                 TranslateMessages.Add(message);
                 return message;
             }

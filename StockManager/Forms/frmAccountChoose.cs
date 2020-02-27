@@ -16,11 +16,24 @@ namespace StockManager
         public frmAccountChoose()
         {
             InitializeComponent();
+            setTranslateMessage();
         }
 
         private void frmStockAnalysis_Load(object sender, EventArgs e)
         {
             refreshList();
+        }
+
+        private void setTranslateMessage()
+        {
+            AccountName.Text = Translate.GetMessage("account-name");
+            MoneyType.Text = Translate.GetMessage("money-type");
+            chooseAccountToolStripMenuItem.Text = Translate.GetMessage("choose-account");
+            refreshToolStripMenuItem.Text = Translate.GetMessage("refresh");
+            editToolStripMenuItem.Text = Translate.GetMessage("edit");
+            addToolStripMenuItem.Text = Translate.GetMessage("add");
+            deleteToolStripMenuItem.Text = Translate.GetMessage("delete");
+            Text = Translate.GetMessage("bank-choose");
         }
 
         private void refreshList()
