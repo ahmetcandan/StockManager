@@ -22,7 +22,7 @@ namespace StockManager
             if (string.IsNullOrEmpty(code))
                 message = new TranslateMessage();
             else
-                message = DB.Entities.GetMessage(code);
+                message = Session.Entities.GetMessage(code);
         }
 
         private void setTranslateMessage()
@@ -81,8 +81,8 @@ namespace StockManager
                     message.LanguageCode = txtLanguageCode.Text;
                     message.Code = txtCode.Text;
                     message.Value = txtValue.Text;
-                    DB.Entities.PostMessage(message);
-                    DB.SaveChanges();
+                    Session.Entities.PostMessage(message);
+                    Session.SaveChanges();
                 }
             }
             catch (Exception ex)

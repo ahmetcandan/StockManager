@@ -39,7 +39,7 @@ namespace StockManager
         private void refreshList()
         {
             lvList.Items.Clear();
-            foreach (var account in DB.User.Accounts)
+            foreach (var account in Session.User.Accounts)
             {
                 var li = new ListViewItem();
                 li.Text = account.AccountId.ToString();
@@ -62,7 +62,7 @@ namespace StockManager
         {
             if (lvList.SelectedItems.Count > 0)
             {
-                DB.DefaultAccount = DB.Entities.GetAccount(int.Parse(lvList.SelectedItems[0].Text));
+                Session.DefaultAccount = Session.Entities.GetAccount(int.Parse(lvList.SelectedItems[0].Text));
                 Close();
             }
         }
@@ -91,9 +91,9 @@ namespace StockManager
             if (MessageBox.Show($"{Translate.GetMessage("delete-account")}?", $"{Translate.GetMessage("delete")}?", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
             {
                 int accountId = int.Parse(lvList.SelectedItems[0].Text);
-                DB.User.Accounts.RemoveAll(c => c.AccountId == accountId);
-                DB.Entities.Accounts.RemoveAll(c => c.AccountId == accountId);
-                DB.SaveChanges();
+                Session.User.Accounts.RemoveAll(c => c.AccountId == accountId);
+                Session.Entities.Accounts.RemoveAll(c => c.AccountId == accountId);
+                Session.SaveChanges();
                 refreshList();
             }
         }

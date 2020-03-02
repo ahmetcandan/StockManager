@@ -123,7 +123,7 @@
     <Compile Include="Forms\frmStockTransaction.Designer.cs">
       <DependentUpon>frmStockTransaction.cs</DependentUpon>
     </Compile>
-    <Compile Include="Db.cs" />
+    <Compile Include="Session.cs" />
     <Compile Include="Model\Account.cs" />
     <Compile Include="Model\AccountTransaction.cs" />
     <Compile Include="Model\Dto.cs" />
@@ -177,6 +177,7 @@
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
+    <None Include="bin\Debug\Data\TranslateMessages.json" />
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>

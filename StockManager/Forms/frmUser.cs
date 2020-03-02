@@ -25,7 +25,7 @@ namespace StockManager
             this.passwordHash = passwordHash;
             passwordIsHash = true;
             isNew = false;
-            user = DB.Entities.GetUser(userName, passwordHash);
+            user = Session.Entities.GetUser(userName, passwordHash);
         }
 
         private void setTranslateMessage()
@@ -121,8 +121,8 @@ namespace StockManager
                     if (!passwordIsHash)
                         user.Password = txtPassword.Text.ComputeSha256Hash(txtUserName.Text);
                     user.IsActive = cbIsActive.Checked;
-                    DB.Entities.PostUser(user, isNew);
-                    DB.SaveChanges();
+                    Session.Entities.PostUser(user, isNew);
+                    Session.SaveChanges();
                 }
                 catch (Exception ex)
                 {

@@ -20,7 +20,7 @@ namespace StockManager
             InitializeComponent();
             setTranslateMessage();
             if (accountId.HasValue)
-                account = DB.Entities.GetAccount(accountId.Value);
+                account = Session.Entities.GetAccount(accountId.Value);
             else
                 account = new Account();
         }
@@ -48,7 +48,7 @@ namespace StockManager
             txtAccountName.Text = account.AccountName;
             cbMoneyType.Text = account.MoneyType.MoneyTypeToString();
             if (account.AccountId > 0)
-                cbSetDefault.Checked = DB.User.Accounts.FirstOrDefault(c => c.AccountId == account.AccountId).DefaultAccount;
+                cbSetDefault.Checked = Session.User.Accounts.FirstOrDefault(c => c.AccountId == account.AccountId).DefaultAccount;
         }
 
         private void setTranslateMessage()
@@ -87,8 +87,8 @@ namespace StockManager
                         break;
                 }
                 account.DefaultAccount = cbSetDefault.Checked;
-                DB.Entities.PostAccount(account);
-                DB.SaveChanges();
+                Session.Entities.PostAccount(account);
+                Session.SaveChanges();
             }
         }
     }

@@ -21,7 +21,7 @@ namespace StockManager
 
         private void cbLanguage_Fill()
         {
-            foreach (var language in DB.Entities.GetLanguageCode())
+            foreach (var language in Session.Entities.GetLanguageCodeList())
             {
                 cbLanguage.Items.Add(new ComboboxItem
                 {
@@ -48,14 +48,14 @@ namespace StockManager
         private void frmStockAnalysis_Load(object sender, EventArgs e)
         {
             cbLanguage_Fill();
-            cbLanguage.Text = DB.LanguageCode;
+            cbLanguage.Text = Session.Entities.Setting.LanguageCode;
             refreshList();
         }
 
         private void refreshList()
         {
             lvList.Items.Clear();
-            foreach (var message in DB.Entities.TranslateMessages.Where(c=>c.LanguageCode == cbLanguage.Text && 
+            foreach (var message in Session.Entities.TranslateMessages.Where(c=>c.LanguageCode == cbLanguage.Text && 
             (c.Value.IndexOf(txtSearch.Text, StringComparison.OrdinalIgnoreCase) >= 0 || c.Code.IndexOf(txtSearch.Text, StringComparison.OrdinalIgnoreCase) >= 0)
             ).OrderBy(c => c.LanguageCode).OrderBy(c => c.Code))
             {
@@ -114,8 +114,8 @@ namespace StockManager
             if (MessageBox.Show(Translate.GetMessage("delete-message"), Translate.GetMessage("delete"), MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
             {
                 string code = lvList.SelectedItems[0].Text;
-                DB.Entities.TranslateMessages.RemoveAll(c => c.Code == code);
-                DB.SaveChanges();
+                Session.Entities.TranslateMessages.RemoveAll(c => c.Code == code);
+                Session.SaveChanges();
                 refreshList();
             }
         }

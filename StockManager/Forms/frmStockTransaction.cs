@@ -24,7 +24,7 @@ namespace StockManager
             setTranslateMessage();
             if (stockTransactionId.HasValue)
             {
-                stockTransaction = DB.Entities.GetStockTransaction(stockTransactionId.Value);
+                stockTransaction = Session.Entities.GetStockTransaction(stockTransactionId.Value);
                 stock = stockTransaction.Stock;
                 txtAmount.Text = stockTransaction.Amount.ToMoneyStirng(2);
                 txtStockCode.Text = stockTransaction.StockCode;
@@ -71,7 +71,7 @@ namespace StockManager
                 stock.UpdateDate = DateTime.Now;
 
 
-                decimal currentAmount = DB.Entities.StockTransactions.Where(c => c.StockCode == stock.StockCode).Sum(c => c.Amount * (c.TransactionType == TransactionType.Sell ? -1 : 1));
+                decimal currentAmount = Session.Entities.StockTransactions.Where(c => c.StockCode == stock.StockCode).Sum(c => c.Amount * (c.TransactionType == TransactionType.Sell ? -1 : 1));
                 if (stockTransaction.StockTransactionId > 0)
                     currentAmount += stockTransaction.Amount;
 
@@ -94,9 +94,9 @@ namespace StockManager
                 stockTransaction.UnitPrice = unitPrice;
                 stockTransaction.TotalPrice = stockTransaction.UnitPrice * stockTransaction.Amount;
 
-                DB.Entities.PostStock(stock);
-                DB.Entities.PostStockTransaction(stockTransaction);
-                DB.SaveChanges();
+                Session.Entities.PostStock(stock);
+                Session.Entities.PostStockTransaction(stockTransaction);
+                Session.SaveChanges();
                 Close();
             }
         }
@@ -158,7 +158,7 @@ namespace StockManager
         {
             if (!string.IsNullOrEmpty(stockCode))
             {
-                stock = DB.Entities.GetStock(stockCode);
+                stock = Session.Entities.GetStock(stockCode);
                 txtStockName.Text = stock.Name;
                 txtStockCode.Text = string.IsNullOrEmpty(stock.StockCode) ? stockCode.ToUpper() : stockCode;
                 txtStockName.Enabled = stock.Value == 0;

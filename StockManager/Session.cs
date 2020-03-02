@@ -11,11 +11,10 @@ using System.Threading.Tasks;
 
 namespace StockManager
 {
-    public static class DB
+    public static class Session
     {
         public static DataAccess Entities;
         public static Account DefaultAccount;
-        public static string LanguageCode = "tr";
         public static User User;
 
         public static T DeepCopy<T>(this T item)

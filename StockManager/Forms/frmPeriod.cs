@@ -20,7 +20,7 @@ namespace StockManager
             InitializeComponent();
             setTranslateMessage();
             if (periodId.HasValue)
-                period = DB.Entities.GetPeriod(periodId.Value);
+                period = Session.Entities.GetPeriod(periodId.Value);
             else
                 period = new Period();
         }
@@ -50,7 +50,7 @@ namespace StockManager
                 errorProvider1.SetError(dtEndDate, Translate.GetMessage("startdate-cannot-be*greater-than-the-enddate"));
             }
 
-            if (DB.Entities.Periods.Where(c => c.PeriodId != period.PeriodId && ((dtStartDate.Value <= c.EndDate && dtStartDate.Value >= c.StartDate) || (dtEndDate.Value <= c.EndDate && dtEndDate.Value >= c.StartDate))).Any())
+            if (Session.Entities.Periods.Where(c => c.PeriodId != period.PeriodId && ((dtStartDate.Value <= c.EndDate && dtStartDate.Value >= c.StartDate) || (dtEndDate.Value <= c.EndDate && dtEndDate.Value >= c.StartDate))).Any())
             {
                 result = false;
                 MessageBox.Show(Translate.GetMessage("this-date-range-is-used"), Translate.GetMessage("error"), MessageBoxButtons.OK, MessageBoxIcon.Error);
@@ -81,8 +81,8 @@ namespace StockManager
                 period.PeriodName = txtPeriodName.Text;
                 period.EndDate = dtEndDate.Value.SmallDate();
                 period.StartDate = dtStartDate.Value.SmallDate();
-                DB.Entities.PostPeriod(period);
-                DB.SaveChanges();
+                Session.Entities.PostPeriod(period);
+                Session.SaveChanges();
             }
         }
     }

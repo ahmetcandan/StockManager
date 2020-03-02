@@ -16,6 +16,7 @@ namespace StockManager
         public frmPeriodList()
         {
             InitializeComponent();
+            setTranslateMessage();
         }
 
         private void setTranslateMessage()
@@ -38,7 +39,7 @@ namespace StockManager
         private void refreshList()
         {
             lvList.Items.Clear();
-            foreach (var period in DB.Entities.Periods.Where(c => c.AccountId == DB.DefaultAccount.AccountId))
+            foreach (var period in Session.Entities.Periods.Where(c => c.AccountId == Session.DefaultAccount.AccountId))
             {
                 var li = new ListViewItem();
                 li.Text = period.PeriodId.ToString();
@@ -95,8 +96,8 @@ namespace StockManager
             if (MessageBox.Show(Translate.GetMessage("delete-period"), Translate.GetMessage("delete"), MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
             {
                 int periodId = int.Parse(lvList.SelectedItems[0].Text);
-                DB.Entities.Periods.RemoveAll(c => c.PeriodId == periodId);
-                DB.SaveChanges();
+                Session.Entities.Periods.RemoveAll(c => c.PeriodId == periodId);
+                Session.SaveChanges();
                 refreshList();
             }
         }

@@ -12,5 +12,6 @@ namespace StockManager.Model
         public string PasswordHash { get; set; }
         public bool RememberUserName { get; set; }
         public bool RememberPassword { get; set; }
+        public string LanguageCode { get; set; }
     }
 }

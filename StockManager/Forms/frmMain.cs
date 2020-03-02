@@ -45,14 +45,14 @@ namespace StockManager
             notifyIcon.Text = Translate.GetMessage("stock-tracing");
             lblInformations.Text = Translate.GetMessage("information");
             lblInformation2.Text = Translate.GetMessage("information");
-            cbStock.Items.AddRange(new object[] {
-            Translate.GetMessage("buy"),
-            Translate.GetMessage("sell")});
+            //cbStock.Items.AddRange(new object[] {
+            //Translate.GetMessage("buy"),
+            //Translate.GetMessage("sell")});
             label4.Text = $"{Translate.GetMessage("stock")} : ";
             label5.Text = $"{Translate.GetMessage("period")} : ";
-            cbPeriod.Items.AddRange(new object[] {
-            Translate.GetMessage("buy"),
-            Translate.GetMessage("sell")});
+            //cbPeriod.Items.AddRange(new object[] {
+            //Translate.GetMessage("buy"),
+            //Translate.GetMessage("sell")});
             translateMessagesToolStripMenuItem.Text = Translate.GetMessage("translate-message");
             Text = $"{Translate.GetMessage("stock-tracing")} - [{(period != null ? period.PeriodName : "")}]";
             label2.Text = $"{Translate.GetMessage("language")} : ";
@@ -63,10 +63,11 @@ namespace StockManager
             timer1.Start();
             cbStock_Fill();
             cbLanguage_Fill();
-            cbLanguage.Text = DB.LanguageCode;
-            period = DB.Entities.Periods.Where(c => c.AccountId == DB.DefaultAccount.AccountId && (c.StartDate <= DateTime.Now && c.EndDate >= DateTime.Now)).OrderByDescending(c => c.StartDate).FirstOrDefault();
+            cbLanguage.Text = Session.Entities.Setting.LanguageCode;
+            DateTime now = DateTime.Now.SmallDate();
+            period = Session.Entities.Periods.Where(c => c.AccountId == Session.DefaultAccount.AccountId && (c.StartDate <= now && c.EndDate >= now)).OrderByDescending(c => c.StartDate).FirstOrDefault();
             if (period == null)
-                period = DB.Entities.Periods.Where(c => c.AccountId == DB.DefaultAccount.AccountId).OrderByDescending(c => c.StartDate).FirstOrDefault();
+                period = Session.Entities.Periods.Where(c => c.AccountId == Session.DefaultAccount.AccountId).OrderByDescending(c => c.StartDate).FirstOrDefault();
             cbPeriod_Fill();
             cbStock.SelectedIndex = 0;
             if (period == null)
@@ -97,7 +98,7 @@ namespace StockManager
                 Code = "",
                 Value = Translate.GetMessage("all")
             });
-            foreach (var stock in DB.Entities.Stocks)
+            foreach (var stock in Session.Entities.Stocks)
             {
                 cbStock.Items.Add(new ComboboxItem
                 {
@@ -109,7 +110,8 @@ namespace StockManager
 
         private void cbLanguage_Fill()
         {
-            foreach (var language in DB.Entities.GetLanguageCode())
+            cbLanguage.Items.Clear();
+            foreach (var language in Session.Entities.GetLanguageCodeList())
             {
                 cbLanguage.Items.Add(new ComboboxItem
                 {
@@ -123,13 +125,13 @@ namespace StockManager
         private void cbPeriod_Fill()
         {
             cbPeriod.Items.Clear();
-            foreach (var stock in DB.Entities.Periods.Where(c => c.AccountId == DB.DefaultAccount.AccountId).OrderByDescending(c => c.StartDate))
+            foreach (var period in Session.Entities.Periods.Where(c => c.AccountId == Session.DefaultAccount.AccountId).OrderByDescending(c => c.StartDate))
             {
                 cbPeriod.Items.Add(new ComboboxItem
                 {
-                    Code = stock.PeriodId.ToString(),
-                    Value = stock.PeriodName,
-                    Object = stock
+                    Code = period.PeriodId.ToString(),
+                    Value = period.PeriodName,
+                    Object = period
                 });
             }
             cbPeriod.Text = periodSelectedText;
@@ -137,16 +139,16 @@ namespace StockManager
 
         private void refreshList()
         {
-            Text = $"{Translate.GetMessage("stock-tracing")} - [{DB.DefaultAccount.AccountName} - {DB.DefaultAccount.MoneyType.MoneyTypeToString()}]";
+            Text = $"{Translate.GetMessage("stock-tracing")} - [{Session.DefaultAccount.AccountName} - {Session.DefaultAccount.MoneyType.MoneyTypeToString()}]";
             string selectedStockCode = cbStock.SelectedItem != null ? ((ComboboxItem)cbStock.SelectedItem).Code : "";
             DateTime startDate = period.StartDate;
             DateTime endDate = period.EndDate;
             lvList.Items.Clear();
-            var list = from a in DB.Entities.Accounts
-                       join al in DB.Entities.AccountTransactions on a.AccountId equals al.AccountId
-                       join st in DB.Entities.StockTransactions on al.StockTransactionId equals st.StockTransactionId
-                       join s in DB.Entities.Stocks on st.StockCode equals s.StockCode
-                       where a.AccountId == DB.DefaultAccount.AccountId
+            var list = from a in Session.Entities.Accounts
+                       join al in Session.Entities.AccountTransactions on a.AccountId equals al.AccountId
+                       join st in Session.Entities.StockTransactions on al.StockTransactionId equals st.StockTransactionId
+                       join s in Session.Entities.Stocks on st.StockCode equals s.StockCode
+                       where a.AccountId == Session.DefaultAccount.AccountId
                        && (string.IsNullOrEmpty(selectedStockCode) || s.StockCode == selectedStockCode)
                        && st.Date >= startDate
                        && st.Date <= endDate
@@ -317,11 +319,11 @@ namespace StockManager
         private void refreshInformations(List<int> ids = null)
         {
             lblInformations.Text = string.Empty;
-            var result = from a in DB.Entities.Accounts
-                         join al in DB.Entities.AccountTransactions on a.AccountId equals al.AccountId
-                         join st in DB.Entities.StockTransactions on al.StockTransactionId equals st.StockTransactionId
-                         join s in DB.Entities.Stocks on st.StockCode equals s.StockCode
-                         where a.AccountId == DB.DefaultAccount.AccountId
+            var result = from a in Session.Entities.Accounts
+                         join al in Session.Entities.AccountTransactions on a.AccountId equals al.AccountId
+                         join st in Session.Entities.StockTransactions on al.StockTransactionId equals st.StockTransactionId
+                         join s in Session.Entities.Stocks on st.StockCode equals s.StockCode
+                         where a.AccountId == Session.DefaultAccount.AccountId
                          && (ids == null || ids.Contains(st.AccountTransactionId))
                          orderby st.Date
                          select new
@@ -329,7 +331,7 @@ namespace StockManager
                              Stock = s,
                              StockTransaction = st
                          };
-            var stocks = from s in DB.Entities.Stocks
+            var stocks = from s in Session.Entities.Stocks
                          where result.Select(c => c.Stock.StockCode).Contains(s.StockCode)
                          select new StockInformation
                          {
@@ -388,7 +390,7 @@ namespace StockManager
         {
             if (MessageBox.Show(Translate.GetMessage("delete-record"), Translate.GetMessage("delete"), MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
             {
-                DB.Entities.DeleteStockTransaction(int.Parse(lvList.SelectedItems[0].Text));
+                Session.Entities.DeleteStockTransaction(int.Parse(lvList.SelectedItems[0].Text));
                 refreshList();
             }
         }
@@ -461,12 +463,18 @@ namespace StockManager
         bool first = true;
         private void cbLanguage_SelectedIndexChanged(object sender, EventArgs e)
         {
-            DB.LanguageCode = cbLanguage.Text;
-            DB.User.LanguageCode = DB.LanguageCode;
-            DB.SaveChanges();
-            setTranslateMessage();
-            refreshInformations();
-            if (!first) refreshList();
+            Session.Entities.Setting.LanguageCode = cbLanguage.Text;
+            Session.User.LanguageCode = Session.Entities.Setting.LanguageCode;
+            Session.SaveChanges();
+            
+            if (!first)
+            {
+                setTranslateMessage();
+                int cbStockSelectedIndex = cbStock.SelectedIndex;
+                cbStock_Fill();
+                cbStock.SelectedIndex = cbStockSelectedIndex;
+                refreshInformations();
+            }
             else first = false;
         }
     }

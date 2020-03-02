@@ -23,11 +23,11 @@ namespace StockManager
             InitializeComponent();
             setTranslateMessage();
             if (request.StockCodes.Count == 0)
-                stocks = DB.Entities.Stocks;
+                stocks = Session.Entities.Stocks;
             else
                 foreach (var stockCode in request.StockCodes)
                 {
-                    var stock = DB.Entities.GetStock(stockCode);
+                    var stock = Session.Entities.GetStock(stockCode);
                     if (stock != null) stocks.Add(stock);
                 }
             Text = $"{request.Period.PeriodName} - {Translate.GetMessage("stock-analysis")}";
@@ -71,10 +71,10 @@ namespace StockManager
             decimal totalGain = 0;
             decimal expectedGain = 0;
             List<StockTransaction> stockTransactions = new List<StockTransaction>();
-            stockTransactions = DB.Entities.StockTransactions.Where(c => c.Date >= request.Period.StartDate && c.Date <= request.Period.EndDate).ToList();
+            stockTransactions = Session.Entities.StockTransactions.Where(c => c.Date >= request.Period.StartDate && c.Date <= request.Period.EndDate).ToList();
 
             {
-                var lastPeriodStockTransaciton = from st in DB.Entities.StockTransactions.DeepCopy()
+                var lastPeriodStockTransaciton = from st in Session.Entities.StockTransactions.DeepCopy()
                                                  where st.Date < request.Period.StartDate
                                                  group st by st.StockCode into StockTransaction
                                                  select new { StockCode = StockTransaction.Key, StockTransaction };
@@ -121,18 +121,18 @@ namespace StockManager
                 }
             }
 
-            var result = from a in DB.Entities.Accounts
-                         join al in DB.Entities.AccountTransactions on a.AccountId equals al.AccountId
+            var result = from a in Session.Entities.Accounts
+                         join al in Session.Entities.AccountTransactions on a.AccountId equals al.AccountId
                          join st in stockTransactions on al.StockTransactionId equals st.StockTransactionId
-                         join s in DB.Entities.Stocks on st.StockCode equals s.StockCode
+                         join s in Session.Entities.Stocks on st.StockCode equals s.StockCode
                          join s1 in stocks.Distinct() on s.StockCode equals s1.StockCode
-                         where a.AccountId == DB.DefaultAccount.AccountId && s1 != null
+                         where a.AccountId == Session.DefaultAccount.AccountId && s1 != null
                          orderby st.Date
                          group st by s into StockTransactions
                          select new { Stock = StockTransactions.Key, StockTransactions };
 
             foreach (var item in result.Where(c => c.StockTransactions.Sum(t => t.Amount * (t.TransactionType == TransactionType.Sell ? -1 : 1)) > 0))
-                DB.Entities.GetStockService(item.Stock.StockCode);
+                Session.Entities.GetStockService(item.Stock.StockCode);
 
             foreach (var stock in result)
             {
@@ -225,8 +225,8 @@ namespace StockManager
                 }
 
                 decimal? curValue = null;
-                if (DB.Entities.CurrentStocks.Any(c => c.StockCode == item.StockCode))
-                    curValue = DB.Entities.CurrentStocks.OrderByDescending(c => c.CreatedDate).FirstOrDefault(c => c.StockCode == item.StockCode).Price;
+                if (Session.Entities.CurrentStocks.Any(c => c.StockCode == item.StockCode))
+                    curValue = Session.Entities.CurrentStocks.OrderByDescending(c => c.CreatedDate).FirstOrDefault(c => c.StockCode == item.StockCode).Price;
                 decimal value = item.TotalAmount == 0 ? (item.TotalSellAmount * item.SellPrice - item.TotalConst) : (item.TotalBuyAmount * (curValue.HasValue ? curValue.Value : item.BuyPrice));
                 if (item.TotalAmount > 0)
                     totalValue += value;

@@ -56,7 +56,7 @@ namespace StockManager
             return 1;
         }
 
-        public List<string> GetLanguageCode()
+        public List<string> GetLanguageCodeList()
         {
             return TranslateMessages.Select(c => c.LanguageCode).Distinct().ToList();
         }
@@ -75,6 +75,14 @@ namespace StockManager
             return null;
         }
 
+        public List<StockTransaction> GetStockTransactions()
+        {
+            return (from st in StockTransactions
+                    join at in AccountTransactions on st.StockTransactionId equals at.StockTransactionId
+                    where at.AccountId == Session.DefaultAccount.AccountId
+                    select st).ToList();
+        }
+
         public Period GetPeriod(int periodId)
         {
             if (Periods.Any(c => c.PeriodId == periodId))
@@ -86,9 +94,9 @@ namespace StockManager
 
         public TranslateMessage GetMessage(string code)
         {
-            if (TranslateMessages.Any(c => c.Code == code && c.LanguageCode == DB.LanguageCode))
+            if (TranslateMessages.Any(c => c.Code == code && c.LanguageCode == Session.Entities.Setting.LanguageCode))
             {
-                return TranslateMessages.First(c => c.Code == code && c.LanguageCode == DB.LanguageCode);
+                return TranslateMessages.First(c => c.Code == code && c.LanguageCode == Session.Entities.Setting.LanguageCode);
             }
             return null;
         }
@@ -190,7 +198,7 @@ namespace StockManager
                     Date = stockTransaction.Date,
                     StockTransactionId = stockTransaction.StockTransactionId,
                     StockTransaction = stockTransaction,
-                    AccountId = DB.DefaultAccount.AccountId
+                    AccountId = Session.DefaultAccount.AccountId
                 });
             else
                 accountTransaction.Amount = stockTransaction.Amount * stockTransaction.UnitPrice * (stockTransaction.TransactionType == TransactionType.Buy ? -1 : 1);
@@ -233,7 +241,7 @@ namespace StockManager
                 throw new Exception(Translate.GetMessage("current-password-is-incorrect"));
 
             foreach (var account in user.Accounts)
-                DB.Entities.PostAccount(account);
+                Session.Entities.PostAccount(account);
 
             if (item != null)
             {
@@ -265,11 +273,11 @@ namespace StockManager
         public Account PostAccount(Account account)
         {
             var item = Accounts.FirstOrDefault(c => c.AccountId == account.AccountId);
-            var userAccount = DB.User.Accounts.FirstOrDefault(c => c.AccountId == account.AccountId);
+            var userAccount = Session.User.Accounts.FirstOrDefault(c => c.AccountId == account.AccountId);
             if (userAccount != null)
                 userAccount.DefaultAccount = account.DefaultAccount;
             if (account.DefaultAccount)
-                foreach (var acc in DB.User.Accounts.Where(c => c.AccountId != account.AccountId))
+                foreach (var acc in Session.User.Accounts.Where(c => c.AccountId != account.AccountId))
                     acc.DefaultAccount = false;
             if (item != null)
             {
@@ -280,7 +288,7 @@ namespace StockManager
             else
             {
                 account.AccountId = GenerateAccountId();
-                DB.User.Accounts.Add(account);
+                Session.User.Accounts.Add(account);
                 Accounts.Add(account);
                 getUserAccounts();
                 return account;
@@ -289,7 +297,7 @@ namespace StockManager
 
         public Period PostPeriod(Period period)
         {
-            period.AccountId = DB.DefaultAccount.AccountId;
+            period.AccountId = Session.DefaultAccount.AccountId;
             var item = Periods.FirstOrDefault(c => c.PeriodId == period.PeriodId);
             if (item != null)
             {
@@ -314,7 +322,7 @@ namespace StockManager
             }
             else
             {
-                if (DB.Entities.TranslateMessages.Any(c => c.Code == message.Code && c.LanguageCode == message.LanguageCode))
+                if (Session.Entities.TranslateMessages.Any(c => c.Code == message.Code && c.LanguageCode == message.LanguageCode))
                     throw new Exception(Translate.GetMessage("dublicate-message"));
                 TranslateMessages.Add(message);
                 return message;
@@ -323,8 +331,8 @@ namespace StockManager
 
         private void getUserAccounts()
         {
-            DB.User.Accounts = (from a in Accounts
-                                join ua in DB.User.Accounts on a.AccountId equals ua.AccountId
+            Session.User.Accounts = (from a in Accounts
+                                join ua in Session.User.Accounts on a.AccountId equals ua.AccountId
                                 select new Account
                                 {
                                     AccountId = a.AccountId,
@@ -370,7 +378,7 @@ namespace StockManager
         {
             stockCode = stockCode.ToUpper();
             var stock = GetStock(stockCode);
-            if (CurrentStocks.Any(c => c.StockCode == stockCode && c.CreatedDate.AddMinutes(30) > DateTime.Now))
+            if (CurrentStocks.Any(c => c.StockCode == stockCode && (c.CreatedDate.AddMinutes(30) > DateTime.Now) || c.CreatedDate >= DateTime.Now.SmallDate().AddHours(18).AddMinutes(10)))
                 return CurrentStocks.OrderByDescending(c => c.CreatedDate).FirstOrDefault(c => c.StockCode == stockCode);
             dynamic stockService = getStock(stockCode);
             if (stockService == null) return null;
