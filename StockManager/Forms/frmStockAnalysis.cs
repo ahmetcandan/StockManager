@@ -71,11 +71,11 @@ namespace StockManager
             decimal totalGain = 0;
             decimal expectedGain = 0;
             List<StockTransaction> stockTransactions = new List<StockTransaction>();
-            stockTransactions = Session.Entities.StockTransactions.Where(c => c.Date >= request.Period.StartDate && c.Date <= request.Period.EndDate).ToList();
+            stockTransactions = Session.Entities.StockTransactions.Where(c => c.Date >= request.Period.StartDate.DayStart() && c.Date <= request.Period.EndDate.DayEnd()).ToList();
 
             {
                 var lastPeriodStockTransaciton = from st in Session.Entities.StockTransactions.DeepCopy()
-                                                 where st.Date < request.Period.StartDate
+                                                 where st.Date < request.Period.StartDate.DayStart()
                                                  group st by st.StockCode into StockTransaction
                                                  select new { StockCode = StockTransaction.Key, StockTransaction };
 
