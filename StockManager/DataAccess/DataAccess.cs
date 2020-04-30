@@ -378,7 +378,7 @@ namespace StockManager
         {
             stockCode = stockCode.ToUpper();
             var stock = GetStock(stockCode);
-            if (CurrentStocks.Any(c => c.StockCode == stockCode && (c.CreatedDate.AddMinutes(30) > DateTime.Now) || c.CreatedDate >= DateTime.Now.SmallDate().AddHours(18).AddMinutes(10)))
+            if (CurrentStocks.Any(c => c.StockCode == stockCode && ((c.CreatedDate.AddMinutes(30) > DateTime.Now) || c.CreatedDate >= DateTime.Now.SmallDate().AddHours(18).AddMinutes(10))))
                 return CurrentStocks.OrderByDescending(c => c.CreatedDate).FirstOrDefault(c => c.StockCode == stockCode);
             dynamic stockService = getStock(stockCode);
             if (stockService == null) return null;

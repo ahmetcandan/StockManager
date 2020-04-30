@@ -57,6 +57,12 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="DataAccess\DataAccess.cs" />
+    <Compile Include="Forms\frmCurrentStock.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\frmCurrentStock.Designer.cs">
+      <DependentUpon>frmCurrentStock.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\frmTranslateMessageList.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -134,6 +140,9 @@
     <Compile Include="Model\User.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="Forms\frmCurrentStock.resx">
+      <DependentUpon>frmCurrentStock.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Forms\frmTranslateMessageList.resx">
       <DependentUpon>frmTranslateMessageList.cs</DependentUpon>
     </EmbeddedResource>

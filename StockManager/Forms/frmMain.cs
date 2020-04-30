@@ -56,6 +56,7 @@ namespace StockManager
             translateMessagesToolStripMenuItem.Text = Translate.GetMessage("translate-message");
             Text = $"{Translate.GetMessage("stock-tracing")} - [{(period != null ? period.PeriodName : "")}]";
             label2.Text = $"{Translate.GetMessage("language")} : ";
+            addcurrentstockpriceToolStripMenuItem.Text = Translate.GetMessage("add-current-stock-price");
         }
 
         private void frmMain_Load(object sender, EventArgs e)
@@ -141,8 +142,8 @@ namespace StockManager
         {
             Text = $"{Translate.GetMessage("stock-tracing")} - [{Session.DefaultAccount.AccountName} - {Session.DefaultAccount.MoneyType.MoneyTypeToString()}]";
             string selectedStockCode = cbStock.SelectedItem != null ? ((ComboboxItem)cbStock.SelectedItem).Code : "";
-            DateTime startDate = period.StartDate;
-            DateTime endDate = period.EndDate;
+            DateTime startDate = period.StartDate.DayStart();
+            DateTime endDate = period.EndDate.DayEnd();
             lvList.Items.Clear();
             var list = from a in Session.Entities.Accounts
                        join al in Session.Entities.AccountTransactions on a.AccountId equals al.AccountId
@@ -476,6 +477,12 @@ namespace StockManager
                 refreshInformations();
             }
             else first = false;
+        }
+
+        private void addcurrentstockpriceToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            frmCurrentStock frm = new frmCurrentStock();
+            frm.ShowDialog();
         }
     }
 

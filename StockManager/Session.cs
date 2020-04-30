@@ -32,6 +32,16 @@ namespace StockManager
             return new DateTime(date.Year, date.Month, date.Day);
         }
 
+        public static DateTime DayStart(this DateTime date)
+        {
+            return new DateTime(date.Year, date.Month, date.Day, 0, 0, 0);
+        }
+
+        public static DateTime DayEnd(this DateTime date)
+        {
+            return new DateTime(date.Year, date.Month, date.Day, 23, 59, 59);
+        }
+
         public static void SaveChanges()
         {
             Entities.Save();

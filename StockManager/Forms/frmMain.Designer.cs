@@ -65,6 +65,7 @@
             this.cbPeriod = new System.Windows.Forms.ComboBox();
             this.cbLanguage = new System.Windows.Forms.ComboBox();
             this.label2 = new System.Windows.Forms.Label();
+            this.addcurrentstockpriceToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.listMenu.SuspendLayout();
             this.menuNotify.SuspendLayout();
             this.SuspendLayout();
@@ -167,16 +168,17 @@
             this.changeAccountToolStripMenuItem,
             this.periodListToolStripMenuItem,
             this.toolStripSeparator3,
-            this.translateMessagesToolStripMenuItem});
+            this.translateMessagesToolStripMenuItem,
+            this.addcurrentstockpriceToolStripMenuItem});
             this.listMenu.Name = "listMenu";
-            this.listMenu.Size = new System.Drawing.Size(286, 278);
+            this.listMenu.Size = new System.Drawing.Size(358, 338);
             this.listMenu.Opening += new System.ComponentModel.CancelEventHandler(this.listMenu_Opening);
             // 
             // editToolStripMenuItem
             // 
             this.editToolStripMenuItem.Font = new System.Drawing.Font("Hermit", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.editToolStripMenuItem.Name = "editToolStripMenuItem";
-            this.editToolStripMenuItem.Size = new System.Drawing.Size(285, 32);
+            this.editToolStripMenuItem.Size = new System.Drawing.Size(357, 32);
             this.editToolStripMenuItem.Text = "edit";
             this.editToolStripMenuItem.Click += new System.EventHandler(this.editToolStripMenuItem_Click);
             // 
@@ -185,21 +187,21 @@
             this.refreshToolStripMenuItem.Font = new System.Drawing.Font("Hermit", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.refreshToolStripMenuItem.Name = "refreshToolStripMenuItem";
             this.refreshToolStripMenuItem.ShortcutKeys = System.Windows.Forms.Keys.F5;
-            this.refreshToolStripMenuItem.Size = new System.Drawing.Size(285, 32);
+            this.refreshToolStripMenuItem.Size = new System.Drawing.Size(357, 32);
             this.refreshToolStripMenuItem.Text = "refresh";
             this.refreshToolStripMenuItem.Click += new System.EventHandler(this.refreshToolStripMenuItem_Click);
             // 
             // toolStripSeparator1
             // 
             this.toolStripSeparator1.Name = "toolStripSeparator1";
-            this.toolStripSeparator1.Size = new System.Drawing.Size(282, 6);
+            this.toolStripSeparator1.Size = new System.Drawing.Size(354, 6);
             // 
             // addToolStripMenuItem
             // 
             this.addToolStripMenuItem.Font = new System.Drawing.Font("Hermit", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.addToolStripMenuItem.Name = "addToolStripMenuItem";
             this.addToolStripMenuItem.ShortcutKeys = System.Windows.Forms.Keys.F2;
-            this.addToolStripMenuItem.Size = new System.Drawing.Size(285, 32);
+            this.addToolStripMenuItem.Size = new System.Drawing.Size(357, 32);
             this.addToolStripMenuItem.Text = "add";
             this.addToolStripMenuItem.Click += new System.EventHandler(this.addToolStripMenuItem_Click);
             // 
@@ -208,7 +210,7 @@
             this.deleteToolStripMenuItem.Font = new System.Drawing.Font("Hermit", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.deleteToolStripMenuItem.Name = "deleteToolStripMenuItem";
             this.deleteToolStripMenuItem.ShortcutKeys = System.Windows.Forms.Keys.Delete;
-            this.deleteToolStripMenuItem.Size = new System.Drawing.Size(285, 32);
+            this.deleteToolStripMenuItem.Size = new System.Drawing.Size(357, 32);
             this.deleteToolStripMenuItem.Text = "delete";
             this.deleteToolStripMenuItem.Click += new System.EventHandler(this.deleteToolStripMenuItem_Click);
             // 
@@ -217,20 +219,20 @@
             this.analysisToolStripMenuItem.Font = new System.Drawing.Font("Hermit", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.analysisToolStripMenuItem.Name = "analysisToolStripMenuItem";
             this.analysisToolStripMenuItem.ShortcutKeys = System.Windows.Forms.Keys.F3;
-            this.analysisToolStripMenuItem.Size = new System.Drawing.Size(285, 32);
+            this.analysisToolStripMenuItem.Size = new System.Drawing.Size(357, 32);
             this.analysisToolStripMenuItem.Text = "analysis";
             this.analysisToolStripMenuItem.Click += new System.EventHandler(this.analysisToolStripMenuItem_Click);
             // 
             // toolStripSeparator2
             // 
             this.toolStripSeparator2.Name = "toolStripSeparator2";
-            this.toolStripSeparator2.Size = new System.Drawing.Size(282, 6);
+            this.toolStripSeparator2.Size = new System.Drawing.Size(354, 6);
             // 
             // changeAccountToolStripMenuItem
             // 
             this.changeAccountToolStripMenuItem.Font = new System.Drawing.Font("Hermit", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.changeAccountToolStripMenuItem.Name = "changeAccountToolStripMenuItem";
-            this.changeAccountToolStripMenuItem.Size = new System.Drawing.Size(285, 32);
+            this.changeAccountToolStripMenuItem.Size = new System.Drawing.Size(357, 32);
             this.changeAccountToolStripMenuItem.Text = "change-account";
             this.changeAccountToolStripMenuItem.Click += new System.EventHandler(this.changeAccountToolStripMenuItem_Click);
             // 
@@ -238,20 +240,20 @@
             // 
             this.periodListToolStripMenuItem.Font = new System.Drawing.Font("Hermit", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.periodListToolStripMenuItem.Name = "periodListToolStripMenuItem";
-            this.periodListToolStripMenuItem.Size = new System.Drawing.Size(285, 32);
+            this.periodListToolStripMenuItem.Size = new System.Drawing.Size(357, 32);
             this.periodListToolStripMenuItem.Text = "period-list";
             this.periodListToolStripMenuItem.Click += new System.EventHandler(this.periodListToolStripMenuItem_Click);
             // 
             // toolStripSeparator3
             // 
             this.toolStripSeparator3.Name = "toolStripSeparator3";
-            this.toolStripSeparator3.Size = new System.Drawing.Size(282, 6);
+            this.toolStripSeparator3.Size = new System.Drawing.Size(354, 6);
             // 
             // translateMessagesToolStripMenuItem
             // 
             this.translateMessagesToolStripMenuItem.Font = new System.Drawing.Font("Hermit", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.translateMessagesToolStripMenuItem.Name = "translateMessagesToolStripMenuItem";
-            this.translateMessagesToolStripMenuItem.Size = new System.Drawing.Size(285, 32);
+            this.translateMessagesToolStripMenuItem.Size = new System.Drawing.Size(357, 32);
             this.translateMessagesToolStripMenuItem.Text = "translate-message";
             this.translateMessagesToolStripMenuItem.Click += new System.EventHandler(this.translateMessagesToolStripMenuItem_Click);
             // 
@@ -417,6 +419,14 @@
             this.label2.Text = "language";
             this.label2.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
+            // addcurrentstockpriceToolStripMenuItem
+            // 
+            this.addcurrentstockpriceToolStripMenuItem.Font = new System.Drawing.Font("Hermit", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.addcurrentstockpriceToolStripMenuItem.Name = "addcurrentstockpriceToolStripMenuItem";
+            this.addcurrentstockpriceToolStripMenuItem.Size = new System.Drawing.Size(357, 32);
+            this.addcurrentstockpriceToolStripMenuItem.Text = "add-current-stock-price";
+            this.addcurrentstockpriceToolStripMenuItem.Click += new System.EventHandler(this.addcurrentstockpriceToolStripMenuItem_Click);
+            // 
             // frmMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -486,6 +496,7 @@
         private System.Windows.Forms.ToolStripMenuItem translateMessagesToolStripMenuItem;
         private System.Windows.Forms.ComboBox cbLanguage;
         private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.ToolStripMenuItem addcurrentstockpriceToolStripMenuItem;
     }
 }
 
