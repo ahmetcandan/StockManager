@@ -72,11 +72,12 @@ namespace StockManager
             decimal totalGain = 0;
             decimal expectedGain = 0;
             List<StockTransaction> stockTransactions = new List<StockTransaction>();
-            stockTransactions = Session.Entities.StockTransactions.Where(c => c.Date >= request.Period.StartDate.DayStart() && c.Date <= request.Period.EndDate.DayEnd()).ToList();
+            stockTransactions = Session.Entities.StockTransactions.Where(c => c.Date >= request.Period.StartDate && c.Date <= request.Period.EndDate).ToList();
 
+            #region Last Period Stock Transaction
             {
                 var lastPeriodStockTransaciton = from st in Session.Entities.StockTransactions.DeepCopy()
-                                                 where st.Date < request.Period.StartDate.DayStart()
+                                                 where st.Date < request.Period.StartDate
                                                  group st by st.StockCode into StockTransaction
                                                  select new { StockCode = StockTransaction.Key, StockTransaction };
 
@@ -121,7 +122,9 @@ namespace StockManager
                     }
                 }
             }
+            #endregion
 
+            #region Process
             var result = from a in Session.Entities.Accounts
                          join al in Session.Entities.AccountTransactions on a.AccountId equals al.AccountId
                          join st in stockTransactions on al.StockTransactionId equals st.StockTransactionId
@@ -198,7 +201,9 @@ namespace StockManager
                     avarageConst = stockAnalysis.BuyPrice;
                 }
             }
+            #endregion
 
+            #region Grid
             foreach (var item in stockAnalyses.OrderBy(c => c.LastTransactionDate))
             {
                 var li = new ListViewItem();
@@ -226,8 +231,8 @@ namespace StockManager
                 }
 
                 decimal? curValue = null;
-                if (Session.Entities.CurrentStocks.Any(c => c.StockCode == item.StockCode))
-                    curValue = Session.Entities.CurrentStocks.OrderByDescending(c => c.CreatedDate).FirstOrDefault(c => c.StockCode == item.StockCode).Price;
+                if (Session.Entities.CurrentStocks.Any(c => c.StockCode == item.StockCode && c.CreatedDate <= request.Period.EndDate))
+                    curValue = Session.Entities.CurrentStocks.Where(c=>c.CreatedDate <= request.Period.EndDate).OrderByDescending(c => c.CreatedDate).FirstOrDefault(c => c.StockCode == item.StockCode).Price;
                 decimal value = item.TotalAmount == 0 ? (item.TotalSellAmount * item.SellPrice - item.TotalConst) : (item.TotalBuyAmount * (curValue.HasValue ? curValue.Value : item.BuyPrice));
                 if (item.TotalAmount > 0)
                     totalValue += value;
@@ -270,6 +275,7 @@ namespace StockManager
 
                 lvList.Items.Add(li);
             }
+            #endregion
 
             lblInformations.Text = $"[{Translate.GetMessage("total-gain")}: {totalGain.ToMoneyStirng(2)}, {Translate.GetMessage("total-const")}: {stockAnalyses.Sum(c => c.TotalConst).ToMoneyStirng(2)}, {Translate.GetMessage("available-value")}: {totalValue.ToMoneyStirng(2)}, {Translate.GetMessage("expected-gain")}: {expectedGain.ToMoneyStirng(2)}]";
         }
