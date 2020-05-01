@@ -471,7 +471,7 @@ namespace StockManager
                     if (Periods == null || Periods.Count == 0)
                         sw.Write("[]");
                     else
-                        sw.Write(JsonConvert.SerializeObject((from u in Periods select new Period { PeriodId = u.PeriodId, PeriodName = u.PeriodName, StartDate = u.StartDate, EndDate = u.EndDate, AccountId = u.AccountId }).ToList()));
+                        sw.Write(JsonConvert.SerializeObject((from u in Periods select new Period { PeriodId = u.PeriodId, PeriodName = u.PeriodName, StartDate = u.StartDate, EndDate = u.EndDate, AccountId = u.AccountId, IsPublic = u.IsPublic }).ToList()));
                 }
                 using (StreamWriter sw = new StreamWriter("Data/Settings.json"))
                 {

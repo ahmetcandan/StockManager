@@ -48,6 +48,7 @@ namespace StockManager
             Gain.Text = Translate.GetMessage("gain");
             TotalValue.Text = Translate.GetMessage("total-value");
             Text = Translate.GetMessage("stock-analysis");
+            Date.Text = Translate.GetMessage("date");
         }
 
         private void timer1_Tick(object sender, EventArgs e)
@@ -198,7 +199,7 @@ namespace StockManager
                 }
             }
 
-            foreach (var item in stockAnalyses)
+            foreach (var item in stockAnalyses.OrderBy(c => c.LastTransactionDate))
             {
                 var li = new ListViewItem();
                 li.Text = item.StockCode;
@@ -258,6 +259,11 @@ namespace StockManager
                     totalGain += gain;
                 li.SubItems.Add(new ListViewItem.ListViewSubItem()
                 {
+                    Name = "Date",
+                    Text = item.LastTransactionDate.ToShortDateString()
+                });
+                li.SubItems.Add(new ListViewItem.ListViewSubItem()
+                {
                     Name = "TotalValue",
                     Text = value.ToMoneyStirng(2)
                 });
@@ -298,6 +304,20 @@ namespace StockManager
                 if (!StockTransactions.Any(c => c.TransactionType == TransactionType.Sell))
                     return 0;
                 return StockTransactions.Where(c => c.TransactionType == TransactionType.Sell).Sum(c => c.UnitPrice * c.Amount) / StockTransactions.Where(c => c.TransactionType == TransactionType.Sell).Sum(c => c.Amount);
+            }
+        }
+        public DateTime FirstTransactionDate
+        {
+            get
+            {
+                return StockTransactions.OrderBy(c => c.Date).First().Date;
+            }
+        }
+        public DateTime LastTransactionDate
+        {
+            get
+            {
+                return StockTransactions.OrderByDescending(c => c.Date).First().Date;
             }
         }
         public decimal TotalValue { get { return StockTransactions.Sum(c => c.Value * (c.TransactionType == TransactionType.Buy ? -1 : 1)); } }

@@ -47,6 +47,7 @@
             this.SellPrice = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.Gain = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.TotalValue = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.Date = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.listMenu.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -59,12 +60,11 @@
             this.lblInformations.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.lblInformations.Font = new System.Drawing.Font("Hermit", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblInformations.ForeColor = System.Drawing.Color.PaleGreen;
-            this.lblInformations.Location = new System.Drawing.Point(1, 584);
-            this.lblInformations.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.lblInformations.Location = new System.Drawing.Point(1, 474);
             this.lblInformations.Name = "lblInformations";
-            this.lblInformations.Size = new System.Drawing.Size(170, 30);
+            this.lblInformations.Size = new System.Drawing.Size(122, 25);
             this.lblInformations.TabIndex = 10;
-            this.lblInformations.Text = "information"; //;Translate.GetMessage("information");
+            this.lblInformations.Text = "information";
             this.lblInformations.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
             // timer1
@@ -77,36 +77,36 @@
             this.refreshToolStripMenuItem.Font = new System.Drawing.Font("Hermit", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.refreshToolStripMenuItem.Name = "refreshToolStripMenuItem";
             this.refreshToolStripMenuItem.ShortcutKeys = System.Windows.Forms.Keys.F5;
-            this.refreshToolStripMenuItem.Size = new System.Drawing.Size(201, 32);
-            this.refreshToolStripMenuItem.Text = "refresh";// Translate.GetMessage("refresh");
+            this.refreshToolStripMenuItem.Size = new System.Drawing.Size(177, 28);
+            this.refreshToolStripMenuItem.Text = "refresh";
             // 
             // toolStripSeparator1
             // 
             this.toolStripSeparator1.Name = "toolStripSeparator1";
-            this.toolStripSeparator1.Size = new System.Drawing.Size(198, 6);
+            this.toolStripSeparator1.Size = new System.Drawing.Size(174, 6);
             // 
             // deleteToolStripMenuItem
             // 
             this.deleteToolStripMenuItem.Font = new System.Drawing.Font("Hermit", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.deleteToolStripMenuItem.Name = "deleteToolStripMenuItem";
             this.deleteToolStripMenuItem.ShortcutKeys = System.Windows.Forms.Keys.Delete;
-            this.deleteToolStripMenuItem.Size = new System.Drawing.Size(201, 32);
-            this.deleteToolStripMenuItem.Text = "delete";// Translate.GetMessage("delete");
+            this.deleteToolStripMenuItem.Size = new System.Drawing.Size(177, 28);
+            this.deleteToolStripMenuItem.Text = "delete";
             // 
             // addToolStripMenuItem
             // 
             this.addToolStripMenuItem.Font = new System.Drawing.Font("Hermit", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.addToolStripMenuItem.Name = "addToolStripMenuItem";
             this.addToolStripMenuItem.ShortcutKeys = System.Windows.Forms.Keys.F2;
-            this.addToolStripMenuItem.Size = new System.Drawing.Size(201, 32);
-            this.addToolStripMenuItem.Text = "add";// Translate.GetMessage("add");
+            this.addToolStripMenuItem.Size = new System.Drawing.Size(177, 28);
+            this.addToolStripMenuItem.Text = "add";
             // 
             // editToolStripMenuItem
             // 
             this.editToolStripMenuItem.Font = new System.Drawing.Font("Hermit", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.editToolStripMenuItem.Name = "editToolStripMenuItem";
-            this.editToolStripMenuItem.Size = new System.Drawing.Size(201, 32);
-            this.editToolStripMenuItem.Text = "edit";// Translate.GetMessage("edit");
+            this.editToolStripMenuItem.Size = new System.Drawing.Size(177, 28);
+            this.editToolStripMenuItem.Text = "edit";
             // 
             // listMenu
             // 
@@ -118,7 +118,7 @@
             this.toolStripSeparator1,
             this.refreshToolStripMenuItem});
             this.listMenu.Name = "listMenu";
-            this.listMenu.Size = new System.Drawing.Size(202, 138);
+            this.listMenu.Size = new System.Drawing.Size(178, 122);
             // 
             // label1
             // 
@@ -128,10 +128,9 @@
             this.label1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.label1.Font = new System.Drawing.Font("Hermit", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label1.ForeColor = System.Drawing.Color.PaleGreen;
-            this.label1.Location = new System.Drawing.Point(1, 584);
-            this.label1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label1.Location = new System.Drawing.Point(1, 474);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(1413, 30);
+            this.label1.Size = new System.Drawing.Size(1194, 25);
             this.label1.TabIndex = 9;
             this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
@@ -149,6 +148,7 @@
             this.BuyPrice,
             this.SellPrice,
             this.Gain,
+            this.Date,
             this.TotalValue});
             this.lvList.Font = new System.Drawing.Font("Hermit", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lvList.ForeColor = System.Drawing.Color.Lime;
@@ -156,66 +156,73 @@
             this.lvList.GridLines = true;
             this.lvList.HideSelection = false;
             this.lvList.LabelEdit = true;
-            this.lvList.Location = new System.Drawing.Point(1, -4);
-            this.lvList.Margin = new System.Windows.Forms.Padding(4);
+            this.lvList.Location = new System.Drawing.Point(1, -3);
             this.lvList.Name = "lvList";
-            this.lvList.Size = new System.Drawing.Size(1413, 584);
+            this.lvList.Size = new System.Drawing.Size(1195, 475);
             this.lvList.TabIndex = 8;
             this.lvList.UseCompatibleStateImageBehavior = false;
             this.lvList.View = System.Windows.Forms.View.Details;
             // 
             // StockCode
             // 
-            this.StockCode.Text = "stock-code";// Translate.GetMessage("stock-code");
+            this.StockCode.Text = "stock-code";
             this.StockCode.Width = 155;
             // 
             // Status
             // 
-            this.Status.Text = "status";// Translate.GetMessage("status");
+            this.Status.Text = "status";
             this.Status.Width = 151;
             // 
             // TotalAmount
             // 
-            this.TotalAmount.Text = "total-amount";// Translate.GetMessage("total-amount");
+            this.TotalAmount.Text = "total-amount";
             this.TotalAmount.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.TotalAmount.Width = 150;
             // 
             // BuyPrice
             // 
-            this.BuyPrice.Text = "buy-price";// Translate.GetMessage("buy-price");
+            this.BuyPrice.Text = "buy-price";
             this.BuyPrice.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.BuyPrice.Width = 150;
             // 
             // SellPrice
             // 
-            this.SellPrice.Text = "sell-price";// Translate.GetMessage("sell-price");
+            this.SellPrice.Text = "sell-price";
             this.SellPrice.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.SellPrice.Width = 150;
             // 
             // Gain
             // 
-            this.Gain.Text = "gain";// Translate.GetMessage("gain");
+            this.Gain.Text = "gain";
             this.Gain.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.Gain.Width = 150;
             // 
             // TotalValue
             // 
-            this.TotalValue.Text = "total-value";// Translate.GetMessage("total-value");
+            this.TotalValue.DisplayIndex = 6;
+            this.TotalValue.Text = "total-value";
             this.TotalValue.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.TotalValue.Width = 150;
             // 
+            // Date
+            // 
+            this.Date.DisplayIndex = 7;
+            this.Date.Text = "date";
+            this.Date.Width = 135;
+            // 
             // frmStockAnalysis
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1414, 614);
+            this.ClientSize = new System.Drawing.Size(1194, 499);
             this.Controls.Add(this.lblInformations);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.lvList);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.Name = "frmStockAnalysis";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "stock-analysis";// Translate.GetMessage("stock-analysis");
+            this.Text = "stock-analysis";
             this.Load += new System.EventHandler(this.frmStockAnalysis_Load);
             this.listMenu.ResumeLayout(false);
             this.ResumeLayout(false);
@@ -242,5 +249,6 @@
         private System.Windows.Forms.ColumnHeader SellPrice;
         private System.Windows.Forms.ColumnHeader StockCode;
         private System.Windows.Forms.ColumnHeader TotalValue;
+        private System.Windows.Forms.ColumnHeader Date;
     }
 }

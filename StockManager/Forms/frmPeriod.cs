@@ -33,6 +33,7 @@ namespace StockManager
             label2.Text = $"{Translate.GetMessage("start-date")} : ";
             label3.Text = $"{Translate.GetMessage("end-date")} : ";
             Text = Translate.GetMessage("period");
+            lblIsPublic.Text = Translate.GetMessage("is-public");
         }
 
         private bool validation()
@@ -44,13 +45,13 @@ namespace StockManager
                 errorProvider1.SetError(txtPeriodName, Translate.GetMessage("cant-be-empty"));
             }
 
-            if (dtStartDate.Value >= dtEndDate.Value)
+            if (dtStartDate.Value.DayStart() >= dtEndDate.Value.DayEnd())
             {
                 result = false;
                 errorProvider1.SetError(dtEndDate, Translate.GetMessage("startdate-cannot-be*greater-than-the-enddate"));
             }
-
-            if (Session.Entities.Periods.Where(c => c.PeriodId != period.PeriodId && ((dtStartDate.Value <= c.EndDate && dtStartDate.Value >= c.StartDate) || (dtEndDate.Value <= c.EndDate && dtEndDate.Value >= c.StartDate))).Any())
+            
+            if (Session.Entities.Periods.Where(c => c.PeriodId != period.PeriodId && ((dtStartDate.Value.DayStart() <= c.EndDate.DayEnd() && dtStartDate.Value.DayStart() >= c.StartDate.DayStart()) || (dtEndDate.Value.DayEnd() <= c.EndDate.DayEnd() && dtEndDate.Value.DayEnd() >= c.StartDate.DayStart())) && !c.IsPublic && !cbIsPublic.Checked).Any())
             {
                 result = false;
                 MessageBox.Show(Translate.GetMessage("this-date-range-is-used"), Translate.GetMessage("error"), MessageBoxButtons.OK, MessageBoxIcon.Error);
@@ -66,6 +67,7 @@ namespace StockManager
                 dtStartDate.Value = period.StartDate;
             if (period.EndDate != DateTime.MinValue)
                 dtEndDate.Value = period.EndDate;
+            cbIsPublic.Checked = period.IsPublic;
         }
 
         private void btnCancel_Click(object sender, EventArgs e)
@@ -81,6 +83,7 @@ namespace StockManager
                 period.PeriodName = txtPeriodName.Text;
                 period.EndDate = dtEndDate.Value.SmallDate();
                 period.StartDate = dtStartDate.Value.SmallDate();
+                period.IsPublic = cbIsPublic.Checked;
                 Session.Entities.PostPeriod(period);
                 Session.SaveChanges();
             }
