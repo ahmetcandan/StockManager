@@ -468,7 +468,7 @@ namespace StockManager
             Session.Entities.Setting.LanguageCode = cbLanguage.Text;
             Session.User.LanguageCode = Session.Entities.Setting.LanguageCode;
             Session.SaveChanges();
-            
+
             if (!first)
             {
                 setTranslateMessage();
@@ -489,7 +489,12 @@ namespace StockManager
         private void getcurrentvaluesToolStripMenuItem_Click(object sender, EventArgs e)
         {
             DovizComApi api = new DovizComApi();
-            Session.Entities.CurrentStocks = api.StockCurrents;
+            foreach (var item in Session.Entities.Stocks)
+            {
+                var cs = api.StockCurrents.FirstOrDefault(c => c.StockCode == item.StockCode);
+                if (cs != null)
+                    Session.Entities.CurrentStocks.Add(cs);
+            }
             Session.SaveChanges();
         }
     }
