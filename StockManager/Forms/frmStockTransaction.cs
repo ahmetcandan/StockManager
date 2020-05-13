@@ -140,6 +140,12 @@ namespace StockManager
                 errorProvider1.SetError(txtStockCode, Translate.GetMessage("cant-be-empty"));
             }
 
+            if (string.IsNullOrEmpty(txtStockName.Text))
+            {
+                result = false;
+                errorProvider1.SetError(txtStockName, Translate.GetMessage("cant-be-empty"));
+            }
+
             return result;
         }
 
@@ -159,9 +165,20 @@ namespace StockManager
             if (!string.IsNullOrEmpty(stockCode))
             {
                 stock = Session.Entities.GetStock(stockCode);
-                txtStockName.Text = stock.Name;
-                txtStockCode.Text = string.IsNullOrEmpty(stock.StockCode) ? stockCode.ToUpper() : stockCode;
-                txtStockName.Enabled = stock.Value == 0;
+                txtStockCode.Text = stockCode;
+                txtStockName.Enabled = stock == null;
+                if (stock != null)
+                {
+                    txtStockName.Text = stock.Name;
+                    txtStockCode.Text = string.IsNullOrEmpty(stock.StockCode) ? stockCode.ToUpper() : stockCode;
+                }
+                else
+                {
+                    stock = new Stock()
+                    {
+                        StockCode = stockCode
+                    };
+                }
             }
         }
 

@@ -41,6 +41,7 @@ namespace StockManager
             analysisToolStripMenuItem.Text = Translate.GetMessage("analysis");
             changeAccountToolStripMenuItem.Text = Translate.GetMessage("change-account");
             periodListToolStripMenuItem.Text = Translate.GetMessage("period-list");
+            getcurrentvaluesToolStripMenuItem.Text = Translate.GetMessage("get-current-values");
             exitToolStripMenuItem.Text = Translate.GetMessage("exit");
             notifyIcon.Text = Translate.GetMessage("stock-tracing");
             lblInformations.Text = Translate.GetMessage("information");
@@ -483,6 +484,13 @@ namespace StockManager
         {
             frmCurrentStock frm = new frmCurrentStock();
             frm.ShowDialog();
+        }
+
+        private void getcurrentvaluesToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            DovizComApi api = new DovizComApi();
+            Session.Entities.CurrentStocks = api.StockCurrents;
+            Session.SaveChanges();
         }
     }
 

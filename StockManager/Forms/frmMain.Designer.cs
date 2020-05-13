@@ -52,6 +52,7 @@
             this.periodListToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
             this.translateMessagesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.addcurrentstockpriceToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuNotify = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.exitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.notifyIcon = new System.Windows.Forms.NotifyIcon(this.components);
@@ -65,7 +66,7 @@
             this.cbPeriod = new System.Windows.Forms.ComboBox();
             this.cbLanguage = new System.Windows.Forms.ComboBox();
             this.label2 = new System.Windows.Forms.Label();
-            this.addcurrentstockpriceToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.getcurrentvaluesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.listMenu.SuspendLayout();
             this.menuNotify.SuspendLayout();
             this.SuspendLayout();
@@ -169,9 +170,10 @@
             this.periodListToolStripMenuItem,
             this.toolStripSeparator3,
             this.translateMessagesToolStripMenuItem,
-            this.addcurrentstockpriceToolStripMenuItem});
+            this.addcurrentstockpriceToolStripMenuItem,
+            this.getcurrentvaluesToolStripMenuItem});
             this.listMenu.Name = "listMenu";
-            this.listMenu.Size = new System.Drawing.Size(358, 338);
+            this.listMenu.Size = new System.Drawing.Size(358, 370);
             this.listMenu.Opening += new System.ComponentModel.CancelEventHandler(this.listMenu_Opening);
             // 
             // editToolStripMenuItem
@@ -256,6 +258,14 @@
             this.translateMessagesToolStripMenuItem.Size = new System.Drawing.Size(357, 32);
             this.translateMessagesToolStripMenuItem.Text = "translate-message";
             this.translateMessagesToolStripMenuItem.Click += new System.EventHandler(this.translateMessagesToolStripMenuItem_Click);
+            // 
+            // addcurrentstockpriceToolStripMenuItem
+            // 
+            this.addcurrentstockpriceToolStripMenuItem.Font = new System.Drawing.Font("Hermit", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.addcurrentstockpriceToolStripMenuItem.Name = "addcurrentstockpriceToolStripMenuItem";
+            this.addcurrentstockpriceToolStripMenuItem.Size = new System.Drawing.Size(357, 32);
+            this.addcurrentstockpriceToolStripMenuItem.Text = "add-current-stock-price";
+            this.addcurrentstockpriceToolStripMenuItem.Click += new System.EventHandler(this.addcurrentstockpriceToolStripMenuItem_Click);
             // 
             // menuNotify
             // 
@@ -419,13 +429,13 @@
             this.label2.Text = "language";
             this.label2.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
-            // addcurrentstockpriceToolStripMenuItem
+            // getcurrentvaluesToolStripMenuItem
             // 
-            this.addcurrentstockpriceToolStripMenuItem.Font = new System.Drawing.Font("Hermit", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.addcurrentstockpriceToolStripMenuItem.Name = "addcurrentstockpriceToolStripMenuItem";
-            this.addcurrentstockpriceToolStripMenuItem.Size = new System.Drawing.Size(357, 32);
-            this.addcurrentstockpriceToolStripMenuItem.Text = "add-current-stock-price";
-            this.addcurrentstockpriceToolStripMenuItem.Click += new System.EventHandler(this.addcurrentstockpriceToolStripMenuItem_Click);
+            this.getcurrentvaluesToolStripMenuItem.Font = new System.Drawing.Font("Hermit", 12F);
+            this.getcurrentvaluesToolStripMenuItem.Name = "getcurrentvaluesToolStripMenuItem";
+            this.getcurrentvaluesToolStripMenuItem.Size = new System.Drawing.Size(357, 32);
+            this.getcurrentvaluesToolStripMenuItem.Text = "get-current-values";
+            this.getcurrentvaluesToolStripMenuItem.Click += new System.EventHandler(this.getcurrentvaluesToolStripMenuItem_Click);
             // 
             // frmMain
             // 
@@ -497,6 +507,7 @@
         private System.Windows.Forms.ComboBox cbLanguage;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.ToolStripMenuItem addcurrentstockpriceToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem getcurrentvaluesToolStripMenuItem;
     }
 }
 

@@ -400,6 +400,7 @@ namespace StockManager
 
         private dynamic getStock(string stockCode)
         {
+            return null;
             try
             {
                 var client = new RestClient("http://bigpara.hurriyet.com.tr/api/v1/borsa/hisseyuzeysel/" + stockCode.ToUpper());
