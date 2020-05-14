@@ -72,20 +72,39 @@ namespace StockManager
             decimal totalGain = 0;
             decimal expectedGain = 0;
             List<StockTransaction> stockTransactions = new List<StockTransaction>();
-            stockTransactions = Session.Entities.StockTransactions.Where(c => c.Date >= request.Period.StartDate && c.Date <= request.Period.EndDate).ToList();
+            stockTransactions = Session.Entities.StockTransactions.Where(c => c.Date >= request.Period.StartDate && c.Date <= request.Period.EndDate && stocks.Select(s => s.StockCode).Contains(c.StockCode)).ToList();
 
             #region Last Period Stock Transaction
             {
                 var lastPeriodStockTransaciton = from st in Session.Entities.StockTransactions.DeepCopy()
                                                  where st.Date < request.Period.StartDate
+                                                    && stocks.Select(c => c.StockCode).Contains(st.StockCode)
                                                  group st by st.StockCode into StockTransaction
                                                  select new { StockCode = StockTransaction.Key, StockTransaction };
 
                 foreach (var stock in lastPeriodStockTransaciton)
                 {
-                    if (stock.StockTransaction.Sum(c => c.Amount * (c.TransactionType == TransactionType.Sell ? -1 : 1)) > 0)
+                    StockTransaction previousTransaction = null;
+                    foreach (var stockTransaction in stock.StockTransaction)
                     {
-                        foreach (var stockTransaction in stock.StockTransaction.OrderBy(c => c.Date).Where(c => c.TransactionType == TransactionType.Sell))
+                        if (previousTransaction != null && previousTransaction.TransactionType == stockTransaction.TransactionType)
+                        {
+                            stockTransaction.Amount += previousTransaction.Amount;
+                            stockTransaction.TotalPrice += previousTransaction.TotalPrice;
+                            previousTransaction.Amount = 0;
+                            previousTransaction.TotalPrice = 0;
+                            previousTransaction.UnitPrice = 0;
+                            stockTransaction.UnitPrice = stockTransaction.TotalPrice / stockTransaction.Amount;
+                        }
+                        previousTransaction = stockTransaction;
+                    }
+                }
+
+                foreach (var stock in lastPeriodStockTransaciton)
+                {
+                    if (stock.StockTransaction.Where(c => c.Amount > 0).Sum(c => c.Amount * (c.TransactionType == TransactionType.Sell ? -1 : 1)) > 0)
+                    {
+                        foreach (var stockTransaction in stock.StockTransaction.OrderBy(c => c.Date).Where(c => c.TransactionType == TransactionType.Sell && c.Amount > 0))
                         {
                             decimal sellAmount = stockTransaction.Amount;
 
@@ -232,7 +251,7 @@ namespace StockManager
 
                 decimal? curValue = null;
                 if (Session.Entities.CurrentStocks.Any(c => c.StockCode == item.StockCode && c.CreatedDate <= request.Period.EndDate))
-                    curValue = Session.Entities.CurrentStocks.Where(c=>c.CreatedDate <= request.Period.EndDate).OrderByDescending(c => c.CreatedDate).FirstOrDefault(c => c.StockCode == item.StockCode).Price;
+                    curValue = Session.Entities.CurrentStocks.Where(c => c.CreatedDate <= request.Period.EndDate).OrderByDescending(c => c.CreatedDate).FirstOrDefault(c => c.StockCode == item.StockCode).Price;
                 decimal value = item.TotalAmount == 0 ? (item.TotalSellAmount * item.SellPrice - item.TotalConst) : (item.TotalBuyAmount * (curValue.HasValue ? curValue.Value : item.BuyPrice));
                 if (item.TotalAmount > 0)
                     totalValue += value;
