@@ -1,12 +1,7 @@
-﻿using StockManager.Model;
-using System;
-using System.Collections.Generic;
+﻿using System;
 using System.ComponentModel;
 using System.Data;
-using System.Drawing;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace StockManager
@@ -55,7 +50,7 @@ namespace StockManager
         private void refreshList()
         {
             lvList.Items.Clear();
-            foreach (var message in Session.Entities.TranslateMessages.Where(c=>c.LanguageCode == cbLanguage.Text && 
+            foreach (var message in Session.Entities.TranslateMessages.Where(c => c.LanguageCode == cbLanguage.Text &&
             (c.Value.IndexOf(txtSearch.Text, StringComparison.OrdinalIgnoreCase) >= 0 || c.Code.IndexOf(txtSearch.Text, StringComparison.OrdinalIgnoreCase) >= 0)
             ).OrderBy(c => c.LanguageCode).OrderBy(c => c.Code))
             {

@@ -2,12 +2,8 @@
 using StockManager.Model;
 using System;
 using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Runtime.Serialization.Formatters.Binary;
 using System.Security.Cryptography;
 using System.Text;
-using System.Threading.Tasks;
 
 namespace StockManager
 {
@@ -49,7 +45,7 @@ namespace StockManager
 
         public static string ToMoneyStirng(this decimal value, int d)
         {
-         
+
             return value.ToString("N" + d);
         }
 

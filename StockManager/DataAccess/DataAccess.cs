@@ -1,12 +1,10 @@
-﻿using StockManager.Model;
-using Newtonsoft.Json;
+﻿using Newtonsoft.Json;
 using RestSharp;
-using StockManager;
+using StockManager.Model;
 using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using System.Threading;
 
 namespace StockManager
 {
@@ -332,16 +330,16 @@ namespace StockManager
         private void getUserAccounts()
         {
             Session.User.Accounts = (from a in Accounts
-                                join ua in Session.User.Accounts on a.AccountId equals ua.AccountId
-                                select new Account
-                                {
-                                    AccountId = a.AccountId,
-                                    AccountName = a.AccountName,
-                                    DefaultAccount = ua.DefaultAccount,
-                                    MoneyType = a.MoneyType,
-                                    TotalAmount = a.TotalAmount,
-                                    AccountTransactions = a.AccountTransactions
-                                }).ToList();
+                                     join ua in Session.User.Accounts on a.AccountId equals ua.AccountId
+                                     select new Account
+                                     {
+                                         AccountId = a.AccountId,
+                                         AccountName = a.AccountName,
+                                         DefaultAccount = ua.DefaultAccount,
+                                         MoneyType = a.MoneyType,
+                                         TotalAmount = a.TotalAmount,
+                                         AccountTransactions = a.AccountTransactions
+                                     }).ToList();
         }
 
         public void DeleteStockTransaction(int stockTransactionId)

@@ -1,12 +1,6 @@
-﻿using StockManager.Model;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel;
+﻿using System;
 using System.Data;
-using System.Drawing;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace StockManager
@@ -50,7 +44,7 @@ namespace StockManager
                 result = false;
                 errorProvider1.SetError(dtEndDate, Translate.GetMessage("startdate-cannot-be*greater-than-the-enddate"));
             }
-            
+
             if (Session.Entities.Periods.Where(c => c.PeriodId != period.PeriodId && ((dtStartDate.Value.DayStart() <= c.EndDate && dtStartDate.Value.DayStart() >= c.StartDate) || (dtEndDate.Value.DayEnd() <= c.EndDate && dtEndDate.Value.DayEnd() >= c.StartDate)) && !c.IsPublic && !cbIsPublic.Checked).Any())
             {
                 result = false;

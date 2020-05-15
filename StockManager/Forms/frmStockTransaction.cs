@@ -1,12 +1,7 @@
 ﻿using StockManager.Model;
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data;
-using System.Drawing;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace StockManager
@@ -75,7 +70,7 @@ namespace StockManager
                 if (stockTransaction.StockTransactionId > 0)
                     currentAmount += stockTransaction.Amount;
 
-                if(cbType.Text == Translate.GetMessage("Sell") && amount > currentAmount)
+                if (cbType.Text == Translate.GetMessage("Sell") && amount > currentAmount)
                 {
                     MessageBox.Show(Translate.GetMessage("there-is-not-enough-stock"), Translate.GetMessage("error"), MessageBoxButtons.OK, MessageBoxIcon.Error);
                     return;
