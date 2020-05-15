@@ -33,6 +33,7 @@ namespace StockManager
                     text = text.Substring(text.IndexOf("<td>"));
                     stockCurrent.StockName = stockCurrent.StockName.Substring(stockCurrent.StockCode.Length + 3);
                     stockCurrent.UpdateDate = DateTime.Now;
+                    stockCurrent.CreatedDate = DateTime.Now;
                     StockCurrents.Add(stockCurrent);
                 }
             }
