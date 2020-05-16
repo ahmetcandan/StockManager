@@ -5,6 +5,7 @@ using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.Linq;
+using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace StockManager
@@ -485,14 +486,27 @@ namespace StockManager
 
         private void getcurrentvaluesToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            DovizComApi api = new DovizComApi();
-            foreach (var item in Session.Entities.Stocks)
+            Task.Run(() => GetCurrentValues());
+        }
+
+        void GetCurrentValues()
+        {
+            try
             {
-                var cs = api.StockCurrents.FirstOrDefault(c => c.StockCode == item.StockCode);
-                if (cs != null)
-                    Session.Entities.CurrentStocks.Add(cs);
+                DovizComApi api = new DovizComApi();
+                foreach (var item in Session.Entities.Stocks)
+                {
+                    var cs = api.StockCurrents.FirstOrDefault(c => c.StockCode == item.StockCode);
+                    if (cs != null)
+                        Session.Entities.CurrentStocks.Add(cs);
+                }
+                Session.SaveChanges();
+                MessageBox.Show(Translate.GetMessage("get-current-stock-values-success"), Translate.GetMessage("success"), MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
-            Session.SaveChanges();
+            catch
+            {
+                MessageBox.Show(Translate.GetMessage("get-current-stock-values-failed"), Translate.GetMessage("error"), MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
     }
 
