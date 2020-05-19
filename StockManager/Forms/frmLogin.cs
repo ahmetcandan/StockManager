@@ -54,10 +54,10 @@ namespace StockManager
             if (validation())
             {
                 var user = Session.Entities.GetUser(txtUserName.Text, passwordIsHash ? Session.Entities.Setting.PasswordHash : txtPassword.Text.ComputeSha256Hash(txtUserName.Text));
-                if (!string.IsNullOrEmpty(user.LanguageCode))
-                    Session.Entities.Setting.LanguageCode = user.LanguageCode;
                 if (user != null)
                 {
+                    if (!string.IsNullOrEmpty(user.LanguageCode))
+                        Session.Entities.Setting.LanguageCode = user.LanguageCode;
                     SettingSave();
                     frmMain frmMain = new frmMain();
                     Session.User = user;

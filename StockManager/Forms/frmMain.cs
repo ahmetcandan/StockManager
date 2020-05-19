@@ -69,6 +69,8 @@ namespace StockManager
             period = Session.Entities.Periods.Where(c => c.AccountId == Session.DefaultAccount.AccountId && (c.StartDate <= now && c.EndDate >= now)).OrderByDescending(c => c.StartDate).FirstOrDefault();
             if (period == null)
                 period = Session.Entities.Periods.Where(c => c.AccountId == Session.DefaultAccount.AccountId).OrderByDescending(c => c.StartDate).FirstOrDefault();
+            if (period == null)
+                period = new Period() { AccountId = Session.DefaultAccount.AccountId, StartDate = DateTime.Now, EndDate = DateTime.Now.AddYears(1), PeriodName = "All" };
             cbPeriod_Fill();
             cbStock.SelectedIndex = 0;
             if (period == null)
@@ -89,15 +91,6 @@ namespace StockManager
                 cbPeriod.Text = periodSelectedText;
             }
             refreshList();
-
-
-
-            //foreach (var period in Session.Entities.Periods.Where(c => !c.IsPublic))
-            //{
-            //    StockAnalysisManager stockAnalysisManager = new StockAnalysisManager(new StockAnalysisRequest { Period = period });
-            //    stockAnalysisManager.RefreshList();
-            //    MessageBox.Show($"Period: {period.PeriodName}, Total Gain: {stockAnalysisManager.TotalGain.ToMoneyStirng(2)}, Expected Gain: {stockAnalysisManager.ExpectedGain.ToMoneyStirng(2)}");
-            //}
         }
 
         private void cbStock_Fill()
@@ -150,7 +143,7 @@ namespace StockManager
         private void refreshList()
         {
             Text = $"{Translate.GetMessage("stock-tracing")} - [{Session.DefaultAccount.AccountName} - {Session.DefaultAccount.MoneyType.MoneyTypeToString()}]";
-            string selectedStockCode = cbStock.SelectedItem != null ? ((ComboboxItem)cbStock.SelectedItem).Code : "";
+            string selectedStockCode = (cbStock.SelectedItem != null && cbStock.SelectedValue != null) ? ((ComboboxItem)cbStock.SelectedItem).Code : "";
             DateTime startDate = period.StartDate;
             DateTime endDate = period.EndDate;
             lvList.Items.Clear();
