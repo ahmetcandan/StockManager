@@ -1,4 +1,5 @@
-﻿using StockManager.Model;
+﻿using StockManager.Business;
+using StockManager.Model;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -88,6 +89,15 @@ namespace StockManager
                 cbPeriod.Text = periodSelectedText;
             }
             refreshList();
+
+
+
+            //foreach (var period in Session.Entities.Periods.Where(c => !c.IsPublic))
+            //{
+            //    StockAnalysisManager stockAnalysisManager = new StockAnalysisManager(new StockAnalysisRequest { Period = period });
+            //    stockAnalysisManager.RefreshList();
+            //    MessageBox.Show($"Period: {period.PeriodName}, Total Gain: {stockAnalysisManager.TotalGain.ToMoneyStirng(2)}, Expected Gain: {stockAnalysisManager.ExpectedGain.ToMoneyStirng(2)}");
+            //}
         }
 
         private void cbStock_Fill()
@@ -465,7 +475,7 @@ namespace StockManager
         {
             Session.Entities.Setting.LanguageCode = cbLanguage.Text;
             Session.User.LanguageCode = Session.Entities.Setting.LanguageCode;
-            Session.SaveChanges();
+            Task.Run(() => Session.SaveChanges());
 
             if (!first)
             {
@@ -501,7 +511,7 @@ namespace StockManager
                         Session.Entities.CurrentStocks.Add(cs);
                 }
                 Session.SaveChanges();
-                MessageBox.Show(Translate.GetMessage("get-current-stock-values-success"), Translate.GetMessage("success"), MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show(Translate.GetMessage("get-current-stock-values-success"), Translate.GetMessage("success"), MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
             catch
             {

@@ -49,7 +49,7 @@
             this.btnSave.BackColor = System.Drawing.Color.DarkGreen;
             this.btnSave.DialogResult = System.Windows.Forms.DialogResult.Cancel;
             this.btnSave.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnSave.Font = new System.Drawing.Font("Hermit", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnSave.Font = new System.Drawing.Font("Hermit", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnSave.ForeColor = System.Drawing.Color.PaleGreen;
             this.btnSave.Location = new System.Drawing.Point(247, 179);
             this.btnSave.Name = "btnSave";
@@ -62,7 +62,7 @@
             // txtPeriodName
             // 
             this.txtPeriodName.BackColor = System.Drawing.Color.Black;
-            this.txtPeriodName.Font = new System.Drawing.Font("Hermit", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtPeriodName.Font = new System.Drawing.Font("Hermit", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtPeriodName.ForeColor = System.Drawing.Color.Lime;
             this.txtPeriodName.Location = new System.Drawing.Point(178, 9);
             this.txtPeriodName.MaxLength = 30;
@@ -74,7 +74,7 @@
             // 
             this.label1.BackColor = System.Drawing.Color.DarkSlateGray;
             this.label1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.label1.Font = new System.Drawing.Font("Hermit", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.Font = new System.Drawing.Font("Hermit", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label1.ForeColor = System.Drawing.Color.PaleGreen;
             this.label1.Location = new System.Drawing.Point(12, 9);
             this.label1.Name = "label1";
@@ -93,7 +93,7 @@
             this.btnCancel.BackColor = System.Drawing.Color.Crimson;
             this.btnCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
             this.btnCancel.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnCancel.Font = new System.Drawing.Font("Hermit", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnCancel.Font = new System.Drawing.Font("Hermit", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnCancel.ForeColor = System.Drawing.Color.Pink;
             this.btnCancel.Location = new System.Drawing.Point(122, 179);
             this.btnCancel.Name = "btnCancel";
@@ -107,7 +107,7 @@
             // 
             this.label2.BackColor = System.Drawing.Color.DarkSlateGray;
             this.label2.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.label2.Font = new System.Drawing.Font("Hermit", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label2.Font = new System.Drawing.Font("Hermit", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label2.ForeColor = System.Drawing.Color.PaleGreen;
             this.label2.Location = new System.Drawing.Point(12, 45);
             this.label2.Name = "label2";
@@ -120,7 +120,7 @@
             // 
             this.label3.BackColor = System.Drawing.Color.DarkSlateGray;
             this.label3.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.label3.Font = new System.Drawing.Font("Hermit", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label3.Font = new System.Drawing.Font("Hermit", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label3.ForeColor = System.Drawing.Color.PaleGreen;
             this.label3.Location = new System.Drawing.Point(12, 80);
             this.label3.Name = "label3";
@@ -132,7 +132,7 @@
             // dtStartDate
             // 
             this.dtStartDate.CalendarMonthBackground = System.Drawing.Color.Black;
-            this.dtStartDate.Font = new System.Drawing.Font("Hermit", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.dtStartDate.Font = new System.Drawing.Font("Hermit", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.dtStartDate.Location = new System.Drawing.Point(180, 45);
             this.dtStartDate.Name = "dtStartDate";
             this.dtStartDate.Size = new System.Drawing.Size(187, 30);
@@ -141,7 +141,7 @@
             // dtEndDate
             // 
             this.dtEndDate.CalendarMonthBackground = System.Drawing.Color.Black;
-            this.dtEndDate.Font = new System.Drawing.Font("Hermit", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.dtEndDate.Font = new System.Drawing.Font("Hermit", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.dtEndDate.Location = new System.Drawing.Point(180, 80);
             this.dtEndDate.Name = "dtEndDate";
             this.dtEndDate.Size = new System.Drawing.Size(187, 30);
@@ -151,7 +151,7 @@
             // 
             this.lblIsPublic.BackColor = System.Drawing.Color.DarkSlateGray;
             this.lblIsPublic.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.lblIsPublic.Font = new System.Drawing.Font("Hermit", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblIsPublic.Font = new System.Drawing.Font("Hermit", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblIsPublic.ForeColor = System.Drawing.Color.PaleGreen;
             this.lblIsPublic.Location = new System.Drawing.Point(12, 115);
             this.lblIsPublic.Name = "lblIsPublic";
@@ -163,7 +163,7 @@
             // cbIsPublic
             // 
             this.cbIsPublic.AutoSize = true;
-            this.cbIsPublic.Font = new System.Drawing.Font("Hermit", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.cbIsPublic.Font = new System.Drawing.Font("Hermit", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cbIsPublic.Location = new System.Drawing.Point(180, 124);
             this.cbIsPublic.Margin = new System.Windows.Forms.Padding(2);
             this.cbIsPublic.Name = "cbIsPublic";

@@ -46,7 +46,7 @@
             this.btnSave.BackColor = System.Drawing.Color.DarkGreen;
             this.btnSave.DialogResult = System.Windows.Forms.DialogResult.Cancel;
             this.btnSave.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnSave.Font = new System.Drawing.Font("Hermit", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnSave.Font = new System.Drawing.Font("Hermit", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnSave.ForeColor = System.Drawing.Color.PaleGreen;
             this.btnSave.Location = new System.Drawing.Point(329, 154);
             this.btnSave.Margin = new System.Windows.Forms.Padding(4);
@@ -60,7 +60,7 @@
             // txtAccountName
             // 
             this.txtAccountName.BackColor = System.Drawing.Color.Black;
-            this.txtAccountName.Font = new System.Drawing.Font("Hermit", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtAccountName.Font = new System.Drawing.Font("Hermit", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtAccountName.ForeColor = System.Drawing.Color.Lime;
             this.txtAccountName.Location = new System.Drawing.Point(237, 11);
             this.txtAccountName.Margin = new System.Windows.Forms.Padding(4);
@@ -73,7 +73,7 @@
             // 
             this.label1.BackColor = System.Drawing.Color.DarkSlateGray;
             this.label1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.label1.Font = new System.Drawing.Font("Hermit", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.Font = new System.Drawing.Font("Hermit", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label1.ForeColor = System.Drawing.Color.PaleGreen;
             this.label1.Location = new System.Drawing.Point(16, 11);
             this.label1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
@@ -93,7 +93,7 @@
             this.btnCancel.BackColor = System.Drawing.Color.Crimson;
             this.btnCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
             this.btnCancel.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnCancel.Font = new System.Drawing.Font("Hermit", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnCancel.Font = new System.Drawing.Font("Hermit", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnCancel.ForeColor = System.Drawing.Color.Pink;
             this.btnCancel.Location = new System.Drawing.Point(162, 154);
             this.btnCancel.Margin = new System.Windows.Forms.Padding(4);
@@ -107,7 +107,7 @@
             // cbSetDefault
             // 
             this.cbSetDefault.AutoSize = true;
-            this.cbSetDefault.Font = new System.Drawing.Font("Hermit", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.cbSetDefault.Font = new System.Drawing.Font("Hermit", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cbSetDefault.Location = new System.Drawing.Point(237, 98);
             this.cbSetDefault.Name = "cbSetDefault";
             this.cbSetDefault.Size = new System.Drawing.Size(214, 32);
@@ -119,7 +119,7 @@
             // 
             this.cbMoneyType.BackColor = System.Drawing.Color.Black;
             this.cbMoneyType.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cbMoneyType.Font = new System.Drawing.Font("Hermit", 12F);
+            this.cbMoneyType.Font = new System.Drawing.Font("Hermit", 10F);
             this.cbMoneyType.ForeColor = System.Drawing.Color.Lime;
             this.cbMoneyType.FormattingEnabled = true;
             this.cbMoneyType.Items.AddRange(new object[] {
@@ -136,7 +136,7 @@
             // 
             this.label4.BackColor = System.Drawing.Color.DarkSlateGray;
             this.label4.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.label4.Font = new System.Drawing.Font("Hermit", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label4.Font = new System.Drawing.Font("Hermit", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label4.ForeColor = System.Drawing.Color.PaleGreen;
             this.label4.Location = new System.Drawing.Point(16, 55);
             this.label4.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);

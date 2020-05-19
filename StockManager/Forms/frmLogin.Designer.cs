@@ -47,7 +47,7 @@
             this.btnLogin.BackColor = System.Drawing.Color.DarkGreen;
             this.btnLogin.DialogResult = System.Windows.Forms.DialogResult.Cancel;
             this.btnLogin.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnLogin.Font = new System.Drawing.Font("Hermit", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnLogin.Font = new System.Drawing.Font("Hermit", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnLogin.ForeColor = System.Drawing.Color.PaleGreen;
             this.btnLogin.Location = new System.Drawing.Point(329, 198);
             this.btnLogin.Margin = new System.Windows.Forms.Padding(4);
@@ -61,7 +61,7 @@
             // txtUserName
             // 
             this.txtUserName.BackColor = System.Drawing.Color.Black;
-            this.txtUserName.Font = new System.Drawing.Font("Hermit", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtUserName.Font = new System.Drawing.Font("Hermit", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtUserName.ForeColor = System.Drawing.Color.Lime;
             this.txtUserName.Location = new System.Drawing.Point(237, 11);
             this.txtUserName.Margin = new System.Windows.Forms.Padding(4);
@@ -75,7 +75,7 @@
             // 
             this.label1.BackColor = System.Drawing.Color.DarkSlateGray;
             this.label1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.label1.Font = new System.Drawing.Font("Hermit", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.Font = new System.Drawing.Font("Hermit", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label1.ForeColor = System.Drawing.Color.PaleGreen;
             this.label1.Location = new System.Drawing.Point(16, 11);
             this.label1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
@@ -89,7 +89,7 @@
             // 
             this.label2.BackColor = System.Drawing.Color.DarkSlateGray;
             this.label2.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.label2.Font = new System.Drawing.Font("Hermit", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label2.Font = new System.Drawing.Font("Hermit", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label2.ForeColor = System.Drawing.Color.PaleGreen;
             this.label2.Location = new System.Drawing.Point(16, 55);
             this.label2.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
@@ -102,7 +102,7 @@
             // txtPassword
             // 
             this.txtPassword.BackColor = System.Drawing.Color.Black;
-            this.txtPassword.Font = new System.Drawing.Font("Hermit", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtPassword.Font = new System.Drawing.Font("Hermit", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtPassword.ForeColor = System.Drawing.Color.Lime;
             this.txtPassword.Location = new System.Drawing.Point(237, 55);
             this.txtPassword.Margin = new System.Windows.Forms.Padding(4);
@@ -123,7 +123,7 @@
             this.btnCreate.BackColor = System.Drawing.Color.Olive;
             this.btnCreate.DialogResult = System.Windows.Forms.DialogResult.Cancel;
             this.btnCreate.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnCreate.Font = new System.Drawing.Font("Hermit", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnCreate.Font = new System.Drawing.Font("Hermit", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnCreate.ForeColor = System.Drawing.Color.Gold;
             this.btnCreate.Location = new System.Drawing.Point(162, 198);
             this.btnCreate.Margin = new System.Windows.Forms.Padding(4);
@@ -137,7 +137,7 @@
             // cbRememberUserName
             // 
             this.cbRememberUserName.AutoSize = true;
-            this.cbRememberUserName.Font = new System.Drawing.Font("Hermit", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.cbRememberUserName.Font = new System.Drawing.Font("Hermit", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cbRememberUserName.Location = new System.Drawing.Point(237, 98);
             this.cbRememberUserName.Name = "cbRememberUserName";
             this.cbRememberUserName.Size = new System.Drawing.Size(250, 32);
@@ -150,7 +150,7 @@
             // 
             this.cbRememberPassword.AutoSize = true;
             this.cbRememberPassword.Enabled = false;
-            this.cbRememberPassword.Font = new System.Drawing.Font("Hermit", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.cbRememberPassword.Font = new System.Drawing.Font("Hermit", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cbRememberPassword.Location = new System.Drawing.Point(236, 136);
             this.cbRememberPassword.Name = "cbRememberPassword";
             this.cbRememberPassword.Size = new System.Drawing.Size(238, 32);

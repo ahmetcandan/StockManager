@@ -4,7 +4,9 @@ using System.Collections.Generic;
 using System.Data;
 using System.Drawing;
 using System.Linq;
+using System.Threading.Tasks;
 using System.Windows.Forms;
+using StockManager.Business;
 
 namespace StockManager
 {
@@ -55,170 +57,16 @@ namespace StockManager
         private void frmStockAnalysis_Load(object sender, EventArgs e)
         {
             lblInformations.Text = string.Empty;
-            refreshList();
+            StockAnalysisManager stockAnaliysisManager = new StockAnalysisManager(request);
+            gridFill(stockAnaliysisManager.RefreshList());
         }
 
-        private void refreshList()
+        private void gridFill(List<StockAnalysis> stockAnalyses)
         {
-            lvList.Items.Clear();
-            List<StockAnalysis> stockAnalyses = new List<StockAnalysis>();
-            StockAnalysis stockAnalysis = new StockAnalysis();
-            decimal avarageConst = 0;
+            #region Grid
             decimal totalValue = 0;
             decimal totalGain = 0;
             decimal expectedGain = 0;
-            List<StockTransaction> stockTransactions = new List<StockTransaction>();
-            stockTransactions = Session.Entities.StockTransactions.Where(c => c.Date >= request.Period.StartDate && c.Date <= request.Period.EndDate && stocks.Select(s => s.StockCode).Contains(c.StockCode)).ToList();
-
-            #region Last Period Stock Transaction
-            {
-                var lastPeriodStockTransaciton = from st in Session.Entities.StockTransactions.DeepCopy()
-                                                 where st.Date < request.Period.StartDate
-                                                    && stocks.Select(c => c.StockCode).Contains(st.StockCode)
-                                                 group st by st.StockCode into StockTransaction
-                                                 select new { StockCode = StockTransaction.Key, StockTransaction };
-
-                foreach (var stock in lastPeriodStockTransaciton)
-                {
-                    StockTransaction previousTransaction = null;
-                    foreach (var stockTransaction in stock.StockTransaction)
-                    {
-                        if (previousTransaction != null && previousTransaction.TransactionType == stockTransaction.TransactionType)
-                        {
-                            stockTransaction.Amount += previousTransaction.Amount;
-                            stockTransaction.TotalPrice += previousTransaction.TotalPrice;
-                            previousTransaction.Amount = 0;
-                            previousTransaction.TotalPrice = 0;
-                            previousTransaction.UnitPrice = 0;
-                            stockTransaction.UnitPrice = stockTransaction.TotalPrice / stockTransaction.Amount;
-                        }
-                        previousTransaction = stockTransaction;
-                    }
-                }
-
-                foreach (var stock in lastPeriodStockTransaciton)
-                {
-                    if (stock.StockTransaction.Where(c => c.Amount > 0).Sum(c => c.Amount * (c.TransactionType == TransactionType.Sell ? -1 : 1)) > 0)
-                    {
-                        foreach (var stockTransaction in stock.StockTransaction.OrderBy(c => c.Date).Where(c => c.TransactionType == TransactionType.Sell && c.Amount > 0))
-                        {
-                            decimal sellAmount = stockTransaction.Amount;
-
-                            while (sellAmount > 0)
-                            {
-                                var buyTransaction = stock.StockTransaction.OrderBy(c => c.Date).FirstOrDefault(c => c.TransactionType == TransactionType.Buy && c.Amount > 0);
-                                if (sellAmount > buyTransaction.Amount)
-                                {
-                                    sellAmount -= buyTransaction.Amount;
-                                    buyTransaction.Amount = 0;
-                                }
-                                else
-                                {
-                                    buyTransaction.Amount -= sellAmount;
-                                    sellAmount = 0;
-                                }
-                            }
-                        }
-
-                        decimal sumBuyAmount = stock.StockTransaction.Where(c => c.TransactionType == TransactionType.Buy && c.Amount > 0).Sum(c => c.Amount);
-                        decimal sumBuyPrice = stock.StockTransaction.Where(c => c.TransactionType == TransactionType.Buy && c.Amount > 0).Sum(c => c.UnitPrice * c.Amount);
-                        DateTime buyDate = stock.StockTransaction.Where(c => c.TransactionType == TransactionType.Buy && c.Amount > 0).Min(c => c.Date);
-                        int stockTransactionId = stock.StockTransaction.OrderBy(c => c.Date).FirstOrDefault(c => c.TransactionType == TransactionType.Buy && c.Amount > 0).StockTransactionId;
-                        stockTransactions.Add(new StockTransaction
-                        {
-                            Amount = sumBuyAmount,
-                            UnitPrice = sumBuyPrice / sumBuyAmount,
-                            TotalPrice = sumBuyPrice,
-                            StockCode = stock.StockCode,
-                            Date = buyDate,
-                            TransactionType = TransactionType.Buy,
-                            StockTransactionId = stockTransactionId,
-                        });
-                    }
-                }
-            }
-            #endregion
-
-            #region Process
-            var result = from a in Session.Entities.Accounts
-                         join al in Session.Entities.AccountTransactions on a.AccountId equals al.AccountId
-                         join st in stockTransactions on al.StockTransactionId equals st.StockTransactionId
-                         join s in Session.Entities.Stocks on st.StockCode equals s.StockCode
-                         join s1 in stocks.Distinct() on s.StockCode equals s1.StockCode
-                         where a.AccountId == Session.DefaultAccount.AccountId && s1 != null
-                         orderby st.Date
-                         group st by s into StockTransactions
-                         select new { Stock = StockTransactions.Key, StockTransactions };
-
-            foreach (var item in result.Where(c => c.StockTransactions.Sum(t => t.Amount * (t.TransactionType == TransactionType.Sell ? -1 : 1)) > 0))
-                Session.Entities.GetStockService(item.Stock.StockCode);
-
-            foreach (var stock in result)
-            {
-                stockAnalysis = new StockAnalysis();
-                foreach (var stockTransaction in stock.StockTransactions)
-                {
-                    stockAnalysis.StockCode = stock.Stock.StockCode;
-                    stockAnalysis.StockTransactions.Add(new StockAnalysisTransaction
-                    {
-                        Amount = stockTransaction.Amount,
-                        Date = stockTransaction.Date,
-                        StockTransactionId = stockTransaction.StockTransactionId,
-                        TransactionType = stockTransaction.TransactionType,
-                        UnitPrice = stockTransaction.UnitPrice
-                    });
-
-                    if (stockAnalysis.TotalAmount == 0)
-                    {
-                        stockAnalyses.Add(stockAnalysis);
-                        stockAnalysis = new StockAnalysis();
-                    }
-                }
-
-                if (stockAnalysis.StockTransactions.Count > 0)
-                {
-                    var partialStockAnalysis = new StockAnalysis();
-                    partialStockAnalysis.StockCode = stockAnalysis.StockCode;
-                    decimal diffarenceAmount = stockAnalysis.StockTransactions.Sum(c => c.Amount * (c.TransactionType == TransactionType.Sell ? -1 : 1));
-                    bool isPartial = diffarenceAmount > 0 && stockAnalysis.StockTransactions.Any(c => c.TransactionType == TransactionType.Sell);
-                    if (isPartial)
-                    {
-                        foreach (var stockTransaction in stockAnalysis.StockTransactions.Where(c => c.TransactionType == TransactionType.Buy).OrderByDescending(c => c.Date))
-                        {
-                            var partialStockTransaction = new StockAnalysisTransaction()
-                            {
-                                Amount = 0,
-                                Date = stockTransaction.Date,
-                                StockTransactionId = stockTransaction.StockTransactionId,
-                                TransactionType = stockTransaction.TransactionType,
-                                UnitPrice = stockTransaction.UnitPrice
-                            };
-                            if (stockTransaction.Amount >= diffarenceAmount)
-                            {
-                                stockTransaction.Amount -= diffarenceAmount;
-                                partialStockTransaction.Amount = diffarenceAmount;
-                                partialStockAnalysis.StockTransactions.Add(partialStockTransaction);
-                                break;
-                            }
-                            else
-                            {
-                                diffarenceAmount -= stockTransaction.Amount;
-                                partialStockTransaction.Amount = stockTransaction.Amount;
-                                partialStockAnalysis.StockTransactions.Add(partialStockTransaction);
-                                stockTransaction.Amount = 0;
-                            }
-                        }
-                        stockAnalysis.StockTransactions.RemoveAll(c => c.Amount == 0);
-                    }
-
-                    stockAnalyses.Add(stockAnalysis);
-                    if (isPartial) stockAnalyses.Add(partialStockAnalysis);
-                    avarageConst = stockAnalysis.BuyPrice;
-                }
-            }
-            #endregion
-
-            #region Grid
             foreach (var item in stockAnalyses.OrderBy(c => c.LastTransactionDate))
             {
                 var li = new ListViewItem();
@@ -290,69 +138,8 @@ namespace StockManager
 
                 lvList.Items.Add(li);
             }
-            #endregion
-
             lblInformations.Text = $"[{Translate.GetMessage("total-gain")}: {totalGain.ToMoneyStirng(2)}, {Translate.GetMessage("total-const")}: {stockAnalyses.Sum(c => c.TotalConst).ToMoneyStirng(2)}, {Translate.GetMessage("available-value")}: {totalValue.ToMoneyStirng(2)}, {Translate.GetMessage("expected-gain")}: {expectedGain.ToMoneyStirng(2)}]";
+            #endregion
         }
-    }
-
-    class StockAnalysis
-    {
-        public StockAnalysis()
-        {
-            StockTransactions = new List<StockAnalysisTransaction>();
-        }
-
-        public string StockCode { get; set; }
-        public decimal Gain { get { return TotalAmount == 0 ? (TotalValue - TotalConst) : 0; } }
-        public decimal TotalAmount { get { return StockTransactions.Sum(c => c.Amount * (c.TransactionType == TransactionType.Sell ? -1 : 1)); } }
-        public decimal TotalBuyAmount { get { return StockTransactions.Where(c => c.TransactionType == TransactionType.Buy).Sum(c => c.Amount); } }
-        public decimal TotalSellAmount { get { return StockTransactions.Where(c => c.TransactionType == TransactionType.Sell).Sum(c => c.Amount); } }
-        public decimal TotalConst { get { return StockTransactions.Sum(c => c.Const); } }
-        public decimal BuyPrice
-        {
-            get
-            {
-                if (!StockTransactions.Any(c => c.TransactionType == TransactionType.Buy))
-                    return 0;
-                return StockTransactions.Where(c => c.TransactionType == TransactionType.Buy).Sum(c => c.UnitPrice * c.Amount) / StockTransactions.Where(c => c.TransactionType == TransactionType.Buy).Sum(c => c.Amount);
-            }
-        }
-        public decimal SellPrice
-        {
-            get
-            {
-                if (!StockTransactions.Any(c => c.TransactionType == TransactionType.Sell))
-                    return 0;
-                return StockTransactions.Where(c => c.TransactionType == TransactionType.Sell).Sum(c => c.UnitPrice * c.Amount) / StockTransactions.Where(c => c.TransactionType == TransactionType.Sell).Sum(c => c.Amount);
-            }
-        }
-        public DateTime FirstTransactionDate
-        {
-            get
-            {
-                return StockTransactions.OrderBy(c => c.Date).First().Date;
-            }
-        }
-        public DateTime LastTransactionDate
-        {
-            get
-            {
-                return StockTransactions.OrderByDescending(c => c.Date).First().Date;
-            }
-        }
-        public decimal TotalValue { get { return StockTransactions.Sum(c => c.Value * (c.TransactionType == TransactionType.Buy ? -1 : 1)); } }
-        public List<StockAnalysisTransaction> StockTransactions { get; set; }
-    }
-
-    class StockAnalysisTransaction
-    {
-        public int StockTransactionId { get; set; }
-        public DateTime Date { get; set; }
-        public decimal Amount { get; set; }
-        public decimal UnitPrice { get; set; }
-        public decimal Value { get { return Amount * UnitPrice; } }
-        public decimal Const { get { return Value / 1000 * 2; } }
-        public TransactionType TransactionType { get; set; }
     }
 }

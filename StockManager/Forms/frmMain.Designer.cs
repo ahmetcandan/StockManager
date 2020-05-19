@@ -89,7 +89,7 @@
             this.Const,
             this.Date});
             this.lvList.ContextMenuStrip = this.listMenu;
-            this.lvList.Font = new System.Drawing.Font("Hermit", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lvList.Font = new System.Drawing.Font("Hermit", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lvList.ForeColor = System.Drawing.Color.Lime;
             this.lvList.FullRowSelect = true;
             this.lvList.GridLines = true;
@@ -178,7 +178,7 @@
             // 
             // editToolStripMenuItem
             // 
-            this.editToolStripMenuItem.Font = new System.Drawing.Font("Hermit", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.editToolStripMenuItem.Font = new System.Drawing.Font("Hermit", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.editToolStripMenuItem.Name = "editToolStripMenuItem";
             this.editToolStripMenuItem.Size = new System.Drawing.Size(357, 32);
             this.editToolStripMenuItem.Text = "edit";
@@ -186,7 +186,7 @@
             // 
             // refreshToolStripMenuItem
             // 
-            this.refreshToolStripMenuItem.Font = new System.Drawing.Font("Hermit", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.refreshToolStripMenuItem.Font = new System.Drawing.Font("Hermit", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.refreshToolStripMenuItem.Name = "refreshToolStripMenuItem";
             this.refreshToolStripMenuItem.ShortcutKeys = System.Windows.Forms.Keys.F5;
             this.refreshToolStripMenuItem.Size = new System.Drawing.Size(357, 32);
@@ -200,7 +200,7 @@
             // 
             // addToolStripMenuItem
             // 
-            this.addToolStripMenuItem.Font = new System.Drawing.Font("Hermit", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.addToolStripMenuItem.Font = new System.Drawing.Font("Hermit", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.addToolStripMenuItem.Name = "addToolStripMenuItem";
             this.addToolStripMenuItem.ShortcutKeys = System.Windows.Forms.Keys.F2;
             this.addToolStripMenuItem.Size = new System.Drawing.Size(357, 32);
@@ -209,7 +209,7 @@
             // 
             // deleteToolStripMenuItem
             // 
-            this.deleteToolStripMenuItem.Font = new System.Drawing.Font("Hermit", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.deleteToolStripMenuItem.Font = new System.Drawing.Font("Hermit", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.deleteToolStripMenuItem.Name = "deleteToolStripMenuItem";
             this.deleteToolStripMenuItem.ShortcutKeys = System.Windows.Forms.Keys.Delete;
             this.deleteToolStripMenuItem.Size = new System.Drawing.Size(357, 32);
@@ -218,7 +218,7 @@
             // 
             // analysisToolStripMenuItem
             // 
-            this.analysisToolStripMenuItem.Font = new System.Drawing.Font("Hermit", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.analysisToolStripMenuItem.Font = new System.Drawing.Font("Hermit", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.analysisToolStripMenuItem.Name = "analysisToolStripMenuItem";
             this.analysisToolStripMenuItem.ShortcutKeys = System.Windows.Forms.Keys.F3;
             this.analysisToolStripMenuItem.Size = new System.Drawing.Size(357, 32);
@@ -232,7 +232,7 @@
             // 
             // changeAccountToolStripMenuItem
             // 
-            this.changeAccountToolStripMenuItem.Font = new System.Drawing.Font("Hermit", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.changeAccountToolStripMenuItem.Font = new System.Drawing.Font("Hermit", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.changeAccountToolStripMenuItem.Name = "changeAccountToolStripMenuItem";
             this.changeAccountToolStripMenuItem.Size = new System.Drawing.Size(357, 32);
             this.changeAccountToolStripMenuItem.Text = "change-account";
@@ -240,7 +240,7 @@
             // 
             // periodListToolStripMenuItem
             // 
-            this.periodListToolStripMenuItem.Font = new System.Drawing.Font("Hermit", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.periodListToolStripMenuItem.Font = new System.Drawing.Font("Hermit", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.periodListToolStripMenuItem.Name = "periodListToolStripMenuItem";
             this.periodListToolStripMenuItem.Size = new System.Drawing.Size(357, 32);
             this.periodListToolStripMenuItem.Text = "period-list";
@@ -253,7 +253,7 @@
             // 
             // translateMessagesToolStripMenuItem
             // 
-            this.translateMessagesToolStripMenuItem.Font = new System.Drawing.Font("Hermit", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.translateMessagesToolStripMenuItem.Font = new System.Drawing.Font("Hermit", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.translateMessagesToolStripMenuItem.Name = "translateMessagesToolStripMenuItem";
             this.translateMessagesToolStripMenuItem.Size = new System.Drawing.Size(357, 32);
             this.translateMessagesToolStripMenuItem.Text = "translate-message";
@@ -261,7 +261,7 @@
             // 
             // addcurrentstockpriceToolStripMenuItem
             // 
-            this.addcurrentstockpriceToolStripMenuItem.Font = new System.Drawing.Font("Hermit", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.addcurrentstockpriceToolStripMenuItem.Font = new System.Drawing.Font("Hermit", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.addcurrentstockpriceToolStripMenuItem.Name = "addcurrentstockpriceToolStripMenuItem";
             this.addcurrentstockpriceToolStripMenuItem.Size = new System.Drawing.Size(357, 32);
             this.addcurrentstockpriceToolStripMenuItem.Text = "add-current-stock-price";
@@ -299,7 +299,7 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.label1.BackColor = System.Drawing.Color.DarkSlateGray;
             this.label1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.label1.Font = new System.Drawing.Font("Hermit", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.Font = new System.Drawing.Font("Hermit", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label1.ForeColor = System.Drawing.Color.PaleGreen;
             this.label1.Location = new System.Drawing.Point(0, 454);
             this.label1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
@@ -315,7 +315,7 @@
             this.lblInformations.AutoSize = true;
             this.lblInformations.BackColor = System.Drawing.Color.DarkSlateGray;
             this.lblInformations.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.lblInformations.Font = new System.Drawing.Font("Hermit", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblInformations.Font = new System.Drawing.Font("Hermit", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblInformations.ForeColor = System.Drawing.Color.PaleGreen;
             this.lblInformations.Location = new System.Drawing.Point(0, 454);
             this.lblInformations.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
@@ -333,7 +333,7 @@
             this.lblInformation2.AutoSize = true;
             this.lblInformation2.BackColor = System.Drawing.Color.DarkSlateGray;
             this.lblInformation2.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.lblInformation2.Font = new System.Drawing.Font("Hermit", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblInformation2.Font = new System.Drawing.Font("Hermit", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblInformation2.ForeColor = System.Drawing.Color.PaleGreen;
             this.lblInformation2.Location = new System.Drawing.Point(0, 454);
             this.lblInformation2.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
@@ -347,7 +347,7 @@
             // 
             this.cbStock.BackColor = System.Drawing.Color.Black;
             this.cbStock.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cbStock.Font = new System.Drawing.Font("Hermit", 12F);
+            this.cbStock.Font = new System.Drawing.Font("Hermit", 10F);
             this.cbStock.ForeColor = System.Drawing.Color.Lime;
             this.cbStock.FormattingEnabled = true;
             this.cbStock.Location = new System.Drawing.Point(176, 3);
@@ -361,7 +361,7 @@
             // 
             this.label4.BackColor = System.Drawing.Color.DarkSlateGray;
             this.label4.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.label4.Font = new System.Drawing.Font("Hermit", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label4.Font = new System.Drawing.Font("Hermit", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label4.ForeColor = System.Drawing.Color.PaleGreen;
             this.label4.Location = new System.Drawing.Point(0, 3);
             this.label4.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
@@ -375,7 +375,7 @@
             // 
             this.label5.BackColor = System.Drawing.Color.DarkSlateGray;
             this.label5.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.label5.Font = new System.Drawing.Font("Hermit", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label5.Font = new System.Drawing.Font("Hermit", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label5.ForeColor = System.Drawing.Color.PaleGreen;
             this.label5.Location = new System.Drawing.Point(430, 3);
             this.label5.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
@@ -389,7 +389,7 @@
             // 
             this.cbPeriod.BackColor = System.Drawing.Color.Black;
             this.cbPeriod.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cbPeriod.Font = new System.Drawing.Font("Hermit", 12F);
+            this.cbPeriod.Font = new System.Drawing.Font("Hermit", 10F);
             this.cbPeriod.ForeColor = System.Drawing.Color.Lime;
             this.cbPeriod.FormattingEnabled = true;
             this.cbPeriod.Location = new System.Drawing.Point(612, 3);
@@ -404,7 +404,7 @@
             this.cbLanguage.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.cbLanguage.BackColor = System.Drawing.Color.Black;
             this.cbLanguage.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cbLanguage.Font = new System.Drawing.Font("Hermit", 12F);
+            this.cbLanguage.Font = new System.Drawing.Font("Hermit", 10F);
             this.cbLanguage.ForeColor = System.Drawing.Color.Lime;
             this.cbLanguage.FormattingEnabled = true;
             this.cbLanguage.Location = new System.Drawing.Point(1232, 3);
@@ -419,7 +419,7 @@
             this.label2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.label2.BackColor = System.Drawing.Color.DarkSlateGray;
             this.label2.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.label2.Font = new System.Drawing.Font("Hermit", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label2.Font = new System.Drawing.Font("Hermit", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label2.ForeColor = System.Drawing.Color.PaleGreen;
             this.label2.Location = new System.Drawing.Point(1053, 3);
             this.label2.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
@@ -431,7 +431,7 @@
             // 
             // getcurrentvaluesToolStripMenuItem
             // 
-            this.getcurrentvaluesToolStripMenuItem.Font = new System.Drawing.Font("Hermit", 12F);
+            this.getcurrentvaluesToolStripMenuItem.Font = new System.Drawing.Font("Hermit", 10F);
             this.getcurrentvaluesToolStripMenuItem.Name = "getcurrentvaluesToolStripMenuItem";
             this.getcurrentvaluesToolStripMenuItem.Size = new System.Drawing.Size(357, 32);
             this.getcurrentvaluesToolStripMenuItem.Text = "get-current-values";
