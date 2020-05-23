@@ -45,7 +45,6 @@ namespace StockManager
 
         public static string ToMoneyStirng(this decimal value, int d)
         {
-
             return value.ToString("N" + d);
         }
 

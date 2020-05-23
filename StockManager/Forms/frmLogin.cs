@@ -53,11 +53,11 @@ namespace StockManager
         {
             if (validation())
             {
-                var user = Session.Entities.GetUser(txtUserName.Text, passwordIsHash ? Session.Entities.Setting.PasswordHash : txtPassword.Text.ComputeSha256Hash(txtUserName.Text));
+                var user = Session.Entities.GetUser(txtUserName.Text, passwordIsHash ? Session.Entities.GetSetting().PasswordHash : txtPassword.Text.ComputeSha256Hash(txtUserName.Text));
                 if (user != null)
                 {
                     if (!string.IsNullOrEmpty(user.LanguageCode))
-                        Session.Entities.Setting.LanguageCode = user.LanguageCode;
+                        Session.Entities.GetSetting().LanguageCode = user.LanguageCode;
                     SettingSave();
                     frmMain frmMain = new frmMain();
                     Session.User = user;
@@ -107,16 +107,16 @@ namespace StockManager
 
         private void SettingSave()
         {
-            Session.Entities.Setting.RememberUserName = cbRememberUserName.Checked;
-            Session.Entities.Setting.RememberPassword = cbRememberPassword.Checked;
+            Session.Entities.GetSetting().RememberUserName = cbRememberUserName.Checked;
+            Session.Entities.GetSetting().RememberPassword = cbRememberPassword.Checked;
             if (cbRememberUserName.Checked)
-                Session.Entities.Setting.UserName = txtUserName.Text;
+                Session.Entities.GetSetting().UserName = txtUserName.Text;
             else
-                Session.Entities.Setting.UserName = string.Empty;
+                Session.Entities.GetSetting().UserName = string.Empty;
             if (cbRememberPassword.Checked)
-                Session.Entities.Setting.PasswordHash = passwordIsHash ? Session.Entities.Setting.PasswordHash : txtPassword.Text.ComputeSha256Hash(txtUserName.Text);
+                Session.Entities.GetSetting().PasswordHash = passwordIsHash ? Session.Entities.GetSetting().PasswordHash : txtPassword.Text.ComputeSha256Hash(txtUserName.Text);
             else
-                Session.Entities.Setting.PasswordHash = string.Empty;
+                Session.Entities.GetSetting().PasswordHash = string.Empty;
             Session.SaveChanges();
         }
 
@@ -125,19 +125,19 @@ namespace StockManager
             try
             {
                 Session.DefaultAccount = null;
-                cbRememberUserName.Checked = Session.Entities.Setting.RememberUserName;
-                cbRememberPassword.Checked = Session.Entities.Setting.RememberPassword;
-                passwordIsHash = Session.Entities.Setting.RememberPassword;
-                txtUserName.Text = Session.Entities.Setting.UserName;
-                if (Session.Entities.Setting.RememberPassword)
+                cbRememberUserName.Checked = Session.Entities.GetSetting().RememberUserName;
+                cbRememberPassword.Checked = Session.Entities.GetSetting().RememberPassword;
+                passwordIsHash = Session.Entities.GetSetting().RememberPassword;
+                txtUserName.Text = Session.Entities.GetSetting().UserName;
+                if (Session.Entities.GetSetting().RememberPassword)
                 {
                     txtPassword.Text = "PASSWORD";
                     passwordIsHash = true;
                 }
 
-                if (Session.Entities.Setting.RememberUserName)
+                if (Session.Entities.GetSetting().RememberUserName)
                     txtPassword.Focus();
-                if (Session.Entities.Setting.RememberPassword)
+                if (Session.Entities.GetSetting().RememberPassword)
                     txtUserName.Focus();
             }
             catch (Exception ex)

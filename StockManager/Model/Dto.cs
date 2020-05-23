@@ -8,7 +8,7 @@ namespace StockManager
     {
         public static string GetMessage(string code)
         {
-            var message = Session.Entities.TranslateMessages.FirstOrDefault(c => c.Code == code && c.LanguageCode == Session.Entities.Setting.LanguageCode);
+            var message = Session.Entities.GetTranslateMessages().FirstOrDefault(c => c.Code == code && c.LanguageCode == Session.Entities.GetSetting().LanguageCode);
             if (message != null)
                 return message.Value;
             return code;

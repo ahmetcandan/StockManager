@@ -34,7 +34,7 @@ namespace StockManager
         private void refreshList()
         {
             lvList.Items.Clear();
-            foreach (var period in Session.Entities.Periods.Where(c => c.AccountId == Session.DefaultAccount.AccountId))
+            foreach (var period in Session.Entities.GetPeriods())
             {
                 var li = new ListViewItem();
                 li.Text = period.PeriodId.ToString();
@@ -91,7 +91,7 @@ namespace StockManager
             if (MessageBox.Show(Translate.GetMessage("delete-period"), Translate.GetMessage("delete"), MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
             {
                 int periodId = int.Parse(lvList.SelectedItems[0].Text);
-                Session.Entities.Periods.RemoveAll(c => c.PeriodId == periodId);
+                Session.Entities.DeletePeriod(periodId);
                 Session.SaveChanges();
                 refreshList();
             }

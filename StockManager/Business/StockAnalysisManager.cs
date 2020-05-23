@@ -14,7 +14,7 @@ namespace StockManager.Business
             this.request = request;
         }
 
-        private List<StockAnalysis> stockAnalyses;
+        public List<StockAnalysis> StockAnalyses { get; set; }
         private StockAnalysisRequest request;
 
         public decimal TotalGain { get; set; }
@@ -26,21 +26,21 @@ namespace StockManager.Business
         {
             List<Stock> stocks = new List<Stock>();
             if (request.StockCodes.Count == 0)
-                stocks = Session.Entities.Stocks;
+                stocks = Session.Entities.GetStocks();
             else
                 foreach (var stockCode in request.StockCodes)
                 {
                     var stock = Session.Entities.GetStock(stockCode);
                     if (stock != null) stocks.Add(stock);
                 }
-            stockAnalyses = new List<StockAnalysis>();
+            StockAnalyses = new List<StockAnalysis>();
             StockAnalysis stockAnalysis = new StockAnalysis();
             List<StockTransaction> stockTransactions = new List<StockTransaction>();
-            stockTransactions = Session.Entities.StockTransactions.Where(c => c.Date >= request.Period.StartDate && c.Date <= request.Period.EndDate && stocks.Select(s => s.StockCode).Contains(c.StockCode)).ToList();
+            stockTransactions = Session.Entities.GetStockTransactions().Where(c => c.Date >= request.Period.StartDate && c.Date <= request.Period.EndDate && stocks.Select(s => s.StockCode).Contains(c.StockCode)).ToList();
 
             #region Last Period Stock Transaction
             {
-                var lastPeriodStockTransaciton = from st in Session.Entities.StockTransactions.DeepCopy()
+                var lastPeriodStockTransaciton = from st in Session.Entities.GetStockTransactions().DeepCopy()
                                                  where st.Date < request.Period.StartDate
                                                     && stocks.Select(c => c.StockCode).Contains(st.StockCode)
                                                  group st by st.StockCode into StockTransaction
@@ -108,12 +108,10 @@ namespace StockManager.Business
             #endregion
 
             #region Process
-            var result = from a in Session.Entities.Accounts
-                         join al in Session.Entities.AccountTransactions on a.AccountId equals al.AccountId
-                         join st in stockTransactions on al.StockTransactionId equals st.StockTransactionId
-                         join s in Session.Entities.Stocks on st.StockCode equals s.StockCode
+            var result = from st in stockTransactions
+                         join s in Session.Entities.GetStocks() on st.StockCode equals s.StockCode
                          join s1 in stocks.Distinct() on s.StockCode equals s1.StockCode
-                         where a.AccountId == Session.DefaultAccount.AccountId && s1 != null
+                         where s1 != null
                          orderby st.Date
                          group st by s into StockTransactions
                          select new { Stock = StockTransactions.Key, StockTransactions };
@@ -138,7 +136,7 @@ namespace StockManager.Business
 
                     if (stockAnalysis.TotalAmount == 0)
                     {
-                        stockAnalyses.Add(stockAnalysis);
+                        StockAnalyses.Add(stockAnalysis);
                         stockAnalysis = new StockAnalysis();
                     }
                 }
@@ -179,27 +177,27 @@ namespace StockManager.Business
                         stockAnalysis.StockTransactions.RemoveAll(c => c.Amount == 0);
                     }
 
-                    stockAnalyses.Add(stockAnalysis);
-                    if (isPartial) stockAnalyses.Add(partialStockAnalysis);
+                    StockAnalyses.Add(stockAnalysis);
+                    if (isPartial) StockAnalyses.Add(partialStockAnalysis);
                 }
             }
             #endregion
 
             calculate();
 
-            return stockAnalyses.OrderBy(c => c.LastTransactionDate).ToList();
+            return StockAnalyses.OrderBy(c => c.LastTransactionDate).ToList();
         }
 
         private void calculate()
         {
-                        decimal totalValue = 0;
+            decimal totalValue = 0;
             decimal totalGain = 0;
             decimal expectedGain = 0;
-            foreach (var item in stockAnalyses.OrderBy(c => c.LastTransactionDate))
+            foreach (var item in StockAnalyses.OrderBy(c => c.LastTransactionDate))
             {
                 decimal? curValue = null;
-                if (Session.Entities.CurrentStocks.Any(c => c.StockCode == item.StockCode && c.CreatedDate <= request.Period.EndDate))
-                    curValue = Session.Entities.CurrentStocks.Where(c => c.CreatedDate <= request.Period.EndDate).OrderByDescending(c => c.CreatedDate).FirstOrDefault(c => c.StockCode == item.StockCode).Price;
+                if (Session.Entities.GetCurrentStocks().Any(c => c.StockCode == item.StockCode && c.CreatedDate <= request.Period.EndDate))
+                    curValue = Session.Entities.GetCurrentStocks().Where(c => c.CreatedDate <= request.Period.EndDate).OrderByDescending(c => c.CreatedDate).FirstOrDefault(c => c.StockCode == item.StockCode).Price;
                 decimal value = item.TotalAmount == 0 ? (item.TotalSellAmount * item.SellPrice - item.TotalConst) : (item.TotalBuyAmount * (curValue.HasValue ? curValue.Value : item.BuyPrice));
                 if (item.TotalAmount > 0)
                     totalValue += value;
@@ -212,8 +210,8 @@ namespace StockManager.Business
                     totalGain += gain;
             }
             TotalGain = totalGain;
-            TotalConst = stockAnalyses.Sum(c => c.TotalConst);
             AvailableValue = totalValue;
+            TotalConst = StockAnalyses.Sum(c => c.StockTransactions.Where(d => d.Date >= request.Period.StartDate && d.Date <= request.Period.EndDate).Sum(d => d.Const));
             ExpectedGain = expectedGain;
         }
     }

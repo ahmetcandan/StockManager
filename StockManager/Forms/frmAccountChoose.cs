@@ -85,7 +85,7 @@ namespace StockManager
             {
                 int accountId = int.Parse(lvList.SelectedItems[0].Text);
                 Session.User.Accounts.RemoveAll(c => c.AccountId == accountId);
-                Session.Entities.Accounts.RemoveAll(c => c.AccountId == accountId);
+                Session.Entities.DeleteAccount(accountId);
                 Session.SaveChanges();
                 refreshList();
             }

@@ -43,14 +43,14 @@ namespace StockManager
         private void frmStockAnalysis_Load(object sender, EventArgs e)
         {
             cbLanguage_Fill();
-            cbLanguage.Text = Session.Entities.Setting.LanguageCode;
+            cbLanguage.Text = Session.Entities.GetSetting().LanguageCode;
             refreshList();
         }
 
         private void refreshList()
         {
             lvList.Items.Clear();
-            foreach (var message in Session.Entities.TranslateMessages.Where(c => c.LanguageCode == cbLanguage.Text &&
+            foreach (var message in Session.Entities.GetTranslateMessages().Where(c => c.LanguageCode == cbLanguage.Text &&
             (c.Value.IndexOf(txtSearch.Text, StringComparison.OrdinalIgnoreCase) >= 0 || c.Code.IndexOf(txtSearch.Text, StringComparison.OrdinalIgnoreCase) >= 0)
             ).OrderBy(c => c.LanguageCode).OrderBy(c => c.Code))
             {
@@ -109,7 +109,7 @@ namespace StockManager
             if (MessageBox.Show(Translate.GetMessage("delete-message"), Translate.GetMessage("delete"), MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
             {
                 string code = lvList.SelectedItems[0].Text;
-                Session.Entities.TranslateMessages.RemoveAll(c => c.Code == code);
+                Session.Entities.GetTranslateMessages().RemoveAll(c => c.Code == code);
                 Session.SaveChanges();
                 refreshList();
             }

@@ -74,7 +74,7 @@ namespace StockManager
                 entity.Price = decimal.Parse(txtCurrentPrice.Text);
                 entity.UpdateDate = dtUpdateDate.Value;
                 entity.CreatedDate = DateTime.Now;
-                Session.Entities.CurrentStocks.Add(entity);
+                Session.Entities.GetCurrentStocks().Add(entity);
                 Session.SaveChanges();
             }
         }

@@ -45,7 +45,7 @@ namespace StockManager
                 errorProvider1.SetError(dtEndDate, Translate.GetMessage("startdate-cannot-be*greater-than-the-enddate"));
             }
 
-            if (Session.Entities.Periods.Where(c => c.PeriodId != period.PeriodId && ((dtStartDate.Value.DayStart() <= c.EndDate && dtStartDate.Value.DayStart() >= c.StartDate) || (dtEndDate.Value.DayEnd() <= c.EndDate && dtEndDate.Value.DayEnd() >= c.StartDate)) && !c.IsPublic && !cbIsPublic.Checked).Any())
+            if (Session.Entities.GetPeriods().Where(c => c.PeriodId != period.PeriodId && ((dtStartDate.Value.DayStart() <= c.EndDate && dtStartDate.Value.DayStart() >= c.StartDate) || (dtEndDate.Value.DayEnd() <= c.EndDate && dtEndDate.Value.DayEnd() >= c.StartDate)) && !c.IsPublic && !cbIsPublic.Checked).Any())
             {
                 result = false;
                 MessageBox.Show(Translate.GetMessage("this-date-range-is-used"), Translate.GetMessage("error"), MessageBoxButtons.OK, MessageBoxIcon.Error);

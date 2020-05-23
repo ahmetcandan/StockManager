@@ -56,6 +56,7 @@ namespace StockManager
             translateMessagesToolStripMenuItem.Text = Translate.GetMessage("translate-message");
             Text = $"{Translate.GetMessage("stock-tracing")} - [{(period != null ? period.PeriodName : "")}]";
             label2.Text = $"{Translate.GetMessage("language")} : ";
+            periodtransToolStripMenuItem.Text = Translate.GetMessage("period-transaction-chart");
             addcurrentstockpriceToolStripMenuItem.Text = Translate.GetMessage("add-current-stock-price");
         }
 
@@ -64,11 +65,11 @@ namespace StockManager
             timer1.Start();
             cbStock_Fill();
             cbLanguage_Fill();
-            cbLanguage.Text = Session.Entities.Setting.LanguageCode;
+            cbLanguage.Text = Session.Entities.GetSetting().LanguageCode;
             DateTime now = DateTime.Now.SmallDate();
-            period = Session.Entities.Periods.Where(c => c.AccountId == Session.DefaultAccount.AccountId && (c.StartDate <= now && c.EndDate >= now)).OrderByDescending(c => c.StartDate).FirstOrDefault();
+            period = Session.Entities.GetPeriods().Where(c => (c.StartDate <= now && c.EndDate >= now)).OrderByDescending(c => c.StartDate).FirstOrDefault();
             if (period == null)
-                period = Session.Entities.Periods.Where(c => c.AccountId == Session.DefaultAccount.AccountId).OrderByDescending(c => c.StartDate).FirstOrDefault();
+                period = Session.Entities.GetPeriods().OrderByDescending(c => c.StartDate).FirstOrDefault();
             if (period == null)
                 period = new Period() { AccountId = Session.DefaultAccount.AccountId, StartDate = DateTime.Now, EndDate = DateTime.Now.AddYears(1), PeriodName = "All" };
             cbPeriod_Fill();
@@ -96,12 +97,13 @@ namespace StockManager
         private void cbStock_Fill()
         {
             cbStock.Items.Clear();
+            cbStock.ValueMember = "Value";
             cbStock.Items.Add(new ComboboxItem
             {
                 Code = "",
                 Value = Translate.GetMessage("all")
             });
-            foreach (var stock in Session.Entities.Stocks)
+            foreach (var stock in Session.Entities.GetStocks())
             {
                 cbStock.Items.Add(new ComboboxItem
                 {
@@ -128,7 +130,7 @@ namespace StockManager
         private void cbPeriod_Fill()
         {
             cbPeriod.Items.Clear();
-            foreach (var period in Session.Entities.Periods.Where(c => c.AccountId == Session.DefaultAccount.AccountId).OrderByDescending(c => c.StartDate))
+            foreach (var period in Session.Entities.GetPeriods().OrderByDescending(c => c.StartDate))
             {
                 cbPeriod.Items.Add(new ComboboxItem
                 {
@@ -143,16 +145,13 @@ namespace StockManager
         private void refreshList()
         {
             Text = $"{Translate.GetMessage("stock-tracing")} - [{Session.DefaultAccount.AccountName} - {Session.DefaultAccount.MoneyType.MoneyTypeToString()}]";
-            string selectedStockCode = (cbStock.SelectedItem != null && cbStock.SelectedValue != null) ? ((ComboboxItem)cbStock.SelectedItem).Code : "";
+            string selectedStockCode = (cbStock.SelectedItem != null && !string.IsNullOrEmpty(cbStock.Text)) ? ((ComboboxItem)cbStock.SelectedItem).Code : "";
             DateTime startDate = period.StartDate;
             DateTime endDate = period.EndDate;
             lvList.Items.Clear();
-            var list = from a in Session.Entities.Accounts
-                       join al in Session.Entities.AccountTransactions on a.AccountId equals al.AccountId
-                       join st in Session.Entities.StockTransactions on al.StockTransactionId equals st.StockTransactionId
-                       join s in Session.Entities.Stocks on st.StockCode equals s.StockCode
-                       where a.AccountId == Session.DefaultAccount.AccountId
-                       && (string.IsNullOrEmpty(selectedStockCode) || s.StockCode == selectedStockCode)
+            var list = from st in Session.Entities.GetStockTransactions()
+                       join s in Session.Entities.GetStocks() on st.StockCode equals s.StockCode
+                       where (string.IsNullOrEmpty(selectedStockCode) || s.StockCode == selectedStockCode)
                        && st.Date >= startDate
                        && st.Date <= endDate
                        orderby st.Date descending
@@ -322,19 +321,16 @@ namespace StockManager
         private void refreshInformations(List<int> ids = null)
         {
             lblInformations.Text = string.Empty;
-            var result = from a in Session.Entities.Accounts
-                         join al in Session.Entities.AccountTransactions on a.AccountId equals al.AccountId
-                         join st in Session.Entities.StockTransactions on al.StockTransactionId equals st.StockTransactionId
-                         join s in Session.Entities.Stocks on st.StockCode equals s.StockCode
-                         where a.AccountId == Session.DefaultAccount.AccountId
-                         && (ids == null || ids.Contains(st.AccountTransactionId))
+            var result = from st in Session.Entities.GetStockTransactions()
+                         join s in Session.Entities.GetStocks() on st.StockCode equals s.StockCode
+                         where (ids == null || ids.Contains(st.AccountTransactionId))
                          orderby st.Date
                          select new
                          {
                              Stock = s,
                              StockTransaction = st
                          };
-            var stocks = from s in Session.Entities.Stocks
+            var stocks = from s in Session.Entities.GetStocks()
                          where result.Select(c => c.Stock.StockCode).Contains(s.StockCode)
                          select new StockInformation
                          {
@@ -402,7 +398,8 @@ namespace StockManager
         {
             StockAnalysisRequest request = new StockAnalysisRequest();
             for (int i = 0; i < lvList.SelectedItems.Count; i++)
-                request.StockCodes.Add(lvList.SelectedItems[i].SubItems["StockCode"].Text);
+                if (!string.IsNullOrEmpty(lvList.SelectedItems[i].SubItems["StockCode"].Text))
+                    request.StockCodes.Add(lvList.SelectedItems[i].SubItems["StockCode"].Text);
             request.Period = period;
             request.StockCodes = request.StockCodes.Distinct().ToList();
             frmStockAnalysis frm = new frmStockAnalysis(request);
@@ -466,8 +463,8 @@ namespace StockManager
         bool first = true;
         private void cbLanguage_SelectedIndexChanged(object sender, EventArgs e)
         {
-            Session.Entities.Setting.LanguageCode = cbLanguage.Text;
-            Session.User.LanguageCode = Session.Entities.Setting.LanguageCode;
+            Session.Entities.GetSetting().LanguageCode = cbLanguage.Text;
+            Session.User.LanguageCode = Session.Entities.GetSetting().LanguageCode;
             Task.Run(() => Session.SaveChanges());
 
             if (!first)
@@ -497,11 +494,11 @@ namespace StockManager
             try
             {
                 DovizComApi api = new DovizComApi();
-                foreach (var item in Session.Entities.Stocks)
+                foreach (var item in Session.Entities.GetStocks())
                 {
                     var cs = api.StockCurrents.FirstOrDefault(c => c.StockCode == item.StockCode);
                     if (cs != null)
-                        Session.Entities.CurrentStocks.Add(cs);
+                        Session.Entities.GetCurrentStocks().Add(cs);
                 }
                 Session.SaveChanges();
                 MessageBox.Show(Translate.GetMessage("get-current-stock-values-success"), Translate.GetMessage("success"), MessageBoxButtons.OK, MessageBoxIcon.Information);
@@ -510,6 +507,12 @@ namespace StockManager
             {
                 MessageBox.Show(Translate.GetMessage("get-current-stock-values-failed"), Translate.GetMessage("error"), MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
+        }
+
+        private void periodtransToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            frmPeriodGain frm = new frmPeriodGain();
+            frm.ShowDialog();
         }
     }
 

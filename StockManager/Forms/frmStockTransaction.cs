@@ -66,7 +66,7 @@ namespace StockManager
                 stock.UpdateDate = DateTime.Now;
 
 
-                decimal currentAmount = Session.Entities.StockTransactions.Where(c => c.StockCode == stock.StockCode).Sum(c => c.Amount * (c.TransactionType == TransactionType.Sell ? -1 : 1));
+                decimal currentAmount = Session.Entities.GetStockTransactions().Where(c => c.StockCode == stock.StockCode).Sum(c => c.Amount * (c.TransactionType == TransactionType.Sell ? -1 : 1));
                 if (stockTransaction.StockTransactionId > 0)
                     currentAmount += stockTransaction.Amount;
 

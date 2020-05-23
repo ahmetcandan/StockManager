@@ -21,7 +21,7 @@ namespace StockManager
             InitializeComponent();
             setTranslateMessage();
             if (request.StockCodes.Count == 0)
-                stocks = Session.Entities.Stocks;
+                stocks = Session.Entities.GetStocks();
             else
                 foreach (var stockCode in request.StockCodes)
                 {
@@ -58,16 +58,15 @@ namespace StockManager
         {
             lblInformations.Text = string.Empty;
             StockAnalysisManager stockAnaliysisManager = new StockAnalysisManager(request);
-            gridFill(stockAnaliysisManager.RefreshList());
+            stockAnaliysisManager.RefreshList();
+            gridFill(stockAnaliysisManager);
         }
 
-        private void gridFill(List<StockAnalysis> stockAnalyses)
+        private void gridFill(StockAnalysisManager analysisManager)
         {
             #region Grid
             decimal totalValue = 0;
-            decimal totalGain = 0;
-            decimal expectedGain = 0;
-            foreach (var item in stockAnalyses.OrderBy(c => c.LastTransactionDate))
+            foreach (var item in analysisManager.StockAnalyses.OrderBy(c => c.LastTransactionDate))
             {
                 var li = new ListViewItem();
                 li.Text = item.StockCode;
@@ -94,8 +93,8 @@ namespace StockManager
                 }
 
                 decimal? curValue = null;
-                if (Session.Entities.CurrentStocks.Any(c => c.StockCode == item.StockCode && c.CreatedDate <= request.Period.EndDate))
-                    curValue = Session.Entities.CurrentStocks.Where(c => c.CreatedDate <= request.Period.EndDate).OrderByDescending(c => c.CreatedDate).FirstOrDefault(c => c.StockCode == item.StockCode).Price;
+                if (Session.Entities.GetCurrentStocks().Any(c => c.StockCode == item.StockCode && c.CreatedDate <= request.Period.EndDate))
+                    curValue = Session.Entities.GetCurrentStocks().Where(c => c.CreatedDate <= request.Period.EndDate).OrderByDescending(c => c.CreatedDate).FirstOrDefault(c => c.StockCode == item.StockCode).Price;
                 decimal value = item.TotalAmount == 0 ? (item.TotalSellAmount * item.SellPrice - item.TotalConst) : (item.TotalBuyAmount * (curValue.HasValue ? curValue.Value : item.BuyPrice));
                 if (item.TotalAmount > 0)
                     totalValue += value;
@@ -121,10 +120,6 @@ namespace StockManager
                     Name = "Gain",
                     Text = gain == 0 ? "" : gain.ToMoneyStirng(2)
                 });
-                if (item.TotalAmount > 0)
-                    expectedGain += gain;
-                else
-                    totalGain += gain;
                 li.SubItems.Add(new ListViewItem.ListViewSubItem()
                 {
                     Name = "Date",
@@ -138,7 +133,7 @@ namespace StockManager
 
                 lvList.Items.Add(li);
             }
-            lblInformations.Text = $"[{Translate.GetMessage("total-gain")}: {totalGain.ToMoneyStirng(2)}, {Translate.GetMessage("total-const")}: {stockAnalyses.Sum(c => c.TotalConst).ToMoneyStirng(2)}, {Translate.GetMessage("available-value")}: {totalValue.ToMoneyStirng(2)}, {Translate.GetMessage("expected-gain")}: {expectedGain.ToMoneyStirng(2)}]";
+            lblInformations.Text = $"[{Translate.GetMessage("total-gain")}: {analysisManager.TotalGain.ToMoneyStirng(2)}, {Translate.GetMessage("total-const")}: {analysisManager.TotalConst.ToMoneyStirng(2)}, {Translate.GetMessage("available-value")}: {totalValue.ToMoneyStirng(2)}, {Translate.GetMessage("expected-gain")}: {analysisManager.ExpectedGain.ToMoneyStirng(2)}]";
             #endregion
         }
     }

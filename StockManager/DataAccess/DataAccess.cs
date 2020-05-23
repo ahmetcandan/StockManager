@@ -16,15 +16,15 @@ namespace StockManager
             read();
         }
 
-        public List<Account> Accounts { get; set; }
-        public List<AccountTransaction> AccountTransactions { get; set; }
-        public List<Stock> Stocks { get; set; }
-        public List<StockTransaction> StockTransactions { get; set; }
-        public List<User> Users { get; set; }
-        public Setting Setting { get; set; }
-        public List<StockCurrent> CurrentStocks { get; set; }
-        public List<Period> Periods { get; set; }
-        public List<TranslateMessage> TranslateMessages { get; set; }
+        private List<Account> Accounts { get; set; }
+        private List<AccountTransaction> AccountTransactions { get; set; }
+        private List<Stock> Stocks { get; set; }
+        private List<StockTransaction> StockTransactions { get; set; }
+        private List<User> Users { get; set; }
+        private Setting Setting { get; set; }
+        private List<StockCurrent> CurrentStocks { get; set; }
+        private List<Period> Periods { get; set; }
+        private List<TranslateMessage> TranslateMessages { get; set; }
 
         public int GenerateAccontTransactionId()
         {
@@ -59,6 +59,16 @@ namespace StockManager
             return TranslateMessages.Select(c => c.LanguageCode).Distinct().ToList();
         }
 
+        public List<StockCurrent> GetCurrentStocks()
+        {
+            return CurrentStocks;
+        }
+
+        public Setting GetSetting()
+        {
+            return Setting;
+        }
+
         public StockTransaction GetStockTransaction(int stockTransactionId)
         {
             if (StockTransactions.Any(c => c.StockTransactionId == stockTransactionId))
@@ -90,11 +100,21 @@ namespace StockManager
             return null;
         }
 
+        public List<TranslateMessage> GetTranslateMessages()
+        {
+            return TranslateMessages;
+        }
+
+        public List<Period> GetPeriods()
+        {
+            return Periods.Where(c => c.AccountId == Session.DefaultAccount.AccountId).ToList();
+        }
+
         public TranslateMessage GetMessage(string code)
         {
-            if (TranslateMessages.Any(c => c.Code == code && c.LanguageCode == Session.Entities.Setting.LanguageCode))
+            if (TranslateMessages.Any(c => c.Code == code && c.LanguageCode == Session.Entities.GetSetting().LanguageCode))
             {
-                return TranslateMessages.First(c => c.Code == code && c.LanguageCode == Session.Entities.Setting.LanguageCode);
+                return TranslateMessages.First(c => c.Code == code && c.LanguageCode == Session.Entities.GetSetting().LanguageCode);
             }
             return null;
         }
@@ -167,6 +187,11 @@ namespace StockManager
                 return Stocks.First(c => c.StockCode == stockCode);
             }
             return null;
+        }
+
+        public List<Stock> GetStocks()
+        {
+            return Stocks;
         }
 
         public Account GetAccount(int accountId)
@@ -320,7 +345,7 @@ namespace StockManager
             }
             else
             {
-                if (Session.Entities.TranslateMessages.Any(c => c.Code == message.Code && c.LanguageCode == message.LanguageCode))
+                if (Session.Entities.GetTranslateMessages().Any(c => c.Code == message.Code && c.LanguageCode == message.LanguageCode))
                     throw new Exception(Translate.GetMessage("dublicate-message"));
                 TranslateMessages.Add(message);
                 return message;
@@ -363,6 +388,13 @@ namespace StockManager
             var message = GetMessage(code);
             if (message != null)
                 TranslateMessages.Remove(message);
+        }
+
+        public void DeleteAccount(int accountId)
+        {
+            var account = GetAccount(accountId);
+            if (account != null)
+                Accounts.Remove(account);
         }
 
         public void Save()
