@@ -130,7 +130,7 @@ namespace StockManager
         private void cbPeriod_Fill()
         {
             cbPeriod.Items.Clear();
-            foreach (var period in Session.Entities.GetPeriods().OrderByDescending(c => c.StartDate))
+            foreach (var period in Session.Entities.GetPeriods().Where(c => c.StartDate <= DateTime.Now).OrderByDescending(c => c.StartDate))
             {
                 cbPeriod.Items.Add(new ComboboxItem
                 {

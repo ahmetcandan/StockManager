@@ -93,8 +93,8 @@ namespace StockManager
                 }
 
                 decimal? curValue = null;
-                if (Session.Entities.GetCurrentStocks().Any(c => c.StockCode == item.StockCode && c.CreatedDate <= request.Period.EndDate))
-                    curValue = Session.Entities.GetCurrentStocks().Where(c => c.CreatedDate <= request.Period.EndDate).OrderByDescending(c => c.CreatedDate).FirstOrDefault(c => c.StockCode == item.StockCode).Price;
+                if (Session.Entities.GetCurrentStocks().Any(c => c.StockCode == item.StockCode && c.UpdateDate <= request.Period.EndDate))
+                    curValue = Session.Entities.GetCurrentStocks().Where(c => c.UpdateDate <= request.Period.EndDate).OrderByDescending(c => c.UpdateDate).FirstOrDefault(c => c.StockCode == item.StockCode).Price;
                 decimal value = item.TotalAmount == 0 ? (item.TotalSellAmount * item.SellPrice - item.TotalConst) : (item.TotalBuyAmount * (curValue.HasValue ? curValue.Value : item.BuyPrice));
                 if (item.TotalAmount > 0)
                     totalValue += value;

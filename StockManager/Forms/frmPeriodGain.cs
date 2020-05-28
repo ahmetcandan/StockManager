@@ -1,6 +1,6 @@
 ﻿using StockManager.Business;
 using System;
-using System.ComponentModel;
+using System.Collections.Generic;
 using System.Data;
 using System.Drawing;
 using System.Linq;
@@ -17,37 +17,58 @@ namespace StockManager
             setTranslateMessage();
         }
 
+        List<Series> series = new List<Series>();
+
         private void setTranslateMessage()
         {
             Text = Translate.GetMessage("period-gain-list");
+            cbConst.Text = Translate.GetMessage("const");
+            cbExceptedGain.Text = Translate.GetMessage("expected-gain");
+            cbGain.Text = Translate.GetMessage("gain");
         }
 
         private void frmStockAnalysis_Load(object sender, EventArgs e)
         {
-            int i = 0;
             var chartType = SeriesChartType.Spline;
 
             chartPeriodGain.Series.Clear();
             Series totalGainSeries = new Series();
             Series totalConstSeries = new Series();
+            Series expectedGainSeries = new Series();
+
             totalConstSeries.ChartType = chartType;
-            totalConstSeries.MarkerBorderColor = Color.Crimson;
-            totalConstSeries.MarkerColor = Color.Crimson;
+            totalConstSeries.MarkerBorderColor = Color.MediumVioletRed;
+            totalConstSeries.MarkerColor = Color.MediumVioletRed;
+            totalConstSeries.Color = Color.Crimson;
             totalConstSeries.MarkerSize = 5;
             totalConstSeries.MarkerStep = 1;
             totalConstSeries.MarkerBorderWidth = 5;
             totalConstSeries.BorderWidth = 3;
             totalConstSeries.MarkerStyle = MarkerStyle.Circle;
             totalConstSeries.Name = Translate.GetMessage("const");
+
             totalGainSeries.ChartType = chartType;
-            totalGainSeries.MarkerBorderColor = Color.RoyalBlue;
-            totalGainSeries.MarkerColor = Color.RoyalBlue;
+            totalGainSeries.MarkerBorderColor = Color.SteelBlue;
+            totalGainSeries.MarkerColor = Color.SteelBlue;
+            totalGainSeries.Color = Color.RoyalBlue;
             totalGainSeries.MarkerSize = 5;
             totalGainSeries.BorderWidth = 3;
             totalGainSeries.MarkerStep = 1;
             totalGainSeries.MarkerBorderWidth = 5;
             totalGainSeries.MarkerStyle = MarkerStyle.Circle;
             totalGainSeries.Name = Translate.GetMessage("gain");
+
+            expectedGainSeries.ChartType = chartType;
+            expectedGainSeries.MarkerBorderColor = Color.Goldenrod;
+            expectedGainSeries.MarkerColor = Color.Goldenrod;
+            expectedGainSeries.Color = Color.Gold;
+            expectedGainSeries.MarkerSize = 5;
+            expectedGainSeries.BorderWidth = 3;
+            expectedGainSeries.MarkerStep = 1;
+            expectedGainSeries.MarkerBorderWidth = 5;
+            expectedGainSeries.MarkerStyle = MarkerStyle.Circle;
+            expectedGainSeries.Name = Translate.GetMessage("expected-gain");
+
             foreach (var period in Session.Entities.GetPeriods().Where(c => !c.IsPublic && c.StartDate < DateTime.Now))
             {
                 StockAnalysisManager analysisManager = new StockAnalysisManager(new StockAnalysisRequest
@@ -55,12 +76,33 @@ namespace StockManager
                     Period = period
                 });
                 analysisManager.RefreshList();
-                totalGainSeries.Points.AddXY(period.PeriodName, analysisManager.TotalGain);
-                totalConstSeries.Points.AddXY(period.PeriodName, analysisManager.TotalConst);
-                i++;
+                DataPoint pointTotalAgain = new DataPoint();
+                pointTotalAgain.SetValueXY(period.PeriodName, analysisManager.TotalGain);
+                pointTotalAgain.ToolTip = $"{Session.DefaultAccount.MoneyType.MoneyTypeToString()} {analysisManager.TotalGain.ToMoneyStirng(2)}";
+                totalGainSeries.Points.Add(pointTotalAgain);
+                DataPoint pointTotalConst = new DataPoint();
+                pointTotalConst.SetValueXY(period.PeriodName, analysisManager.TotalConst);
+                pointTotalConst.ToolTip = $"{Session.DefaultAccount.MoneyType.MoneyTypeToString()} {analysisManager.TotalConst.ToMoneyStirng(2)}";
+                totalConstSeries.Points.Add(pointTotalConst);
+                DataPoint pointExceptedGain = new DataPoint();
+                pointExceptedGain.SetValueXY(period.PeriodName, analysisManager.ExpectedGain);
+                pointExceptedGain.ToolTip = $"{Session.DefaultAccount.MoneyType.MoneyTypeToString()} {analysisManager.ExpectedGain.ToMoneyStirng(2)}";
+                expectedGainSeries.Points.Add(pointExceptedGain);
             }
             chartPeriodGain.Series.Add(totalGainSeries);
             chartPeriodGain.Series.Add(totalConstSeries);
+            series.Add(totalGainSeries);
+            series.Add(totalConstSeries);
+            series.Add(expectedGainSeries);
+        }
+
+        private void cb_CheckedChanged(object sender, EventArgs e)
+        {
+            var cb = ((CheckBox)sender);
+            if (!cb.Checked && chartPeriodGain.Series.Any(c => c.Name == cb.Text))
+                chartPeriodGain.Series.Remove(series.FirstOrDefault(c => c.Name == cb.Text));
+            else if (cb.Checked && !chartPeriodGain.Series.Any(c => c.Name == cb.Text))
+                chartPeriodGain.Series.Add(series.FirstOrDefault(c => c.Name == cb.Text));
         }
     }
 }
