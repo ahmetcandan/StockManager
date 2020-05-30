@@ -95,7 +95,10 @@ namespace StockManager
 
         private void addToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            frmTranslateMessage frm = new frmTranslateMessage();
+            string languageCode = string.Empty;
+            if (!string.IsNullOrEmpty(cbLanguage.Text))
+                languageCode = ((ComboboxItem)cbLanguage.SelectedItem).Code;
+            frmTranslateMessage frm = new frmTranslateMessage(languageCode);
             frm.ShowDialog();
             refreshList();
         }

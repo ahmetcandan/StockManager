@@ -19,8 +19,8 @@ namespace StockManager
         {
             InitializeComponent();
             setTranslateMessage();
-            txtLanguageCode.Text = languageCode;
             message = new TranslateMessage();
+            message.LanguageCode = languageCode;
         }
 
         private void setTranslateMessage()
