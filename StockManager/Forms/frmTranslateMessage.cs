@@ -7,14 +7,20 @@ namespace StockManager
     {
         TranslateMessage message;
 
-        public frmTranslateMessage(string code = "")
+        public frmTranslateMessage(string languageCode, string code)
         {
             InitializeComponent();
             setTranslateMessage();
-            if (string.IsNullOrEmpty(code))
-                message = new TranslateMessage();
-            else
-                message = Session.Entities.GetMessage(code);
+            txtLanguageCode.Text = languageCode;
+            message = Session.Entities.GetMessage(code, languageCode);
+        }
+
+        public frmTranslateMessage(string languageCode = "")
+        {
+            InitializeComponent();
+            setTranslateMessage();
+            txtLanguageCode.Text = languageCode;
+            message = new TranslateMessage();
         }
 
         private void setTranslateMessage()

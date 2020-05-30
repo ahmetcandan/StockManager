@@ -81,7 +81,8 @@ namespace StockManager
             if (lvList.SelectedItems.Count > 0)
             {
                 string code = lvList.SelectedItems[0].Text;
-                frmTranslateMessage frm = new frmTranslateMessage(code);
+                string languageCode = ((ComboboxItem)cbLanguage.SelectedItem).Code;
+                frmTranslateMessage frm = new frmTranslateMessage(languageCode, code);
                 frm.ShowDialog();
                 refreshList();
             }

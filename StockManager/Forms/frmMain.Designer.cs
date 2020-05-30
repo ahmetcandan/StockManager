@@ -50,6 +50,7 @@
             this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
             this.changeAccountToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.periodListToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.periodtransToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
             this.translateMessagesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.addcurrentstockpriceToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -65,9 +66,8 @@
             this.label4 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
             this.cbPeriod = new System.Windows.Forms.ComboBox();
-            this.cbLanguage = new System.Windows.Forms.ComboBox();
             this.label2 = new System.Windows.Forms.Label();
-            this.periodtransToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.cbLanguage = new System.Windows.Forms.ComboBox();
             this.listMenu.SuspendLayout();
             this.menuNotify.SuspendLayout();
             this.SuspendLayout();
@@ -96,10 +96,9 @@
             this.lvList.GridLines = true;
             this.lvList.HideSelection = false;
             this.lvList.LabelEdit = true;
-            this.lvList.Location = new System.Drawing.Point(0, 40);
-            this.lvList.Margin = new System.Windows.Forms.Padding(4);
+            this.lvList.Location = new System.Drawing.Point(0, 32);
             this.lvList.Name = "lvList";
-            this.lvList.Size = new System.Drawing.Size(1360, 414);
+            this.lvList.Size = new System.Drawing.Size(1021, 337);
             this.lvList.TabIndex = 2;
             this.lvList.UseCompatibleStateImageBehavior = false;
             this.lvList.View = System.Windows.Forms.View.Details;
@@ -175,14 +174,14 @@
             this.addcurrentstockpriceToolStripMenuItem,
             this.getcurrentvaluesToolStripMenuItem});
             this.listMenu.Name = "listMenu";
-            this.listMenu.Size = new System.Drawing.Size(344, 358);
+            this.listMenu.Size = new System.Drawing.Size(293, 286);
             this.listMenu.Opening += new System.ComponentModel.CancelEventHandler(this.listMenu_Opening);
             // 
             // editToolStripMenuItem
             // 
             this.editToolStripMenuItem.Font = new System.Drawing.Font("Hermit", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.editToolStripMenuItem.Name = "editToolStripMenuItem";
-            this.editToolStripMenuItem.Size = new System.Drawing.Size(343, 28);
+            this.editToolStripMenuItem.Size = new System.Drawing.Size(292, 24);
             this.editToolStripMenuItem.Text = "edit";
             this.editToolStripMenuItem.Click += new System.EventHandler(this.editToolStripMenuItem_Click);
             // 
@@ -191,21 +190,21 @@
             this.refreshToolStripMenuItem.Font = new System.Drawing.Font("Hermit", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.refreshToolStripMenuItem.Name = "refreshToolStripMenuItem";
             this.refreshToolStripMenuItem.ShortcutKeys = System.Windows.Forms.Keys.F5;
-            this.refreshToolStripMenuItem.Size = new System.Drawing.Size(343, 28);
+            this.refreshToolStripMenuItem.Size = new System.Drawing.Size(292, 24);
             this.refreshToolStripMenuItem.Text = "refresh";
             this.refreshToolStripMenuItem.Click += new System.EventHandler(this.refreshToolStripMenuItem_Click);
             // 
             // toolStripSeparator1
             // 
             this.toolStripSeparator1.Name = "toolStripSeparator1";
-            this.toolStripSeparator1.Size = new System.Drawing.Size(340, 6);
+            this.toolStripSeparator1.Size = new System.Drawing.Size(289, 6);
             // 
             // addToolStripMenuItem
             // 
             this.addToolStripMenuItem.Font = new System.Drawing.Font("Hermit", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.addToolStripMenuItem.Name = "addToolStripMenuItem";
             this.addToolStripMenuItem.ShortcutKeys = System.Windows.Forms.Keys.F2;
-            this.addToolStripMenuItem.Size = new System.Drawing.Size(343, 28);
+            this.addToolStripMenuItem.Size = new System.Drawing.Size(292, 24);
             this.addToolStripMenuItem.Text = "add";
             this.addToolStripMenuItem.Click += new System.EventHandler(this.addToolStripMenuItem_Click);
             // 
@@ -214,7 +213,7 @@
             this.deleteToolStripMenuItem.Font = new System.Drawing.Font("Hermit", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.deleteToolStripMenuItem.Name = "deleteToolStripMenuItem";
             this.deleteToolStripMenuItem.ShortcutKeys = System.Windows.Forms.Keys.Delete;
-            this.deleteToolStripMenuItem.Size = new System.Drawing.Size(343, 28);
+            this.deleteToolStripMenuItem.Size = new System.Drawing.Size(292, 24);
             this.deleteToolStripMenuItem.Text = "delete";
             this.deleteToolStripMenuItem.Click += new System.EventHandler(this.deleteToolStripMenuItem_Click);
             // 
@@ -223,20 +222,20 @@
             this.analysisToolStripMenuItem.Font = new System.Drawing.Font("Hermit", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.analysisToolStripMenuItem.Name = "analysisToolStripMenuItem";
             this.analysisToolStripMenuItem.ShortcutKeys = System.Windows.Forms.Keys.F3;
-            this.analysisToolStripMenuItem.Size = new System.Drawing.Size(343, 28);
+            this.analysisToolStripMenuItem.Size = new System.Drawing.Size(292, 24);
             this.analysisToolStripMenuItem.Text = "analysis";
             this.analysisToolStripMenuItem.Click += new System.EventHandler(this.analysisToolStripMenuItem_Click);
             // 
             // toolStripSeparator2
             // 
             this.toolStripSeparator2.Name = "toolStripSeparator2";
-            this.toolStripSeparator2.Size = new System.Drawing.Size(340, 6);
+            this.toolStripSeparator2.Size = new System.Drawing.Size(289, 6);
             // 
             // changeAccountToolStripMenuItem
             // 
             this.changeAccountToolStripMenuItem.Font = new System.Drawing.Font("Hermit", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.changeAccountToolStripMenuItem.Name = "changeAccountToolStripMenuItem";
-            this.changeAccountToolStripMenuItem.Size = new System.Drawing.Size(343, 28);
+            this.changeAccountToolStripMenuItem.Size = new System.Drawing.Size(292, 24);
             this.changeAccountToolStripMenuItem.Text = "change-account";
             this.changeAccountToolStripMenuItem.Click += new System.EventHandler(this.changeAccountToolStripMenuItem_Click);
             // 
@@ -244,20 +243,28 @@
             // 
             this.periodListToolStripMenuItem.Font = new System.Drawing.Font("Hermit", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.periodListToolStripMenuItem.Name = "periodListToolStripMenuItem";
-            this.periodListToolStripMenuItem.Size = new System.Drawing.Size(343, 28);
+            this.periodListToolStripMenuItem.Size = new System.Drawing.Size(292, 24);
             this.periodListToolStripMenuItem.Text = "period-list";
             this.periodListToolStripMenuItem.Click += new System.EventHandler(this.periodListToolStripMenuItem_Click);
+            // 
+            // periodtransToolStripMenuItem
+            // 
+            this.periodtransToolStripMenuItem.Font = new System.Drawing.Font("Hermit", 10F);
+            this.periodtransToolStripMenuItem.Name = "periodtransToolStripMenuItem";
+            this.periodtransToolStripMenuItem.Size = new System.Drawing.Size(292, 24);
+            this.periodtransToolStripMenuItem.Text = "period-transaction-chart";
+            this.periodtransToolStripMenuItem.Click += new System.EventHandler(this.periodtransToolStripMenuItem_Click);
             // 
             // toolStripSeparator3
             // 
             this.toolStripSeparator3.Name = "toolStripSeparator3";
-            this.toolStripSeparator3.Size = new System.Drawing.Size(340, 6);
+            this.toolStripSeparator3.Size = new System.Drawing.Size(289, 6);
             // 
             // translateMessagesToolStripMenuItem
             // 
             this.translateMessagesToolStripMenuItem.Font = new System.Drawing.Font("Hermit", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.translateMessagesToolStripMenuItem.Name = "translateMessagesToolStripMenuItem";
-            this.translateMessagesToolStripMenuItem.Size = new System.Drawing.Size(343, 28);
+            this.translateMessagesToolStripMenuItem.Size = new System.Drawing.Size(292, 24);
             this.translateMessagesToolStripMenuItem.Text = "translate-message";
             this.translateMessagesToolStripMenuItem.Click += new System.EventHandler(this.translateMessagesToolStripMenuItem_Click);
             // 
@@ -265,7 +272,7 @@
             // 
             this.addcurrentstockpriceToolStripMenuItem.Font = new System.Drawing.Font("Hermit", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.addcurrentstockpriceToolStripMenuItem.Name = "addcurrentstockpriceToolStripMenuItem";
-            this.addcurrentstockpriceToolStripMenuItem.Size = new System.Drawing.Size(343, 28);
+            this.addcurrentstockpriceToolStripMenuItem.Size = new System.Drawing.Size(292, 24);
             this.addcurrentstockpriceToolStripMenuItem.Text = "add-current-stock-price";
             this.addcurrentstockpriceToolStripMenuItem.Click += new System.EventHandler(this.addcurrentstockpriceToolStripMenuItem_Click);
             // 
@@ -273,7 +280,7 @@
             // 
             this.getcurrentvaluesToolStripMenuItem.Font = new System.Drawing.Font("Hermit", 10F);
             this.getcurrentvaluesToolStripMenuItem.Name = "getcurrentvaluesToolStripMenuItem";
-            this.getcurrentvaluesToolStripMenuItem.Size = new System.Drawing.Size(343, 28);
+            this.getcurrentvaluesToolStripMenuItem.Size = new System.Drawing.Size(292, 24);
             this.getcurrentvaluesToolStripMenuItem.Text = "get-current-values";
             this.getcurrentvaluesToolStripMenuItem.Click += new System.EventHandler(this.getcurrentvaluesToolStripMenuItem_Click);
             // 
@@ -283,12 +290,12 @@
             this.menuNotify.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.exitToolStripMenuItem});
             this.menuNotify.Name = "menuNotify";
-            this.menuNotify.Size = new System.Drawing.Size(103, 28);
+            this.menuNotify.Size = new System.Drawing.Size(94, 26);
             // 
             // exitToolStripMenuItem
             // 
             this.exitToolStripMenuItem.Name = "exitToolStripMenuItem";
-            this.exitToolStripMenuItem.Size = new System.Drawing.Size(102, 24);
+            this.exitToolStripMenuItem.Size = new System.Drawing.Size(93, 22);
             this.exitToolStripMenuItem.Text = "exit";
             this.exitToolStripMenuItem.Click += new System.EventHandler(this.exitToolStripMenuItem_Click);
             // 
@@ -311,10 +318,9 @@
             this.label1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.label1.Font = new System.Drawing.Font("Hermit", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label1.ForeColor = System.Drawing.Color.PaleGreen;
-            this.label1.Location = new System.Drawing.Point(0, 454);
-            this.label1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label1.Location = new System.Drawing.Point(0, 369);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(1360, 30);
+            this.label1.Size = new System.Drawing.Size(1020, 25);
             this.label1.TabIndex = 6;
             this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
@@ -327,10 +333,9 @@
             this.lblInformations.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.lblInformations.Font = new System.Drawing.Font("Hermit", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblInformations.ForeColor = System.Drawing.Color.PaleGreen;
-            this.lblInformations.Location = new System.Drawing.Point(0, 454);
-            this.lblInformations.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.lblInformations.Location = new System.Drawing.Point(0, 369);
             this.lblInformations.Name = "lblInformations";
-            this.lblInformations.Size = new System.Drawing.Size(133, 26);
+            this.lblInformations.Size = new System.Drawing.Size(110, 22);
             this.lblInformations.TabIndex = 7;
             this.lblInformations.Text = "information";
             this.lblInformations.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
@@ -345,10 +350,9 @@
             this.lblInformation2.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.lblInformation2.Font = new System.Drawing.Font("Hermit", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblInformation2.ForeColor = System.Drawing.Color.PaleGreen;
-            this.lblInformation2.Location = new System.Drawing.Point(0, 454);
-            this.lblInformation2.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.lblInformation2.Location = new System.Drawing.Point(0, 369);
             this.lblInformation2.Name = "lblInformation2";
-            this.lblInformation2.Size = new System.Drawing.Size(133, 26);
+            this.lblInformation2.Size = new System.Drawing.Size(110, 22);
             this.lblInformation2.TabIndex = 8;
             this.lblInformation2.Text = "information";
             this.lblInformation2.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
@@ -360,10 +364,9 @@
             this.cbStock.Font = new System.Drawing.Font("Hermit", 10F);
             this.cbStock.ForeColor = System.Drawing.Color.Lime;
             this.cbStock.FormattingEnabled = true;
-            this.cbStock.Location = new System.Drawing.Point(176, 3);
-            this.cbStock.Margin = new System.Windows.Forms.Padding(4);
+            this.cbStock.Location = new System.Drawing.Point(132, 2);
             this.cbStock.Name = "cbStock";
-            this.cbStock.Size = new System.Drawing.Size(248, 32);
+            this.cbStock.Size = new System.Drawing.Size(187, 26);
             this.cbStock.TabIndex = 0;
             this.cbStock.SelectedIndexChanged += new System.EventHandler(this.cbStock_SelectedIndexChanged);
             // 
@@ -373,10 +376,9 @@
             this.label4.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.label4.Font = new System.Drawing.Font("Hermit", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label4.ForeColor = System.Drawing.Color.PaleGreen;
-            this.label4.Location = new System.Drawing.Point(0, 3);
-            this.label4.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label4.Location = new System.Drawing.Point(0, 2);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(168, 36);
+            this.label4.Size = new System.Drawing.Size(126, 30);
             this.label4.TabIndex = 10;
             this.label4.Text = "stock";
             this.label4.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
@@ -387,10 +389,9 @@
             this.label5.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.label5.Font = new System.Drawing.Font("Hermit", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label5.ForeColor = System.Drawing.Color.PaleGreen;
-            this.label5.Location = new System.Drawing.Point(430, 3);
-            this.label5.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label5.Location = new System.Drawing.Point(322, 2);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(174, 36);
+            this.label5.Size = new System.Drawing.Size(131, 30);
             this.label5.TabIndex = 12;
             this.label5.Text = "period";
             this.label5.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
@@ -402,12 +403,25 @@
             this.cbPeriod.Font = new System.Drawing.Font("Hermit", 10F);
             this.cbPeriod.ForeColor = System.Drawing.Color.Lime;
             this.cbPeriod.FormattingEnabled = true;
-            this.cbPeriod.Location = new System.Drawing.Point(612, 3);
-            this.cbPeriod.Margin = new System.Windows.Forms.Padding(4);
+            this.cbPeriod.Location = new System.Drawing.Point(459, 2);
             this.cbPeriod.Name = "cbPeriod";
-            this.cbPeriod.Size = new System.Drawing.Size(248, 32);
+            this.cbPeriod.Size = new System.Drawing.Size(187, 26);
             this.cbPeriod.TabIndex = 1;
             this.cbPeriod.SelectedIndexChanged += new System.EventHandler(this.cbPeriod_SelectedIndexChanged);
+            // 
+            // label2
+            // 
+            this.label2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.label2.BackColor = System.Drawing.Color.DarkSlateGray;
+            this.label2.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.label2.Font = new System.Drawing.Font("Hermit", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label2.ForeColor = System.Drawing.Color.PaleGreen;
+            this.label2.Location = new System.Drawing.Point(790, 2);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(129, 30);
+            this.label2.TabIndex = 14;
+            this.label2.Text = "language";
+            this.label2.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
             // cbLanguage
             // 
@@ -417,42 +431,18 @@
             this.cbLanguage.Font = new System.Drawing.Font("Hermit", 10F);
             this.cbLanguage.ForeColor = System.Drawing.Color.Lime;
             this.cbLanguage.FormattingEnabled = true;
-            this.cbLanguage.Location = new System.Drawing.Point(1232, 3);
-            this.cbLanguage.Margin = new System.Windows.Forms.Padding(4);
+            this.cbLanguage.Location = new System.Drawing.Point(925, 2);
             this.cbLanguage.Name = "cbLanguage";
-            this.cbLanguage.Size = new System.Drawing.Size(128, 32);
-            this.cbLanguage.TabIndex = 13;
+            this.cbLanguage.Size = new System.Drawing.Size(96, 26);
+            this.cbLanguage.TabIndex = 15;
             this.cbLanguage.SelectedIndexChanged += new System.EventHandler(this.cbLanguage_SelectedIndexChanged);
-            // 
-            // label2
-            // 
-            this.label2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.label2.BackColor = System.Drawing.Color.DarkSlateGray;
-            this.label2.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.label2.Font = new System.Drawing.Font("Hermit", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.ForeColor = System.Drawing.Color.PaleGreen;
-            this.label2.Location = new System.Drawing.Point(1053, 3);
-            this.label2.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(171, 36);
-            this.label2.TabIndex = 14;
-            this.label2.Text = "language";
-            this.label2.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            // 
-            // periodtransToolStripMenuItem
-            // 
-            this.periodtransToolStripMenuItem.Font = new System.Drawing.Font("Hermit", 10F);
-            this.periodtransToolStripMenuItem.Name = "periodtransToolStripMenuItem";
-            this.periodtransToolStripMenuItem.Size = new System.Drawing.Size(343, 28);
-            this.periodtransToolStripMenuItem.Text = "period-transaction-chart";
-            this.periodtransToolStripMenuItem.Click += new System.EventHandler(this.periodtransToolStripMenuItem_Click);
             // 
             // frmMain
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            this.ClientSize = new System.Drawing.Size(1361, 484);
+            this.ClientSize = new System.Drawing.Size(1021, 393);
             this.Controls.Add(this.cbLanguage);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.cbPeriod);
@@ -464,8 +454,7 @@
             this.Controls.Add(this.label1);
             this.Controls.Add(this.lvList);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
-            this.Margin = new System.Windows.Forms.Padding(4);
-            this.MinimumSize = new System.Drawing.Size(1025, 400);
+            this.MinimumSize = new System.Drawing.Size(773, 332);
             this.Name = "frmMain";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "stock-trancing";
@@ -514,11 +503,11 @@
         private System.Windows.Forms.ComboBox cbPeriod;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator3;
         private System.Windows.Forms.ToolStripMenuItem translateMessagesToolStripMenuItem;
-        private System.Windows.Forms.ComboBox cbLanguage;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.ToolStripMenuItem addcurrentstockpriceToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem getcurrentvaluesToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem periodtransToolStripMenuItem;
+        private System.Windows.Forms.ComboBox cbLanguage;
     }
 }
 

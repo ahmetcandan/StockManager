@@ -110,12 +110,12 @@ namespace StockManager
             return Periods.Where(c => c.AccountId == Session.DefaultAccount.AccountId).ToList();
         }
 
-        public TranslateMessage GetMessage(string code)
+        public TranslateMessage GetMessage(string code, string languageCode = "")
         {
-            if (TranslateMessages.Any(c => c.Code == code && c.LanguageCode == Session.Entities.GetSetting().LanguageCode))
-            {
-                return TranslateMessages.First(c => c.Code == code && c.LanguageCode == Session.Entities.GetSetting().LanguageCode);
-            }
+            if (string.IsNullOrEmpty(languageCode))
+                languageCode = Session.Entities.GetSetting().LanguageCode;
+            if (TranslateMessages.Any(c => c.Code == code && c.LanguageCode == languageCode))
+                return TranslateMessages.First(c => c.Code == code && c.LanguageCode == languageCode);
             return null;
         }
 

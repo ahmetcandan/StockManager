@@ -49,12 +49,11 @@
             this.btnSave.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnSave.Font = new System.Drawing.Font("Hermit", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnSave.ForeColor = System.Drawing.Color.PaleGreen;
-            this.btnSave.Location = new System.Drawing.Point(329, 191);
-            this.btnSave.Margin = new System.Windows.Forms.Padding(4);
+            this.btnSave.Location = new System.Drawing.Point(247, 155);
             this.btnSave.Name = "btnSave";
-            this.btnSave.Size = new System.Drawing.Size(159, 43);
+            this.btnSave.Size = new System.Drawing.Size(119, 35);
             this.btnSave.TabIndex = 4;
-            this.btnSave.Text = "save";// Translate.GetMessage("save");
+            this.btnSave.Text = "save";
             this.btnSave.UseVisualStyleBackColor = false;
             this.btnSave.Click += new System.EventHandler(this.btnSave_Click);
             // 
@@ -63,11 +62,10 @@
             this.txtLanguageCode.BackColor = System.Drawing.Color.Black;
             this.txtLanguageCode.Font = new System.Drawing.Font("Hermit", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtLanguageCode.ForeColor = System.Drawing.Color.Lime;
-            this.txtLanguageCode.Location = new System.Drawing.Point(237, 11);
-            this.txtLanguageCode.Margin = new System.Windows.Forms.Padding(4);
-            this.txtLanguageCode.MaxLength = 30;
+            this.txtLanguageCode.Location = new System.Drawing.Point(178, 9);
+            this.txtLanguageCode.MaxLength = 5;
             this.txtLanguageCode.Name = "txtLanguageCode";
-            this.txtLanguageCode.Size = new System.Drawing.Size(249, 36);
+            this.txtLanguageCode.Size = new System.Drawing.Size(188, 26);
             this.txtLanguageCode.TabIndex = 0;
             // 
             // label1
@@ -76,12 +74,11 @@
             this.label1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.label1.Font = new System.Drawing.Font("Hermit", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label1.ForeColor = System.Drawing.Color.PaleGreen;
-            this.label1.Location = new System.Drawing.Point(16, 11);
-            this.label1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label1.Location = new System.Drawing.Point(12, 9);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(213, 36);
+            this.label1.Size = new System.Drawing.Size(160, 30);
             this.label1.TabIndex = 2;
-            this.label1.Text = "language-code";// $"{Translate.GetMessage("language-code")} : ";
+            this.label1.Text = "language-code";
             this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
             // errorProvider1
@@ -96,12 +93,11 @@
             this.btnCancel.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnCancel.Font = new System.Drawing.Font("Hermit", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnCancel.ForeColor = System.Drawing.Color.Pink;
-            this.btnCancel.Location = new System.Drawing.Point(162, 191);
-            this.btnCancel.Margin = new System.Windows.Forms.Padding(4);
+            this.btnCancel.Location = new System.Drawing.Point(122, 155);
             this.btnCancel.Name = "btnCancel";
-            this.btnCancel.Size = new System.Drawing.Size(159, 43);
+            this.btnCancel.Size = new System.Drawing.Size(119, 35);
             this.btnCancel.TabIndex = 5;
-            this.btnCancel.Text = "cancel";// Translate.GetMessage("cancel");
+            this.btnCancel.Text = "cancel";
             this.btnCancel.UseVisualStyleBackColor = false;
             this.btnCancel.Click += new System.EventHandler(this.btnCancel_Click);
             // 
@@ -111,12 +107,11 @@
             this.label2.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.label2.Font = new System.Drawing.Font("Hermit", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label2.ForeColor = System.Drawing.Color.PaleGreen;
-            this.label2.Location = new System.Drawing.Point(16, 55);
-            this.label2.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label2.Location = new System.Drawing.Point(12, 45);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(213, 36);
+            this.label2.Size = new System.Drawing.Size(160, 30);
             this.label2.TabIndex = 2;
-            this.label2.Text = "code";// $"{Translate.GetMessage("code")} : ";
+            this.label2.Text = "code";
             this.label2.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
             // label3
@@ -125,12 +120,11 @@
             this.label3.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.label3.Font = new System.Drawing.Font("Hermit", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label3.ForeColor = System.Drawing.Color.PaleGreen;
-            this.label3.Location = new System.Drawing.Point(16, 99);
-            this.label3.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label3.Location = new System.Drawing.Point(12, 80);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(213, 36);
+            this.label3.Size = new System.Drawing.Size(160, 30);
             this.label3.TabIndex = 2;
-            this.label3.Text = "value";// $"{Translate.GetMessage("value")} : ";
+            this.label3.Text = "value";
             this.label3.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
             // txtCode
@@ -138,11 +132,10 @@
             this.txtCode.BackColor = System.Drawing.Color.Black;
             this.txtCode.Font = new System.Drawing.Font("Hermit", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtCode.ForeColor = System.Drawing.Color.Lime;
-            this.txtCode.Location = new System.Drawing.Point(239, 55);
-            this.txtCode.Margin = new System.Windows.Forms.Padding(4);
-            this.txtCode.MaxLength = 30;
+            this.txtCode.Location = new System.Drawing.Point(179, 45);
+            this.txtCode.MaxLength = 100;
             this.txtCode.Name = "txtCode";
-            this.txtCode.Size = new System.Drawing.Size(249, 36);
+            this.txtCode.Size = new System.Drawing.Size(188, 26);
             this.txtCode.TabIndex = 1;
             // 
             // txtValue
@@ -150,22 +143,21 @@
             this.txtValue.BackColor = System.Drawing.Color.Black;
             this.txtValue.Font = new System.Drawing.Font("Hermit", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtValue.ForeColor = System.Drawing.Color.Lime;
-            this.txtValue.Location = new System.Drawing.Point(239, 99);
-            this.txtValue.Margin = new System.Windows.Forms.Padding(4);
-            this.txtValue.MaxLength = 30;
+            this.txtValue.Location = new System.Drawing.Point(179, 80);
+            this.txtValue.MaxLength = 150;
             this.txtValue.Name = "txtValue";
-            this.txtValue.Size = new System.Drawing.Size(249, 36);
+            this.txtValue.Size = new System.Drawing.Size(188, 26);
             this.txtValue.TabIndex = 2;
             // 
             // frmTranslateMessage
             // 
             this.AcceptButton = this.btnSave;
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoSize = true;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
             this.CancelButton = this.btnCancel;
-            this.ClientSize = new System.Drawing.Size(531, 249);
+            this.ClientSize = new System.Drawing.Size(398, 202);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
@@ -175,10 +167,9 @@
             this.Controls.Add(this.btnCancel);
             this.Controls.Add(this.btnSave);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
-            this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "frmTranslateMessage";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "period";// Translate.GetMessage("period");
+            this.Text = "period";
             this.Load += new System.EventHandler(this.frmTranslateMessage_Load);
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).EndInit();
             this.ResumeLayout(false);

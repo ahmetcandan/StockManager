@@ -466,6 +466,7 @@ namespace StockManager
             Session.Entities.GetSetting().LanguageCode = cbLanguage.Text;
             Session.User.LanguageCode = Session.Entities.GetSetting().LanguageCode;
             Task.Run(() => Session.SaveChanges());
+            //Session.SaveChanges();
 
             if (!first)
             {
