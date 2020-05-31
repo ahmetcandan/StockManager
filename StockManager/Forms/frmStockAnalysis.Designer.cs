@@ -60,10 +60,9 @@
             this.lblInformations.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.lblInformations.Font = new System.Drawing.Font("Hermit", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblInformations.ForeColor = System.Drawing.Color.PaleGreen;
-            this.lblInformations.Location = new System.Drawing.Point(1, 583);
-            this.lblInformations.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.lblInformations.Location = new System.Drawing.Point(1, 474);
             this.lblInformations.Name = "lblInformations";
-            this.lblInformations.Size = new System.Drawing.Size(146, 30);
+            this.lblInformations.Size = new System.Drawing.Size(110, 22);
             this.lblInformations.TabIndex = 10;
             this.lblInformations.Text = "information";
             this.lblInformations.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
@@ -78,20 +77,20 @@
             this.refreshToolStripMenuItem.Font = new System.Drawing.Font("Hermit", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.refreshToolStripMenuItem.Name = "refreshToolStripMenuItem";
             this.refreshToolStripMenuItem.ShortcutKeys = System.Windows.Forms.Keys.F5;
-            this.refreshToolStripMenuItem.Size = new System.Drawing.Size(201, 32);
+            this.refreshToolStripMenuItem.Size = new System.Drawing.Size(166, 24);
             this.refreshToolStripMenuItem.Text = "refresh";
             // 
             // toolStripSeparator1
             // 
             this.toolStripSeparator1.Name = "toolStripSeparator1";
-            this.toolStripSeparator1.Size = new System.Drawing.Size(198, 6);
+            this.toolStripSeparator1.Size = new System.Drawing.Size(163, 6);
             // 
             // deleteToolStripMenuItem
             // 
             this.deleteToolStripMenuItem.Font = new System.Drawing.Font("Hermit", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.deleteToolStripMenuItem.Name = "deleteToolStripMenuItem";
             this.deleteToolStripMenuItem.ShortcutKeys = System.Windows.Forms.Keys.Delete;
-            this.deleteToolStripMenuItem.Size = new System.Drawing.Size(201, 32);
+            this.deleteToolStripMenuItem.Size = new System.Drawing.Size(166, 24);
             this.deleteToolStripMenuItem.Text = "delete";
             // 
             // addToolStripMenuItem
@@ -99,14 +98,14 @@
             this.addToolStripMenuItem.Font = new System.Drawing.Font("Hermit", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.addToolStripMenuItem.Name = "addToolStripMenuItem";
             this.addToolStripMenuItem.ShortcutKeys = System.Windows.Forms.Keys.F2;
-            this.addToolStripMenuItem.Size = new System.Drawing.Size(201, 32);
+            this.addToolStripMenuItem.Size = new System.Drawing.Size(166, 24);
             this.addToolStripMenuItem.Text = "add";
             // 
             // editToolStripMenuItem
             // 
             this.editToolStripMenuItem.Font = new System.Drawing.Font("Hermit", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.editToolStripMenuItem.Name = "editToolStripMenuItem";
-            this.editToolStripMenuItem.Size = new System.Drawing.Size(201, 32);
+            this.editToolStripMenuItem.Size = new System.Drawing.Size(166, 24);
             this.editToolStripMenuItem.Text = "edit";
             // 
             // listMenu
@@ -119,7 +118,7 @@
             this.toolStripSeparator1,
             this.refreshToolStripMenuItem});
             this.listMenu.Name = "listMenu";
-            this.listMenu.Size = new System.Drawing.Size(202, 138);
+            this.listMenu.Size = new System.Drawing.Size(167, 106);
             // 
             // label1
             // 
@@ -129,10 +128,9 @@
             this.label1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.label1.Font = new System.Drawing.Font("Hermit", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label1.ForeColor = System.Drawing.Color.PaleGreen;
-            this.label1.Location = new System.Drawing.Point(1, 583);
-            this.label1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label1.Location = new System.Drawing.Point(1, 474);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(1688, 30);
+            this.label1.Size = new System.Drawing.Size(1266, 25);
             this.label1.TabIndex = 9;
             this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
@@ -158,13 +156,13 @@
             this.lvList.GridLines = true;
             this.lvList.HideSelection = false;
             this.lvList.LabelEdit = true;
-            this.lvList.Location = new System.Drawing.Point(1, -4);
-            this.lvList.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.lvList.Location = new System.Drawing.Point(1, -3);
             this.lvList.Name = "lvList";
-            this.lvList.Size = new System.Drawing.Size(1689, 584);
+            this.lvList.Size = new System.Drawing.Size(1268, 475);
             this.lvList.TabIndex = 8;
             this.lvList.UseCompatibleStateImageBehavior = false;
             this.lvList.View = System.Windows.Forms.View.Details;
+            this.lvList.DoubleClick += new System.EventHandler(this.lvList_DoubleClick);
             // 
             // StockCode
             // 
@@ -215,14 +213,14 @@
             // 
             // frmStockAnalysis
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1689, 614);
+            this.ClientSize = new System.Drawing.Size(1267, 499);
             this.Controls.Add(this.lblInformations);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.lvList);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
-            this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.Name = "frmStockAnalysis";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "stock-analysis";

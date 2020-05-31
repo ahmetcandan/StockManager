@@ -136,5 +136,15 @@ namespace StockManager
             lblInformations.Text = $"[{Translate.GetMessage("total-gain")}: {analysisManager.TotalGain.ToMoneyStirng(2)}, {Translate.GetMessage("total-const")}: {analysisManager.TotalConst.ToMoneyStirng(2)}, {Translate.GetMessage("available-value")}: {totalValue.ToMoneyStirng(2)}, {Translate.GetMessage("expected-gain")}: {analysisManager.ExpectedGain.ToMoneyStirng(2)}]";
             #endregion
         }
+
+        private void lvList_DoubleClick(object sender, EventArgs e)
+        {
+            if (lvList.SelectedItems.Count == 1)
+            {
+                string stockCode = lvList.SelectedItems[0].Text;
+                frmStockChart frm = new frmStockChart(stockCode);
+                frm.ShowDialog();
+            }
+        }
     }
 }
