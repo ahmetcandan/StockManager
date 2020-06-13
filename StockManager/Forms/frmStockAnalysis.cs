@@ -14,6 +14,7 @@ namespace StockManager
     {
         List<Stock> stocks = new List<Stock>();
         StockAnalysisRequest request = new StockAnalysisRequest();
+        StockAnalysisManager stockAnaliysisManager;
 
         public frmStockAnalysis(StockAnalysisRequest request)
         {
@@ -57,7 +58,7 @@ namespace StockManager
         private void frmStockAnalysis_Load(object sender, EventArgs e)
         {
             lblInformations.Text = string.Empty;
-            StockAnalysisManager stockAnaliysisManager = new StockAnalysisManager(request);
+            stockAnaliysisManager = new StockAnalysisManager(request);
             stockAnaliysisManager.RefreshList();
             gridFill(stockAnaliysisManager);
         }
@@ -69,7 +70,12 @@ namespace StockManager
             foreach (var item in analysisManager.StockAnalyses.OrderBy(c => c.LastTransactionDate))
             {
                 var li = new ListViewItem();
-                li.Text = item.StockCode;
+                li.Text = item.Guid.ToString();
+                li.SubItems.Add(new ListViewItem.ListViewSubItem()
+                {
+                    Name = "StockCode",
+                    Text = item.StockCode
+                });
                 li.SubItems.Add(new ListViewItem.ListViewSubItem()
                 {
                     Name = "Status",
@@ -141,8 +147,9 @@ namespace StockManager
         {
             if (lvList.SelectedItems.Count == 1)
             {
-                string stockCode = lvList.SelectedItems[0].Text;
-                frmStockChart frm = new frmStockChart(stockCode);
+                Guid analysesGuid = System.Guid.Parse(lvList.SelectedItems[0].Text);
+                var stockAnalysis = stockAnaliysisManager.StockAnalyses.FirstOrDefault(c => c.Guid == analysesGuid);
+                frmStockTransactions frm = new frmStockTransactions(stockAnalysis);
                 frm.ShowDialog();
             }
         }

@@ -65,6 +65,12 @@
     <Compile Include="Forms\frmCurrentStock.Designer.cs">
       <DependentUpon>frmCurrentStock.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\frmStockTransactions.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\frmStockTransactions.Designer.cs">
+      <DependentUpon>frmStockTransactions.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\frmStockChart.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -157,6 +163,9 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="Forms\frmCurrentStock.resx">
       <DependentUpon>frmCurrentStock.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\frmStockTransactions.resx">
+      <DependentUpon>frmStockTransactions.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\frmStockChart.resx">
       <DependentUpon>frmStockChart.cs</DependentUpon>

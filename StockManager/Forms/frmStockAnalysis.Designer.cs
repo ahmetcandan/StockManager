@@ -48,6 +48,7 @@
             this.Gain = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.Date = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.TotalValue = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.Guid = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.listMenu.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -142,6 +143,7 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.lvList.BackColor = System.Drawing.SystemColors.ActiveCaptionText;
             this.lvList.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
+            this.Guid,
             this.StockCode,
             this.Status,
             this.TotalAmount,
@@ -166,41 +168,46 @@
             // 
             // StockCode
             // 
+            this.StockCode.DisplayIndex = 0;
             this.StockCode.Text = "stock-code";
             this.StockCode.Width = 155;
             // 
             // Status
             // 
+            this.Status.DisplayIndex = 1;
             this.Status.Text = "status";
             this.Status.Width = 151;
             // 
             // TotalAmount
             // 
+            this.TotalAmount.DisplayIndex = 2;
             this.TotalAmount.Text = "total-amount";
             this.TotalAmount.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.TotalAmount.Width = 150;
             // 
             // BuyPrice
             // 
+            this.BuyPrice.DisplayIndex = 3;
             this.BuyPrice.Text = "buy-price";
             this.BuyPrice.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.BuyPrice.Width = 150;
             // 
             // SellPrice
             // 
+            this.SellPrice.DisplayIndex = 4;
             this.SellPrice.Text = "sell-price";
             this.SellPrice.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.SellPrice.Width = 150;
             // 
             // Gain
             // 
+            this.Gain.DisplayIndex = 5;
             this.Gain.Text = "gain";
             this.Gain.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.Gain.Width = 150;
             // 
             // Date
             // 
-            this.Date.DisplayIndex = 7;
             this.Date.Text = "date";
             this.Date.Width = 135;
             // 
@@ -211,6 +218,11 @@
             this.TotalValue.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.TotalValue.Width = 150;
             // 
+            // Guid
+            // 
+            this.Guid.DisplayIndex = 8;
+            this.Guid.Width = 0;
+            // 
             // frmStockAnalysis
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -220,7 +232,7 @@
             this.Controls.Add(this.label1);
             this.Controls.Add(this.lvList);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
-            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.Margin = new System.Windows.Forms.Padding(2);
             this.Name = "frmStockAnalysis";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "stock-analysis";
@@ -251,5 +263,6 @@
         private System.Windows.Forms.ColumnHeader StockCode;
         private System.Windows.Forms.ColumnHeader TotalValue;
         private System.Windows.Forms.ColumnHeader Date;
+        private System.Windows.Forms.ColumnHeader Guid;
     }
 }

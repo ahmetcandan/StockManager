@@ -22,8 +22,10 @@ namespace StockManager.Model
         public StockAnalysis()
         {
             StockTransactions = new List<StockAnalysisTransaction>();
+            Guid = Guid.NewGuid();
         }
-
+        
+        public Guid Guid { get; set; }
         public string StockCode { get; set; }
         public decimal Gain { get { return TotalAmount == 0 ? (TotalValue - TotalConst) : 0; } }
         public decimal TotalAmount { get { return StockTransactions.Sum(c => c.Amount * (c.TransactionType == TransactionType.Sell ? -1 : 1)); } }
