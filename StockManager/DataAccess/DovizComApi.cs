@@ -10,6 +10,7 @@ namespace StockManager
         public List<StockCurrent> StockCurrents { get; set; }
         string html;
         string hisseUrl = @"<a href=""//borsa.doviz.com/hisseler/";
+        bool error = false;
 
         public DovizComApi()
         {
@@ -26,7 +27,7 @@ namespace StockManager
                     StockCurrent stockCurrent = new StockCurrent();
                     stockCurrent.StockName = text.Substring(text.IndexOf(@""">") + 2, text.IndexOf("</a>") - (text.IndexOf(@""">") + 2)).Trim();
                     stockCurrent.StockCode = getStockName(text.Substring(text.IndexOf(hisseUrl) + hisseUrl.Length, 7));
-                    stockCurrent.Price = getStockValue(text.Substring(text.IndexOf("<td>") + 4, 20));
+                    stockCurrent.Price = getStockValue(text.Substring(text.IndexOf(@"<td class=""text-bold"">") + 22, 20));
                     text = text.Substring(text.IndexOf("<td>"));
                     stockCurrent.StockName = stockCurrent.StockName.Substring(stockCurrent.StockCode.Length + 3);
                     stockCurrent.UpdateDate = DateTime.Now;
@@ -36,9 +37,11 @@ namespace StockManager
             }
             catch (Exception ex)
             {
-
+                error = true;
             }
         }
+
+        public bool IsError { get { return error; } }
 
         string getStockName(string text)
         {

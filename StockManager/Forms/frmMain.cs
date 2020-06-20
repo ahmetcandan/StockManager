@@ -16,6 +16,7 @@ namespace StockManager
         bool left = false;
         Period period;
         string periodSelectedText;
+        List<Stock> stocks;
 
         public frmMain()
         {
@@ -41,18 +42,13 @@ namespace StockManager
             changeAccountToolStripMenuItem.Text = Translate.GetMessage("change-account");
             periodListToolStripMenuItem.Text = Translate.GetMessage("period-list");
             getcurrentvaluesToolStripMenuItem.Text = Translate.GetMessage("get-current-values");
+            getcurrentvaluesToolStripMenuItem1.Text = Translate.GetMessage("get-current-values");
             exitToolStripMenuItem.Text = Translate.GetMessage("exit");
             notifyIcon.Text = Translate.GetMessage("stock-tracing");
             lblInformations.Text = Translate.GetMessage("information");
             lblInformation2.Text = Translate.GetMessage("information");
-            //cbStock.Items.AddRange(new object[] {
-            //Translate.GetMessage("buy"),
-            //Translate.GetMessage("sell")});
             label4.Text = $"{Translate.GetMessage("stock")} : ";
             label5.Text = $"{Translate.GetMessage("period")} : ";
-            //cbPeriod.Items.AddRange(new object[] {
-            //Translate.GetMessage("buy"),
-            //Translate.GetMessage("sell")});
             translateMessagesToolStripMenuItem.Text = Translate.GetMessage("translate-message");
             Text = $"{Translate.GetMessage("stock-tracing")} - [{(period != null ? period.PeriodName : "")}]";
             label2.Text = $"{Translate.GetMessage("language")} : ";
@@ -63,7 +59,6 @@ namespace StockManager
         private void frmMain_Load(object sender, EventArgs e)
         {
             timer1.Start();
-            cbStock_Fill();
             cbLanguage_Fill();
             cbLanguage.Text = Session.Entities.GetSetting().LanguageCode;
             DateTime now = DateTime.Now.SmallDate();
@@ -73,7 +68,6 @@ namespace StockManager
             if (period == null)
                 period = new Period() { AccountId = Session.DefaultAccount.AccountId, StartDate = DateTime.Now, EndDate = DateTime.Now.AddYears(1), PeriodName = "All" };
             cbPeriod_Fill();
-            cbStock.SelectedIndex = 0;
             if (period == null)
             {
                 var endDate = new DateTime(DateTime.Now.Year, DateTime.Now.Month, 1);
@@ -91,7 +85,8 @@ namespace StockManager
                 periodSelectedText = period.PeriodName;
                 cbPeriod.Text = periodSelectedText;
             }
-            refreshList();
+            cbStock_Fill();
+            cbStock.SelectedIndex = 0;
         }
 
         private void cbStock_Fill()
@@ -103,7 +98,14 @@ namespace StockManager
                 Code = "",
                 Value = Translate.GetMessage("all")
             });
-            foreach (var stock in Session.Entities.GetStocks())
+            DateTime startDate = period.StartDate;
+            DateTime endDate = period.EndDate;
+            stocks = (from st in Session.Entities.GetStockTransactions()
+                      join s in Session.Entities.GetStocks() on st.StockCode equals s.StockCode
+                      where st.Date >= startDate && st.Date <= endDate
+                      orderby st.Date descending
+                      select s).Distinct().ToList();
+            foreach (var stock in stocks)
             {
                 cbStock.Items.Add(new ComboboxItem
                 {
@@ -160,6 +162,7 @@ namespace StockManager
                            Stock = s,
                            StockTransaction = st
                        };
+
             foreach (var item in list)
             {
                 var li = new ListViewItem();
@@ -451,7 +454,8 @@ namespace StockManager
         {
             periodSelectedText = cbPeriod.Text;
             period = (Period)((ComboboxItem)cbPeriod.SelectedItem).Object;
-            refreshList();
+            cbStock_Fill();
+            cbStock.SelectedIndex = 0;
         }
 
         private void translateMessagesToolStripMenuItem_Click(object sender, EventArgs e)
@@ -487,19 +491,29 @@ namespace StockManager
 
         private void getcurrentvaluesToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            Task.Run(() => GetCurrentValues());
+            Task.Run(() => getCurrentValues());
         }
 
-        void GetCurrentValues()
+        void getCurrentValues()
         {
             try
             {
                 DovizComApi api = new DovizComApi();
-                foreach (var item in Session.Entities.GetStocks())
+                if (api.IsError)
                 {
-                    var cs = api.StockCurrents.FirstOrDefault(c => c.StockCode == item.StockCode);
-                    if (cs != null)
-                        Session.Entities.GetCurrentStocks().Add(cs);
+                    MessageBox.Show(Translate.GetMessage("get-current-stock-values-failed"), Translate.GetMessage("error"), MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return;
+                }
+                foreach (var item in (from s in Session.Entities.GetStocks() 
+                                      join cs in api.StockCurrents on s.StockCode equals cs.StockCode 
+                                      select new 
+                                      { 
+                                          Stock = s, 
+                                          CurrentStock = cs 
+                                      }))
+                {
+                    Session.Entities.GetCurrentStocks().Add(item.CurrentStock);
+                    item.Stock.Name = item.CurrentStock.StockName;
                 }
                 Session.SaveChanges();
                 MessageBox.Show(Translate.GetMessage("get-current-stock-values-success"), Translate.GetMessage("success"), MessageBoxButtons.OK, MessageBoxIcon.Information);

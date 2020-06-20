@@ -68,6 +68,8 @@
             this.cbPeriod = new System.Windows.Forms.ComboBox();
             this.label2 = new System.Windows.Forms.Label();
             this.cbLanguage = new System.Windows.Forms.ComboBox();
+            this.getcurrentvaluesToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator4 = new System.Windows.Forms.ToolStripSeparator();
             this.listMenu.SuspendLayout();
             this.menuNotify.SuspendLayout();
             this.SuspendLayout();
@@ -288,19 +290,22 @@
             // 
             this.menuNotify.ImageScalingSize = new System.Drawing.Size(20, 20);
             this.menuNotify.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.getcurrentvaluesToolStripMenuItem1,
+            this.toolStripSeparator4,
             this.exitToolStripMenuItem});
             this.menuNotify.Name = "menuNotify";
-            this.menuNotify.Size = new System.Drawing.Size(94, 26);
+            this.menuNotify.Size = new System.Drawing.Size(173, 54);
             // 
             // exitToolStripMenuItem
             // 
             this.exitToolStripMenuItem.Name = "exitToolStripMenuItem";
-            this.exitToolStripMenuItem.Size = new System.Drawing.Size(93, 22);
+            this.exitToolStripMenuItem.Size = new System.Drawing.Size(172, 22);
             this.exitToolStripMenuItem.Text = "exit";
             this.exitToolStripMenuItem.Click += new System.EventHandler(this.exitToolStripMenuItem_Click);
             // 
             // notifyIcon
             // 
+            this.notifyIcon.ContextMenuStrip = this.menuNotify;
             this.notifyIcon.Icon = ((System.Drawing.Icon)(resources.GetObject("notifyIcon.Icon")));
             this.notifyIcon.Text = "stock-tracing";
             this.notifyIcon.Visible = true;
@@ -437,6 +442,18 @@
             this.cbLanguage.TabIndex = 15;
             this.cbLanguage.SelectedIndexChanged += new System.EventHandler(this.cbLanguage_SelectedIndexChanged);
             // 
+            // getcurrentvaluesToolStripMenuItem1
+            // 
+            this.getcurrentvaluesToolStripMenuItem1.Name = "getcurrentvaluesToolStripMenuItem1";
+            this.getcurrentvaluesToolStripMenuItem1.Size = new System.Drawing.Size(172, 22);
+            this.getcurrentvaluesToolStripMenuItem1.Text = "get-current-values";
+            this.getcurrentvaluesToolStripMenuItem1.Click += new System.EventHandler(this.getcurrentvaluesToolStripMenuItem_Click);
+            // 
+            // toolStripSeparator4
+            // 
+            this.toolStripSeparator4.Name = "toolStripSeparator4";
+            this.toolStripSeparator4.Size = new System.Drawing.Size(169, 6);
+            // 
             // frmMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -508,6 +525,8 @@
         private System.Windows.Forms.ToolStripMenuItem getcurrentvaluesToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem periodtransToolStripMenuItem;
         private System.Windows.Forms.ComboBox cbLanguage;
+        private System.Windows.Forms.ToolStripMenuItem getcurrentvaluesToolStripMenuItem1;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator4;
     }
 }
 
