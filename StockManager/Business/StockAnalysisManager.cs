@@ -131,7 +131,8 @@ namespace StockManager.Business
                         Date = stockTransaction.Date,
                         StockTransactionId = stockTransaction.StockTransactionId,
                         TransactionType = stockTransaction.TransactionType,
-                        UnitPrice = stockTransaction.UnitPrice
+                        UnitPrice = stockTransaction.UnitPrice,
+                        StockCode = stockTransaction.StockCode
                     });
 
                     if (stockAnalysis.TotalAmount == 0)
@@ -157,7 +158,8 @@ namespace StockManager.Business
                                 Date = stockTransaction.Date,
                                 StockTransactionId = stockTransaction.StockTransactionId,
                                 TransactionType = stockTransaction.TransactionType,
-                                UnitPrice = stockTransaction.UnitPrice
+                                UnitPrice = stockTransaction.UnitPrice,
+                                StockCode = stockTransaction.StockCode
                             };
                             if (stockTransaction.Amount >= diffarenceAmount)
                             {

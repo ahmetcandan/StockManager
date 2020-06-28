@@ -48,10 +48,9 @@
             this.btnSave.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnSave.Font = new System.Drawing.Font("Hermit", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnSave.ForeColor = System.Drawing.Color.PaleGreen;
-            this.btnSave.Location = new System.Drawing.Point(329, 154);
-            this.btnSave.Margin = new System.Windows.Forms.Padding(4);
+            this.btnSave.Location = new System.Drawing.Point(247, 125);
             this.btnSave.Name = "btnSave";
-            this.btnSave.Size = new System.Drawing.Size(159, 43);
+            this.btnSave.Size = new System.Drawing.Size(119, 35);
             this.btnSave.TabIndex = 4;
             this.btnSave.Text = "save";
             this.btnSave.UseVisualStyleBackColor = false;
@@ -62,11 +61,10 @@
             this.txtAccountName.BackColor = System.Drawing.Color.Black;
             this.txtAccountName.Font = new System.Drawing.Font("Hermit", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtAccountName.ForeColor = System.Drawing.Color.Lime;
-            this.txtAccountName.Location = new System.Drawing.Point(237, 11);
-            this.txtAccountName.Margin = new System.Windows.Forms.Padding(4);
+            this.txtAccountName.Location = new System.Drawing.Point(178, 9);
             this.txtAccountName.MaxLength = 30;
             this.txtAccountName.Name = "txtAccountName";
-            this.txtAccountName.Size = new System.Drawing.Size(249, 36);
+            this.txtAccountName.Size = new System.Drawing.Size(188, 26);
             this.txtAccountName.TabIndex = 0;
             // 
             // label1
@@ -75,10 +73,9 @@
             this.label1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.label1.Font = new System.Drawing.Font("Hermit", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label1.ForeColor = System.Drawing.Color.PaleGreen;
-            this.label1.Location = new System.Drawing.Point(16, 11);
-            this.label1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label1.Location = new System.Drawing.Point(12, 9);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(213, 36);
+            this.label1.Size = new System.Drawing.Size(160, 30);
             this.label1.TabIndex = 2;
             this.label1.Text = "account-name";
             this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
@@ -95,12 +92,11 @@
             this.btnCancel.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnCancel.Font = new System.Drawing.Font("Hermit", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnCancel.ForeColor = System.Drawing.Color.Pink;
-            this.btnCancel.Location = new System.Drawing.Point(162, 154);
-            this.btnCancel.Margin = new System.Windows.Forms.Padding(4);
+            this.btnCancel.Location = new System.Drawing.Point(122, 125);
             this.btnCancel.Name = "btnCancel";
-            this.btnCancel.Size = new System.Drawing.Size(159, 43);
+            this.btnCancel.Size = new System.Drawing.Size(119, 35);
             this.btnCancel.TabIndex = 5;
-            this.btnCancel.Text = "cancel";//Translate.GetMessage("cancel");
+            this.btnCancel.Text = "cancel";
             this.btnCancel.UseVisualStyleBackColor = false;
             this.btnCancel.Click += new System.EventHandler(this.btnCancel_Click);
             // 
@@ -108,11 +104,12 @@
             // 
             this.cbSetDefault.AutoSize = true;
             this.cbSetDefault.Font = new System.Drawing.Font("Hermit", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.cbSetDefault.Location = new System.Drawing.Point(237, 98);
+            this.cbSetDefault.Location = new System.Drawing.Point(178, 80);
+            this.cbSetDefault.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.cbSetDefault.Name = "cbSetDefault";
-            this.cbSetDefault.Size = new System.Drawing.Size(214, 32);
+            this.cbSetDefault.Size = new System.Drawing.Size(163, 24);
             this.cbSetDefault.TabIndex = 2;
-            this.cbSetDefault.Text = "default-account";//Translate.GetMessage("default-account");
+            this.cbSetDefault.Text = "default-account";
             this.cbSetDefault.UseVisualStyleBackColor = true;
             // 
             // cbMoneyType
@@ -126,10 +123,9 @@
             "TRY",
             "USD",
             "EUR"});
-            this.cbMoneyType.Location = new System.Drawing.Point(237, 55);
-            this.cbMoneyType.Margin = new System.Windows.Forms.Padding(4);
+            this.cbMoneyType.Location = new System.Drawing.Point(178, 45);
             this.cbMoneyType.Name = "cbMoneyType";
-            this.cbMoneyType.Size = new System.Drawing.Size(248, 36);
+            this.cbMoneyType.Size = new System.Drawing.Size(187, 26);
             this.cbMoneyType.TabIndex = 7;
             // 
             // label4
@@ -138,23 +134,22 @@
             this.label4.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.label4.Font = new System.Drawing.Font("Hermit", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label4.ForeColor = System.Drawing.Color.PaleGreen;
-            this.label4.Location = new System.Drawing.Point(16, 55);
-            this.label4.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label4.Location = new System.Drawing.Point(12, 45);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(213, 36);
+            this.label4.Size = new System.Drawing.Size(160, 30);
             this.label4.TabIndex = 8;
-            this.label4.Text = "money-type";// $"{Translate.GetMessage("money-type")} : ";
+            this.label4.Text = "money-type";
             this.label4.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
             // frmAccount
             // 
             this.AcceptButton = this.btnSave;
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoSize = true;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
             this.CancelButton = this.btnCancel;
-            this.ClientSize = new System.Drawing.Size(531, 212);
+            this.ClientSize = new System.Drawing.Size(398, 172);
             this.Controls.Add(this.cbMoneyType);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.cbSetDefault);
@@ -163,10 +158,9 @@
             this.Controls.Add(this.btnCancel);
             this.Controls.Add(this.btnSave);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
-            this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "frmAccount";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "account";//Translate.GetMessage("account");
+            this.Text = "account";
             this.Load += new System.EventHandler(this.frmAccount_Load);
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).EndInit();
             this.ResumeLayout(false);

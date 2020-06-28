@@ -13,8 +13,20 @@ namespace StockManager.Model
         public decimal Amount { get; set; }
         public decimal UnitPrice { get; set; }
         public decimal Value { get { return Amount * UnitPrice; } }
-        public decimal Const { get { return Value / 1000 * 2; } }
+        public decimal Const 
+        { 
+            get
+            {
+                if (!Session.Entities.GetStock(StockCode).CalculateConst)
+                    return 0;
+                var constRates = Session.Entities.GetSetting().ConstRates.Where(c => Value > c.StartPrice && Value <= c.EndPrice);
+                if (constRates.Any())
+                    return Value * constRates.First().Rate;
+                return 0;
+            }
+        }
         public TransactionType TransactionType { get; set; }
+        public string StockCode { get; set; }
     }
 
     public class StockAnalysis

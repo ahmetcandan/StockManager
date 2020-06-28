@@ -40,6 +40,7 @@
             this.listMenu = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.label1 = new System.Windows.Forms.Label();
             this.lvList = new System.Windows.Forms.ListView();
+            this.Guid = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.StockCode = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.Status = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.TotalAmount = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
@@ -48,7 +49,6 @@
             this.Gain = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.Date = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.TotalValue = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.Guid = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.listMenu.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -166,6 +166,11 @@
             this.lvList.View = System.Windows.Forms.View.Details;
             this.lvList.DoubleClick += new System.EventHandler(this.lvList_DoubleClick);
             // 
+            // Guid
+            // 
+            this.Guid.DisplayIndex = 8;
+            this.Guid.Width = 0;
+            // 
             // StockCode
             // 
             this.StockCode.DisplayIndex = 0;
@@ -218,11 +223,6 @@
             this.TotalValue.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.TotalValue.Width = 150;
             // 
-            // Guid
-            // 
-            this.Guid.DisplayIndex = 8;
-            this.Guid.Width = 0;
-            // 
             // frmStockAnalysis
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -233,6 +233,7 @@
             this.Controls.Add(this.lvList);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Margin = new System.Windows.Forms.Padding(2);
+            this.MinimumSize = new System.Drawing.Size(854, 304);
             this.Name = "frmStockAnalysis";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "stock-analysis";

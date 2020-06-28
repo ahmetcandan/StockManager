@@ -474,7 +474,7 @@ namespace StockManager
                     if (Stocks == null || Stocks.Count == 0)
                         sw.Write("[]");
                     else
-                        sw.Write(JsonConvert.SerializeObject(from s in Stocks select new { s.StockCode, s.HighestValueOfDay, s.LowestValueOfDay, s.Name, s.Value }));
+                        sw.Write(JsonConvert.SerializeObject(from s in Stocks select new { s.StockCode, s.HighestValueOfDay, s.LowestValueOfDay, s.Name, s.Value, s.CalculateConst }));
                 }
                 using (StreamWriter sw = new StreamWriter("Data/StockTransactions.json"))
                 {

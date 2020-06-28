@@ -200,7 +200,7 @@ namespace StockManager
                 li.SubItems.Add(new ListViewItem.ListViewSubItem()
                 {
                     Name = "Const",
-                    Text = (item.StockTransaction.TotalPrice / 1000 * 2).ToMoneyStirng(2)
+                    Text = (item.StockTransaction.Const).ToMoneyStirng(2)
                 });
                 li.SubItems.Add(new ListViewItem.ListViewSubItem()
                 {
@@ -244,7 +244,7 @@ namespace StockManager
                 Name = "TotalPrice",
                 Text = totalPrice.ToMoneyStirng(2)
             });
-            var totalConst = list.Sum(c => c.StockTransaction.TotalPrice / 1000 * 2);
+            var totalConst = list.Sum(c => c.StockTransaction.Const);
             liTotal.SubItems.Add(new ListViewItem.ListViewSubItem()
             {
                 Name = "Const",
@@ -344,7 +344,7 @@ namespace StockManager
                              TotalPrice = result.Where(c => c.Stock.StockCode == s.StockCode)
                                             .Sum(c => c.StockTransaction.UnitPrice * c.StockTransaction.Amount *
                                                 (c.StockTransaction.TransactionType == TransactionType.Buy ? -1 : 1)),
-                             Const = (result.Where(c => c.Stock.StockCode == s.StockCode).Sum(c => c.StockTransaction.UnitPrice * c.StockTransaction.Amount) / 1000) * 2
+                             Const = result.Where(c => c.Stock.StockCode == s.StockCode).Sum(c => c.StockTransaction.Const)
                          };
 
             foreach (var item in stocks)
@@ -504,12 +504,12 @@ namespace StockManager
                     MessageBox.Show(Translate.GetMessage("get-current-stock-values-failed"), Translate.GetMessage("error"), MessageBoxButtons.OK, MessageBoxIcon.Error);
                     return;
                 }
-                foreach (var item in (from s in Session.Entities.GetStocks() 
-                                      join cs in api.StockCurrents on s.StockCode equals cs.StockCode 
-                                      select new 
-                                      { 
-                                          Stock = s, 
-                                          CurrentStock = cs 
+                foreach (var item in (from s in Session.Entities.GetStocks()
+                                      join cs in api.StockCurrents on s.StockCode equals cs.StockCode
+                                      select new
+                                      {
+                                          Stock = s,
+                                          CurrentStock = cs
                                       }))
                 {
                     Session.Entities.GetCurrentStocks().Add(item.CurrentStock);

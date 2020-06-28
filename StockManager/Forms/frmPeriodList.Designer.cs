@@ -64,10 +64,9 @@
             this.lvList.GridLines = true;
             this.lvList.HideSelection = false;
             this.lvList.LabelEdit = true;
-            this.lvList.Location = new System.Drawing.Point(1, -4);
-            this.lvList.Margin = new System.Windows.Forms.Padding(4);
+            this.lvList.Location = new System.Drawing.Point(1, -3);
             this.lvList.Name = "lvList";
-            this.lvList.Size = new System.Drawing.Size(556, 494);
+            this.lvList.Size = new System.Drawing.Size(418, 402);
             this.lvList.TabIndex = 8;
             this.lvList.UseCompatibleStateImageBehavior = false;
             this.lvList.View = System.Windows.Forms.View.Details;
@@ -80,17 +79,17 @@
             // 
             // PeriodName
             // 
-            this.PeriodName.Text = "period-name";// Translate.GetMessage("period-name");
+            this.PeriodName.Text = "period-name";
             this.PeriodName.Width = 160;
             // 
             // StartDate
             // 
-            this.StartDate.Text = "start-date";// Translate.GetMessage("start-date");
+            this.StartDate.Text = "start-date";
             this.StartDate.Width = 120;
             // 
             // EndDate
             // 
-            this.EndDate.Text = "end-date";// Translate.GetMessage("end-date");
+            this.EndDate.Text = "end-date";
             this.EndDate.Width = 120;
             // 
             // listMenu
@@ -104,29 +103,29 @@
             this.refreshToolStripMenuItem,
             this.toolStripSeparator2});
             this.listMenu.Name = "listMenu";
-            this.listMenu.Size = new System.Drawing.Size(202, 144);
+            this.listMenu.Size = new System.Drawing.Size(167, 112);
             this.listMenu.Opening += new System.ComponentModel.CancelEventHandler(this.listMenu_Opening);
             // 
             // editToolStripMenuItem
             // 
             this.editToolStripMenuItem.Font = new System.Drawing.Font("Hermit", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.editToolStripMenuItem.Name = "editToolStripMenuItem";
-            this.editToolStripMenuItem.Size = new System.Drawing.Size(201, 32);
-            this.editToolStripMenuItem.Text = "edit";// Translate.GetMessage("edit");
+            this.editToolStripMenuItem.Size = new System.Drawing.Size(166, 24);
+            this.editToolStripMenuItem.Text = "edit";
             this.editToolStripMenuItem.Click += new System.EventHandler(this.editToolStripMenuItem_Click);
             // 
             // toolStripSeparator1
             // 
             this.toolStripSeparator1.Name = "toolStripSeparator1";
-            this.toolStripSeparator1.Size = new System.Drawing.Size(198, 6);
+            this.toolStripSeparator1.Size = new System.Drawing.Size(163, 6);
             // 
             // addToolStripMenuItem
             // 
             this.addToolStripMenuItem.Font = new System.Drawing.Font("Hermit", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.addToolStripMenuItem.Name = "addToolStripMenuItem";
             this.addToolStripMenuItem.ShortcutKeys = System.Windows.Forms.Keys.F2;
-            this.addToolStripMenuItem.Size = new System.Drawing.Size(201, 32);
-            this.addToolStripMenuItem.Text = "add";// Translate.GetMessage("add");
+            this.addToolStripMenuItem.Size = new System.Drawing.Size(166, 24);
+            this.addToolStripMenuItem.Text = "add";
             this.addToolStripMenuItem.Click += new System.EventHandler(this.addToolStripMenuItem_Click);
             // 
             // deleteToolStripMenuItem
@@ -134,8 +133,8 @@
             this.deleteToolStripMenuItem.Font = new System.Drawing.Font("Hermit", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.deleteToolStripMenuItem.Name = "deleteToolStripMenuItem";
             this.deleteToolStripMenuItem.ShortcutKeys = System.Windows.Forms.Keys.Delete;
-            this.deleteToolStripMenuItem.Size = new System.Drawing.Size(201, 32);
-            this.deleteToolStripMenuItem.Text = "delete";// Translate.GetMessage("delete");
+            this.deleteToolStripMenuItem.Size = new System.Drawing.Size(166, 24);
+            this.deleteToolStripMenuItem.Text = "delete";
             this.deleteToolStripMenuItem.Click += new System.EventHandler(this.deleteToolStripMenuItem_Click);
             // 
             // refreshToolStripMenuItem
@@ -143,26 +142,27 @@
             this.refreshToolStripMenuItem.Font = new System.Drawing.Font("Hermit", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.refreshToolStripMenuItem.Name = "refreshToolStripMenuItem";
             this.refreshToolStripMenuItem.ShortcutKeys = System.Windows.Forms.Keys.F5;
-            this.refreshToolStripMenuItem.Size = new System.Drawing.Size(201, 32);
-            this.refreshToolStripMenuItem.Text = "refresh";// Translate.GetMessage("refresh");
+            this.refreshToolStripMenuItem.Size = new System.Drawing.Size(166, 24);
+            this.refreshToolStripMenuItem.Text = "refresh";
             this.refreshToolStripMenuItem.Click += new System.EventHandler(this.refreshToolStripMenuItem_Click);
             // 
             // toolStripSeparator2
             // 
             this.toolStripSeparator2.Name = "toolStripSeparator2";
-            this.toolStripSeparator2.Size = new System.Drawing.Size(198, 6);
+            this.toolStripSeparator2.Size = new System.Drawing.Size(163, 6);
             // 
             // frmPeriodList
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(557, 490);
+            this.ClientSize = new System.Drawing.Size(418, 398);
             this.Controls.Add(this.lvList);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
-            this.MinimumSize = new System.Drawing.Size(538, 506);
+            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.MinimumSize = new System.Drawing.Size(408, 418);
             this.Name = "frmPeriodList";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "period-list";// Translate.GetMessage("period-list");
+            this.Text = "period-list";
             this.Load += new System.EventHandler(this.frmStockAnalysis_Load);
             this.listMenu.ResumeLayout(false);
             this.ResumeLayout(false);

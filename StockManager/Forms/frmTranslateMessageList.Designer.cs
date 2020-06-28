@@ -67,10 +67,9 @@
             this.lvList.GridLines = true;
             this.lvList.HideSelection = false;
             this.lvList.LabelEdit = true;
-            this.lvList.Location = new System.Drawing.Point(1, 41);
-            this.lvList.Margin = new System.Windows.Forms.Padding(4);
+            this.lvList.Location = new System.Drawing.Point(1, 33);
             this.lvList.Name = "lvList";
-            this.lvList.Size = new System.Drawing.Size(556, 449);
+            this.lvList.Size = new System.Drawing.Size(418, 366);
             this.lvList.TabIndex = 8;
             this.lvList.UseCompatibleStateImageBehavior = false;
             this.lvList.View = System.Windows.Forms.View.Details;
@@ -107,28 +106,28 @@
             this.refreshToolStripMenuItem,
             this.toolStripSeparator2});
             this.listMenu.Name = "listMenu";
-            this.listMenu.Size = new System.Drawing.Size(202, 144);
+            this.listMenu.Size = new System.Drawing.Size(167, 112);
             this.listMenu.Opening += new System.ComponentModel.CancelEventHandler(this.listMenu_Opening);
             // 
             // editToolStripMenuItem
             // 
             this.editToolStripMenuItem.Font = new System.Drawing.Font("Hermit", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.editToolStripMenuItem.Name = "editToolStripMenuItem";
-            this.editToolStripMenuItem.Size = new System.Drawing.Size(201, 32);
+            this.editToolStripMenuItem.Size = new System.Drawing.Size(166, 24);
             this.editToolStripMenuItem.Text = "edit";
             this.editToolStripMenuItem.Click += new System.EventHandler(this.editToolStripMenuItem_Click);
             // 
             // toolStripSeparator1
             // 
             this.toolStripSeparator1.Name = "toolStripSeparator1";
-            this.toolStripSeparator1.Size = new System.Drawing.Size(198, 6);
+            this.toolStripSeparator1.Size = new System.Drawing.Size(163, 6);
             // 
             // addToolStripMenuItem
             // 
             this.addToolStripMenuItem.Font = new System.Drawing.Font("Hermit", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.addToolStripMenuItem.Name = "addToolStripMenuItem";
             this.addToolStripMenuItem.ShortcutKeys = System.Windows.Forms.Keys.F2;
-            this.addToolStripMenuItem.Size = new System.Drawing.Size(201, 32);
+            this.addToolStripMenuItem.Size = new System.Drawing.Size(166, 24);
             this.addToolStripMenuItem.Text = "add";
             this.addToolStripMenuItem.Click += new System.EventHandler(this.addToolStripMenuItem_Click);
             // 
@@ -137,7 +136,7 @@
             this.deleteToolStripMenuItem.Font = new System.Drawing.Font("Hermit", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.deleteToolStripMenuItem.Name = "deleteToolStripMenuItem";
             this.deleteToolStripMenuItem.ShortcutKeys = System.Windows.Forms.Keys.Delete;
-            this.deleteToolStripMenuItem.Size = new System.Drawing.Size(201, 32);
+            this.deleteToolStripMenuItem.Size = new System.Drawing.Size(166, 24);
             this.deleteToolStripMenuItem.Text = "delete";
             this.deleteToolStripMenuItem.Click += new System.EventHandler(this.deleteToolStripMenuItem_Click);
             // 
@@ -146,14 +145,14 @@
             this.refreshToolStripMenuItem.Font = new System.Drawing.Font("Hermit", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.refreshToolStripMenuItem.Name = "refreshToolStripMenuItem";
             this.refreshToolStripMenuItem.ShortcutKeys = System.Windows.Forms.Keys.F5;
-            this.refreshToolStripMenuItem.Size = new System.Drawing.Size(201, 32);
+            this.refreshToolStripMenuItem.Size = new System.Drawing.Size(166, 24);
             this.refreshToolStripMenuItem.Text = "refresh";
             this.refreshToolStripMenuItem.Click += new System.EventHandler(this.refreshToolStripMenuItem_Click);
             // 
             // toolStripSeparator2
             // 
             this.toolStripSeparator2.Name = "toolStripSeparator2";
-            this.toolStripSeparator2.Size = new System.Drawing.Size(198, 6);
+            this.toolStripSeparator2.Size = new System.Drawing.Size(163, 6);
             // 
             // cbLanguage
             // 
@@ -162,10 +161,9 @@
             this.cbLanguage.Font = new System.Drawing.Font("Hermit", 10F);
             this.cbLanguage.ForeColor = System.Drawing.Color.Lime;
             this.cbLanguage.FormattingEnabled = true;
-            this.cbLanguage.Location = new System.Drawing.Point(139, 1);
-            this.cbLanguage.Margin = new System.Windows.Forms.Padding(4);
+            this.cbLanguage.Location = new System.Drawing.Point(104, 1);
             this.cbLanguage.Name = "cbLanguage";
-            this.cbLanguage.Size = new System.Drawing.Size(128, 36);
+            this.cbLanguage.Size = new System.Drawing.Size(97, 26);
             this.cbLanguage.TabIndex = 15;
             this.cbLanguage.SelectedIndexChanged += new System.EventHandler(this.cbLanguage_SelectedIndexChanged);
             // 
@@ -176,9 +174,8 @@
             this.label2.Font = new System.Drawing.Font("Hermit", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label2.ForeColor = System.Drawing.Color.PaleGreen;
             this.label2.Location = new System.Drawing.Point(1, 1);
-            this.label2.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(130, 36);
+            this.label2.Size = new System.Drawing.Size(98, 30);
             this.label2.TabIndex = 16;
             this.label2.Text = "language";
             this.label2.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
@@ -188,26 +185,26 @@
             this.txtSearch.BackColor = System.Drawing.Color.Black;
             this.txtSearch.Font = new System.Drawing.Font("Hermit", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtSearch.ForeColor = System.Drawing.Color.Lime;
-            this.txtSearch.Location = new System.Drawing.Point(275, 2);
-            this.txtSearch.Margin = new System.Windows.Forms.Padding(4);
+            this.txtSearch.Location = new System.Drawing.Point(206, 2);
             this.txtSearch.MaxLength = 30;
             this.txtSearch.Name = "txtSearch";
-            this.txtSearch.Size = new System.Drawing.Size(249, 36);
+            this.txtSearch.Size = new System.Drawing.Size(188, 26);
             this.txtSearch.TabIndex = 17;
             this.txtSearch.TextChanged += new System.EventHandler(this.txtSearch_TextChanged);
             // 
             // frmTranslateMessageList
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            this.ClientSize = new System.Drawing.Size(557, 490);
+            this.ClientSize = new System.Drawing.Size(418, 398);
             this.Controls.Add(this.txtSearch);
             this.Controls.Add(this.cbLanguage);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.lvList);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
-            this.MinimumSize = new System.Drawing.Size(538, 506);
+            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.MinimumSize = new System.Drawing.Size(408, 418);
             this.Name = "frmTranslateMessageList";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "period-list";

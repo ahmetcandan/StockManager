@@ -10,5 +10,6 @@ namespace StockManager.Model
         public decimal LowestValueOfDay { get; set; }
         public decimal Value { get; set; }
         public DateTime UpdateDate { get; set; }
+        public bool CalculateConst { get; set; }
     }
 }

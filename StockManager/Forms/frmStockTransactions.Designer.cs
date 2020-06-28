@@ -32,13 +32,13 @@
             this.lblInformations = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.lvList = new System.Windows.Forms.ListView();
+            this.StockTransactionId = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.UnitPrice = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.Amount = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.Total = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.Const = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.TransactionType = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.Date = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.StockTransactionId = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.Total = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.SuspendLayout();
             // 
             // lblInformations
@@ -99,6 +99,10 @@
             this.lvList.UseCompatibleStateImageBehavior = false;
             this.lvList.View = System.Windows.Forms.View.Details;
             // 
+            // StockTransactionId
+            // 
+            this.StockTransactionId.Width = 0;
+            // 
             // UnitPrice
             // 
             this.UnitPrice.Text = "stock-code";
@@ -110,6 +114,12 @@
             this.Amount.Text = "status";
             this.Amount.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.Amount.Width = 151;
+            // 
+            // Total
+            // 
+            this.Total.Text = "total";
+            this.Total.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.Total.Width = 138;
             // 
             // Const
             // 
@@ -127,16 +137,6 @@
             this.Date.Text = "date";
             this.Date.Width = 135;
             // 
-            // StockTransactionId
-            // 
-            this.StockTransactionId.Width = 0;
-            // 
-            // Total
-            // 
-            this.Total.Text = "total";
-            this.Total.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            this.Total.Width = 138;
-            // 
             // frmStockTransactions
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -147,6 +147,7 @@
             this.Controls.Add(this.lvList);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Margin = new System.Windows.Forms.Padding(2);
+            this.MinimumSize = new System.Drawing.Size(709, 286);
             this.Name = "frmStockTransactions";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "stock-transactions";

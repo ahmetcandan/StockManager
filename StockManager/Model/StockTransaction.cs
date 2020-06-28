@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 
 namespace StockManager.Model
 {
@@ -13,6 +14,19 @@ namespace StockManager.Model
         public decimal TotalPrice { get; set; }
         public TransactionType TransactionType { get; set; }
         public int AccountTransactionId { get; set; }
+        public decimal Const
+        {
+            get
+            {
+                if (!Session.Entities.GetStock(StockCode).CalculateConst)
+                    return 0;
+                decimal totalPrice = UnitPrice * Amount;
+                var constRates = Session.Entities.GetSetting().ConstRates.Where(c => totalPrice > c.StartPrice && totalPrice <= c.EndPrice);
+                if (constRates.Any())
+                    return totalPrice * constRates.First().Rate;
+                return 0;
+            }
+        }
         public AccountTransaction AccountTransaction { get; set; }
     }
 

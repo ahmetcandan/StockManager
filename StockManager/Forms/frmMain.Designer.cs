@@ -56,6 +56,8 @@
             this.addcurrentstockpriceToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.getcurrentvaluesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuNotify = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.getcurrentvaluesToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator4 = new System.Windows.Forms.ToolStripSeparator();
             this.exitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.notifyIcon = new System.Windows.Forms.NotifyIcon(this.components);
             this.timer1 = new System.Windows.Forms.Timer(this.components);
@@ -68,8 +70,6 @@
             this.cbPeriod = new System.Windows.Forms.ComboBox();
             this.label2 = new System.Windows.Forms.Label();
             this.cbLanguage = new System.Windows.Forms.ComboBox();
-            this.getcurrentvaluesToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripSeparator4 = new System.Windows.Forms.ToolStripSeparator();
             this.listMenu.SuspendLayout();
             this.menuNotify.SuspendLayout();
             this.SuspendLayout();
@@ -296,6 +296,18 @@
             this.menuNotify.Name = "menuNotify";
             this.menuNotify.Size = new System.Drawing.Size(173, 54);
             // 
+            // getcurrentvaluesToolStripMenuItem1
+            // 
+            this.getcurrentvaluesToolStripMenuItem1.Name = "getcurrentvaluesToolStripMenuItem1";
+            this.getcurrentvaluesToolStripMenuItem1.Size = new System.Drawing.Size(172, 22);
+            this.getcurrentvaluesToolStripMenuItem1.Text = "get-current-values";
+            this.getcurrentvaluesToolStripMenuItem1.Click += new System.EventHandler(this.getcurrentvaluesToolStripMenuItem_Click);
+            // 
+            // toolStripSeparator4
+            // 
+            this.toolStripSeparator4.Name = "toolStripSeparator4";
+            this.toolStripSeparator4.Size = new System.Drawing.Size(169, 6);
+            // 
             // exitToolStripMenuItem
             // 
             this.exitToolStripMenuItem.Name = "exitToolStripMenuItem";
@@ -441,18 +453,6 @@
             this.cbLanguage.Size = new System.Drawing.Size(96, 26);
             this.cbLanguage.TabIndex = 15;
             this.cbLanguage.SelectedIndexChanged += new System.EventHandler(this.cbLanguage_SelectedIndexChanged);
-            // 
-            // getcurrentvaluesToolStripMenuItem1
-            // 
-            this.getcurrentvaluesToolStripMenuItem1.Name = "getcurrentvaluesToolStripMenuItem1";
-            this.getcurrentvaluesToolStripMenuItem1.Size = new System.Drawing.Size(172, 22);
-            this.getcurrentvaluesToolStripMenuItem1.Text = "get-current-values";
-            this.getcurrentvaluesToolStripMenuItem1.Click += new System.EventHandler(this.getcurrentvaluesToolStripMenuItem_Click);
-            // 
-            // toolStripSeparator4
-            // 
-            this.toolStripSeparator4.Name = "toolStripSeparator4";
-            this.toolStripSeparator4.Size = new System.Drawing.Size(169, 6);
             // 
             // frmMain
             // 
