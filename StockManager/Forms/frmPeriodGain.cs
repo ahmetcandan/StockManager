@@ -25,11 +25,19 @@ namespace StockManager
             cbConst.Text = Translate.GetMessage("const");
             cbExceptedGain.Text = Translate.GetMessage("expected-gain");
             cbGain.Text = Translate.GetMessage("gain");
+            const1.Text = Translate.GetMessage("const");
+            gain.Text = Translate.GetMessage("gain");
+            period.Text = Translate.GetMessage("period");
+            endOfDay.Text = Translate.GetMessage("end-of-day");
+            expectedGain.Text = Translate.GetMessage("expected-gain");
+            tabGraphich.Text = Translate.GetMessage("graphic");
+            tabGrid.Text = Translate.GetMessage("grid");
         }
 
         private void frmStockAnalysis_Load(object sender, EventArgs e)
         {
             var chartType = SeriesChartType.Spline;
+            lvList.Items.Clear();
 
             chartPeriodGain.Series.Clear();
             Series totalGainSeries = new Series();
@@ -76,6 +84,37 @@ namespace StockManager
                     Period = period
                 });
                 analysisManager.RefreshList();
+
+                var li = new ListViewItem();
+                li.Text = period.PeriodId.ToString();
+                li.SubItems.Add(new ListViewItem.ListViewSubItem()
+                {
+                    Name = "month",
+                    Text = period.PeriodName
+                });
+                li.SubItems.Add(new ListViewItem.ListViewSubItem()
+                {
+                    Name = "gain",
+                    Text = analysisManager.TotalGain.ToMoneyStirng(2)
+                });
+                li.SubItems.Add(new ListViewItem.ListViewSubItem()
+                {
+                    Name = "const",
+                    Text = analysisManager.TotalConst.ToMoneyStirng(2)
+                });
+                li.SubItems.Add(new ListViewItem.ListViewSubItem()
+                {
+                    Name = "expectedGain",
+                    Text = analysisManager.ExpectedGain.ToMoneyStirng(2)
+                });
+                li.SubItems.Add(new ListViewItem.ListViewSubItem()
+                {
+                    Name = "endOfDay",
+                    Text = (analysisManager.TotalGain + analysisManager.ExpectedGain).ToMoneyStirng(2)
+                });
+
+                lvList.Items.Add(li);
+
                 DataPoint pointTotalAgain = new DataPoint();
                 pointTotalAgain.SetValueXY(period.PeriodName, analysisManager.TotalGain);
                 pointTotalAgain.ToolTip = $"{Session.DefaultAccount.MoneyType.MoneyTypeToString()} {analysisManager.TotalGain.ToMoneyStirng(2)}";
@@ -89,6 +128,7 @@ namespace StockManager
                 pointExceptedGain.ToolTip = $"{Session.DefaultAccount.MoneyType.MoneyTypeToString()} {analysisManager.ExpectedGain.ToMoneyStirng(2)}";
                 expectedGainSeries.Points.Add(pointExceptedGain);
             }
+
             chartPeriodGain.Series.Add(totalGainSeries);
             chartPeriodGain.Series.Add(totalConstSeries);
             series.Add(totalGainSeries);
