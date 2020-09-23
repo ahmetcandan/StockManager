@@ -76,56 +76,65 @@ namespace StockManager
             expectedGainSeries.MarkerBorderWidth = 5;
             expectedGainSeries.MarkerStyle = MarkerStyle.Circle;
             expectedGainSeries.Name = Translate.GetMessage("expected-gain");
+            List<StockAnalysisManagerList> list = new List<StockAnalysisManagerList>();
 
-            foreach (var period in Session.Entities.GetPeriods().Where(c => !c.IsPublic && c.StartDate < DateTime.Now))
+
+            foreach (var period in Session.Entities.GetPeriods().Where(c => c.StartDate < DateTime.Now))
             {
                 StockAnalysisManager analysisManager = new StockAnalysisManager(new StockAnalysisRequest
                 {
                     Period = period
                 });
                 analysisManager.RefreshList();
+                list.Add(new StockAnalysisManagerList { Period = period, StockAnalysisManager = analysisManager });
+            }
 
+            foreach (var item in list.OrderByDescending(c => c.Period.StartDate))
+            {
                 var li = new ListViewItem();
-                li.Text = period.PeriodId.ToString();
+                li.Text = item.Period.PeriodId.ToString();
                 li.SubItems.Add(new ListViewItem.ListViewSubItem()
                 {
                     Name = "month",
-                    Text = period.PeriodName
+                    Text = item.Period.PeriodName
                 });
                 li.SubItems.Add(new ListViewItem.ListViewSubItem()
                 {
                     Name = "gain",
-                    Text = analysisManager.TotalGain.ToMoneyStirng(2)
+                    Text = item.StockAnalysisManager.TotalGain.ToMoneyStirng(2)
                 });
                 li.SubItems.Add(new ListViewItem.ListViewSubItem()
                 {
                     Name = "const",
-                    Text = analysisManager.TotalConst.ToMoneyStirng(2)
+                    Text = item.StockAnalysisManager.TotalConst.ToMoneyStirng(2)
                 });
                 li.SubItems.Add(new ListViewItem.ListViewSubItem()
                 {
                     Name = "expectedGain",
-                    Text = analysisManager.ExpectedGain.ToMoneyStirng(2)
+                    Text = item.StockAnalysisManager.ExpectedGain.ToMoneyStirng(2)
                 });
                 li.SubItems.Add(new ListViewItem.ListViewSubItem()
                 {
                     Name = "endOfDay",
-                    Text = (analysisManager.TotalGain + analysisManager.ExpectedGain).ToMoneyStirng(2)
+                    Text = (item.StockAnalysisManager.TotalGain + item.StockAnalysisManager.ExpectedGain).ToMoneyStirng(2)
                 });
 
                 lvList.Items.Add(li);
+            }
 
+            foreach (var item in list.Where(c => !c.Period.IsPublic).OrderBy(c => c.Period.StartDate))
+            {
                 DataPoint pointTotalAgain = new DataPoint();
-                pointTotalAgain.SetValueXY(period.PeriodName, analysisManager.TotalGain);
-                pointTotalAgain.ToolTip = $"{Session.DefaultAccount.MoneyType.MoneyTypeToString()} {analysisManager.TotalGain.ToMoneyStirng(2)}";
+                pointTotalAgain.SetValueXY(item.Period.PeriodName, item.StockAnalysisManager.TotalGain);
+                pointTotalAgain.ToolTip = $"{Session.DefaultAccount.MoneyType.MoneyTypeToString()} {item.StockAnalysisManager.TotalGain.ToMoneyStirng(2)}";
                 totalGainSeries.Points.Add(pointTotalAgain);
                 DataPoint pointTotalConst = new DataPoint();
-                pointTotalConst.SetValueXY(period.PeriodName, analysisManager.TotalConst);
-                pointTotalConst.ToolTip = $"{Session.DefaultAccount.MoneyType.MoneyTypeToString()} {analysisManager.TotalConst.ToMoneyStirng(2)}";
+                pointTotalConst.SetValueXY(item.Period.PeriodName, item.StockAnalysisManager.TotalConst);
+                pointTotalConst.ToolTip = $"{Session.DefaultAccount.MoneyType.MoneyTypeToString()} {item.StockAnalysisManager.TotalConst.ToMoneyStirng(2)}";
                 totalConstSeries.Points.Add(pointTotalConst);
                 DataPoint pointExceptedGain = new DataPoint();
-                pointExceptedGain.SetValueXY(period.PeriodName, analysisManager.ExpectedGain);
-                pointExceptedGain.ToolTip = $"{Session.DefaultAccount.MoneyType.MoneyTypeToString()} {analysisManager.ExpectedGain.ToMoneyStirng(2)}";
+                pointExceptedGain.SetValueXY(item.Period.PeriodName, item.StockAnalysisManager.ExpectedGain);
+                pointExceptedGain.ToolTip = $"{Session.DefaultAccount.MoneyType.MoneyTypeToString()} {item.StockAnalysisManager.ExpectedGain.ToMoneyStirng(2)}";
                 expectedGainSeries.Points.Add(pointExceptedGain);
             }
 

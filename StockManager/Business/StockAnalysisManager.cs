@@ -132,7 +132,8 @@ namespace StockManager.Business
                         StockTransactionId = stockTransaction.StockTransactionId,
                         TransactionType = stockTransaction.TransactionType,
                         UnitPrice = stockTransaction.UnitPrice,
-                        StockCode = stockTransaction.StockCode
+                        StockCode = stockTransaction.StockCode,
+                        Const = stockTransaction.Const
                     });
 
                     if (stockAnalysis.TotalAmount == 0)
@@ -159,11 +160,14 @@ namespace StockManager.Business
                                 StockTransactionId = stockTransaction.StockTransactionId,
                                 TransactionType = stockTransaction.TransactionType,
                                 UnitPrice = stockTransaction.UnitPrice,
-                                StockCode = stockTransaction.StockCode
+                                StockCode = stockTransaction.StockCode,
+                                Const = 0
                             };
                             if (stockTransaction.Amount >= diffarenceAmount)
                             {
                                 stockTransaction.Amount -= diffarenceAmount;
+                                partialStockTransaction.Const = stockTransaction.Const;
+                                stockTransaction.Const = 0;
                                 partialStockTransaction.Amount = diffarenceAmount;
                                 partialStockAnalysis.StockTransactions.Add(partialStockTransaction);
                                 break;
@@ -216,5 +220,11 @@ namespace StockManager.Business
             TotalConst = StockAnalyses.Sum(c => c.StockTransactions.Where(d => d.Date >= request.Period.StartDate && d.Date <= request.Period.EndDate).Sum(d => d.Const));
             ExpectedGain = expectedGain;
         }
+    }
+
+    public class StockAnalysisManagerList
+    {
+        public StockAnalysisManager StockAnalysisManager { get; set; }
+        public Period Period { get; set; }
     }
 }

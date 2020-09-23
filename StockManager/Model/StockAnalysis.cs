@@ -13,18 +13,19 @@ namespace StockManager.Model
         public decimal Amount { get; set; }
         public decimal UnitPrice { get; set; }
         public decimal Value { get { return Amount * UnitPrice; } }
-        public decimal Const 
-        { 
-            get
-            {
-                if (!Session.Entities.GetStock(StockCode).CalculateConst)
-                    return 0;
-                var constRates = Session.Entities.GetSetting().ConstRates.Where(c => Value > c.StartPrice && Value <= c.EndPrice);
-                if (constRates.Any())
-                    return Value * constRates.First().Rate;
-                return 0;
-            }
-        }
+        //public decimal Const 
+        //{ 
+        //    get
+        //    {
+        //        if (!Session.Entities.GetStock(StockCode).CalculateConst)
+        //            return 0;
+        //        var constRates = Session.Entities.GetSetting().ConstRates.Where(c => Value > c.StartPrice && Value <= c.EndPrice);
+        //        if (constRates.Any())
+        //            return Value * constRates.First().Rate;
+        //        return 0;
+        //    }
+        //}
+        public decimal Const { get; set; }
         public TransactionType TransactionType { get; set; }
         public string StockCode { get; set; }
     }
@@ -36,7 +37,7 @@ namespace StockManager.Model
             StockTransactions = new List<StockAnalysisTransaction>();
             Guid = Guid.NewGuid();
         }
-        
+
         public Guid Guid { get; set; }
         public string StockCode { get; set; }
         public decimal Gain { get { return TotalAmount == 0 ? (TotalValue - TotalConst) : 0; } }
