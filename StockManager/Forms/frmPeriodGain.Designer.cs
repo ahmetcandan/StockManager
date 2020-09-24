@@ -43,7 +43,6 @@
             this.cbExceptedGain = new System.Windows.Forms.CheckBox();
             this.cbConst = new System.Windows.Forms.CheckBox();
             this.tabControl1 = new System.Windows.Forms.TabControl();
-            this.tabGraphich = new System.Windows.Forms.TabPage();
             this.tabGrid = new System.Windows.Forms.TabPage();
             this.lvList = new System.Windows.Forms.ListView();
             this.id = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
@@ -52,10 +51,11 @@
             this.const1 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.expectedGain = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.endOfDay = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.tabGraphich = new System.Windows.Forms.TabPage();
             ((System.ComponentModel.ISupportInitialize)(this.chartPeriodGain)).BeginInit();
             this.tabControl1.SuspendLayout();
-            this.tabGraphich.SuspendLayout();
             this.tabGrid.SuspendLayout();
+            this.tabGraphich.SuspendLayout();
             this.SuspendLayout();
             // 
             // chartPeriodGain
@@ -154,20 +154,6 @@
             this.tabControl1.Size = new System.Drawing.Size(935, 393);
             this.tabControl1.TabIndex = 4;
             // 
-            // tabGraphich
-            // 
-            this.tabGraphich.Controls.Add(this.cbConst);
-            this.tabGraphich.Controls.Add(this.chartPeriodGain);
-            this.tabGraphich.Controls.Add(this.cbExceptedGain);
-            this.tabGraphich.Controls.Add(this.cbGain);
-            this.tabGraphich.Location = new System.Drawing.Point(4, 23);
-            this.tabGraphich.Name = "tabGraphich";
-            this.tabGraphich.Padding = new System.Windows.Forms.Padding(3);
-            this.tabGraphich.Size = new System.Drawing.Size(927, 366);
-            this.tabGraphich.TabIndex = 0;
-            this.tabGraphich.Text = "graphic";
-            this.tabGraphich.UseVisualStyleBackColor = true;
-            // 
             // tabGrid
             // 
             this.tabGrid.Controls.Add(this.lvList);
@@ -205,6 +191,7 @@
             this.lvList.TabIndex = 9;
             this.lvList.UseCompatibleStateImageBehavior = false;
             this.lvList.View = System.Windows.Forms.View.Details;
+            this.lvList.DoubleClick += new System.EventHandler(this.lvList_DoubleClick);
             // 
             // id
             // 
@@ -240,6 +227,20 @@
             this.endOfDay.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.endOfDay.Width = 208;
             // 
+            // tabGraphich
+            // 
+            this.tabGraphich.Controls.Add(this.cbConst);
+            this.tabGraphich.Controls.Add(this.chartPeriodGain);
+            this.tabGraphich.Controls.Add(this.cbExceptedGain);
+            this.tabGraphich.Controls.Add(this.cbGain);
+            this.tabGraphich.Location = new System.Drawing.Point(4, 23);
+            this.tabGraphich.Name = "tabGraphich";
+            this.tabGraphich.Padding = new System.Windows.Forms.Padding(3);
+            this.tabGraphich.Size = new System.Drawing.Size(927, 366);
+            this.tabGraphich.TabIndex = 0;
+            this.tabGraphich.Text = "graphic";
+            this.tabGraphich.UseVisualStyleBackColor = true;
+            // 
             // frmPeriodGain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -256,9 +257,9 @@
             this.Load += new System.EventHandler(this.frmStockAnalysis_Load);
             ((System.ComponentModel.ISupportInitialize)(this.chartPeriodGain)).EndInit();
             this.tabControl1.ResumeLayout(false);
+            this.tabGrid.ResumeLayout(false);
             this.tabGraphich.ResumeLayout(false);
             this.tabGraphich.PerformLayout();
-            this.tabGrid.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }

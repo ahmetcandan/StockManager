@@ -153,5 +153,16 @@ namespace StockManager
             else if (cb.Checked && !chartPeriodGain.Series.Any(c => c.Name == cb.Text))
                 chartPeriodGain.Series.Add(series.FirstOrDefault(c => c.Name == cb.Text));
         }
+
+        private void lvList_DoubleClick(object sender, EventArgs e)
+        {
+            if (lvList.SelectedItems.Count == 1)
+            {
+                StockAnalysisRequest request = new StockAnalysisRequest();
+                request.Period = Session.Entities.GetPeriod(int.Parse(lvList.SelectedItems[0].Text));
+                frmStockAnalysis frm = new frmStockAnalysis(request);
+                frm.ShowDialog();
+            }
+        }
     }
 }
