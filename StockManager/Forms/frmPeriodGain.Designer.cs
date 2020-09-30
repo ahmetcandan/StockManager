@@ -51,6 +51,7 @@
             this.const1 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.expectedGain = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.endOfDay = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.cumulativeEndOfDay = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.tabGraphich = new System.Windows.Forms.TabPage();
             ((System.ComponentModel.ISupportInitialize)(this.chartPeriodGain)).BeginInit();
             this.tabControl1.SuspendLayout();
@@ -151,7 +152,7 @@
             this.tabControl1.Location = new System.Drawing.Point(0, 0);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(935, 393);
+            this.tabControl1.Size = new System.Drawing.Size(1018, 393);
             this.tabControl1.TabIndex = 4;
             // 
             // tabGrid
@@ -160,7 +161,7 @@
             this.tabGrid.Location = new System.Drawing.Point(4, 23);
             this.tabGrid.Name = "tabGrid";
             this.tabGrid.Padding = new System.Windows.Forms.Padding(3);
-            this.tabGrid.Size = new System.Drawing.Size(927, 366);
+            this.tabGrid.Size = new System.Drawing.Size(1010, 366);
             this.tabGrid.TabIndex = 1;
             this.tabGrid.Text = "grid";
             this.tabGrid.UseVisualStyleBackColor = true;
@@ -178,7 +179,8 @@
             this.gain,
             this.const1,
             this.expectedGain,
-            this.endOfDay});
+            this.endOfDay,
+            this.cumulativeEndOfDay});
             this.lvList.Font = new System.Drawing.Font("Hermit", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lvList.ForeColor = System.Drawing.Color.Lime;
             this.lvList.FullRowSelect = true;
@@ -187,7 +189,7 @@
             this.lvList.LabelEdit = true;
             this.lvList.Location = new System.Drawing.Point(-1, 0);
             this.lvList.Name = "lvList";
-            this.lvList.Size = new System.Drawing.Size(928, 366);
+            this.lvList.Size = new System.Drawing.Size(1011, 366);
             this.lvList.TabIndex = 9;
             this.lvList.UseCompatibleStateImageBehavior = false;
             this.lvList.View = System.Windows.Forms.View.Details;
@@ -227,6 +229,12 @@
             this.endOfDay.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.endOfDay.Width = 208;
             // 
+            // cumulativeEndOfDay
+            // 
+            this.cumulativeEndOfDay.Text = "cumulative-end-of-day";
+            this.cumulativeEndOfDay.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.cumulativeEndOfDay.Width = 182;
+            // 
             // tabGraphich
             // 
             this.tabGraphich.Controls.Add(this.cbConst);
@@ -246,7 +254,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            this.ClientSize = new System.Drawing.Size(937, 392);
+            this.ClientSize = new System.Drawing.Size(1020, 392);
             this.Controls.Add(this.tabControl1);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Margin = new System.Windows.Forms.Padding(2);
@@ -278,6 +286,7 @@
         private System.Windows.Forms.ColumnHeader gain;
         private System.Windows.Forms.ColumnHeader const1;
         private System.Windows.Forms.ColumnHeader expectedGain;
+        private System.Windows.Forms.ColumnHeader cumulativeEndOfDay;
         private System.Windows.Forms.ColumnHeader endOfDay;
     }
 }

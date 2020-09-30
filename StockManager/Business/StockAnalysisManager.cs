@@ -226,5 +226,6 @@ namespace StockManager.Business
     {
         public StockAnalysisManager StockAnalysisManager { get; set; }
         public Period Period { get; set; }
+        public decimal CumulativeEndOfDay { get; set; }
     }
 }

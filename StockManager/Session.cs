@@ -13,6 +13,8 @@ namespace StockManager
         public static Account DefaultAccount;
         public static User User;
 
+        public static frmPeriodGain FrmPeriodGain;
+
         public static T DeepCopy<T>(this T item)
         {
             return JsonConvert.DeserializeObject<T>(JsonConvert.SerializeObject(item));

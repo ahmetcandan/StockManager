@@ -30,6 +30,7 @@ namespace StockManager
             period.Text = Translate.GetMessage("period");
             endOfDay.Text = Translate.GetMessage("end-of-day");
             expectedGain.Text = Translate.GetMessage("expected-gain");
+            cumulativeEndOfDay.Text = Translate.GetMessage("end-of-period");
             tabGraphich.Text = Translate.GetMessage("graphic");
             tabGrid.Text = Translate.GetMessage("grid");
         }
@@ -89,6 +90,13 @@ namespace StockManager
                 list.Add(new StockAnalysisManagerList { Period = period, StockAnalysisManager = analysisManager });
             }
 
+            decimal totalGain = 0;
+            foreach (var item in list.Where(c => !c.Period.IsPublic).OrderBy(c => c.Period.StartDate))
+            {
+                totalGain += item.StockAnalysisManager.TotalGain;
+                item.CumulativeEndOfDay = totalGain + item.StockAnalysisManager.ExpectedGain;
+            }
+
             foreach (var item in list.OrderByDescending(c => c.Period.StartDate))
             {
                 var li = new ListViewItem();
@@ -118,6 +126,15 @@ namespace StockManager
                     Name = "endOfDay",
                     Text = (item.StockAnalysisManager.TotalGain + item.StockAnalysisManager.ExpectedGain).ToMoneyStirng(2)
                 });
+                li.SubItems.Add(new ListViewItem.ListViewSubItem()
+                {
+                    Name = "cumulativeEndOfDay",
+                    Text = item.Period.IsPublic ? string.Empty : item.CumulativeEndOfDay.ToMoneyStirng(2)
+                });
+                if (item.Period.IsPublic)
+                {
+                    li.BackColor = Color.DarkSlateGray;
+                }
 
                 lvList.Items.Add(li);
             }

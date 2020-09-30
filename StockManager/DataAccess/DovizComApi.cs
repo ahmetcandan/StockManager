@@ -51,7 +51,7 @@ namespace StockManager
         decimal getStockValue(string text)
         {
             decimal result = 0;
-            decimal.TryParse(text.Substring(0, text.IndexOf("</td>")).Replace(",", "."), out result);
+            decimal.TryParse(text.Substring(0, text.IndexOf("</td>")).Replace(".", "").Replace(",", "."), out result);
             return result;
         }
 
